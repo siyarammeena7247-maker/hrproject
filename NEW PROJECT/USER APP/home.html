@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Home</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+.box{
+background:#00bcd4;
+color:white;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+}
+
+.result{
+background:#4CAF50;
+}
+
+.notice{
+background:#ff9800;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:20px;
+border:none;
+background:red;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="appTitle">
+HR MATKA
+</h1>
+
+<h2 id="userName">Welcome</h2>
+
+<p id="userMobile"></p>
+
+<div class="box">
+
+<h3>
+Wallet Balance
+</h3>
+
+<h1>
+₹ <span id="walletBalance">0</span>
+</h1>
+
+</div>
+
+<div class="box result">
+
+<h3>
+Live Result
+</h3>
+
+<p id="liveResult">
+No Result
+</p>
+
+</div>
+
+<div class="box notice">
+
+<h3>
+Admin Notification
+</h3>
+
+<p id="notification">
+No Notification
+</p>
+
+</div>
+
+<div class="menu">
+
+<button onclick="window.location.href='play.html'">
+Play Game
+</button>
+
+<button onclick="window.location.href='deposit.html'">
+Deposit
+</button>
+
+<button onclick="window.location.href='withdraw.html'">
+Withdraw
+</button>
+
+
+<button onclick="window.location.href='bankdetails.html'">
+    Bank Details
+</button>
+
+<button onclick="window.location.href='history.html'">
+History
+</button>
+
+</div>
+
+
+<button onclick="logoutUser()">
+
+Logout
+
+</button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,2449 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Single Pana</title>
+
+<style>
+
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#111;
+color:#fff;
+}
+
+.topBar{
+height:70px;
+background:#1c1c1c;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
+}
+
+.backBtn{
+font-size:34px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.marketTitle{
+font-size:22px;
+font-weight:bold;
+text-align:center;
+}
+
+.walletBox{
+background:#2b2b2b;
+padding:10px 18px;
+border-radius:25px;
+font-size:20px;
+font-weight:bold;
+color:#d9b13d;
+}
+
+.dateSection{
+display:flex;
+justify-content:space-between;
+gap:15px;
+padding:15px;
+}
+
+.dateBox{
+flex:1;
+height:55px;
+border:2px solid #d9b13d;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+background:#151515;
+color:#fff;
+}
+
+.sessionBox{
+flex:1;
+height:55px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+background:#1f1f1f;
+color:#00e676;
+letter-spacing:2px;
+}
+
+
+#sessionSelect{
+width:100%;
+padding:10px;
+border:none;
+border-radius:8px;
+font-size:17px;
+font-weight:bold;
+text-align:center;
+outline:none;
+cursor:pointer;
+background:#fff;
+color:#111;
+}
+
+#sessionSelect:disabled{
+background:#ddd;
+color:#777;
+cursor:not-allowed;
+}
+
+
+
+.container{
+max-width:700px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:#fff;
+color:#000;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,.3);
+}
+
+h1{
+text-align:center;
+color:#e53935;
+margin-bottom:10px;
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.wallet{
+background:#4CAF50;
+color:#fff;
+padding:15px;
+border-radius:10px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.grid button{
+padding:15px;
+border:none;
+border-radius:8px;
+background:#2196F3;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.grid button:hover{
+background:#1976D2;
+}
+
+.grid button.selected{
+background:#4CAF50;
+}
+
+/* ===================================== */
+/* SINGLE PANA PART 10 */
+/* PANA + POINT ROW DESIGN */
+/* ===================================== */
+
+.panaContainer{
+margin-top:20px;
+}
+
+.panaRow{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:12px;
+}
+
+.panaNumber{
+width:75px;
+height:45px;
+background:#2196F3;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+flex-shrink:0;
+}
+
+.panaPointInput{
+flex:1;
+padding:12px;
+font-size:17px;
+border:1px solid #ccc;
+border-radius:8px;
+outline:none;
+}
+
+.panaPointInput:focus{
+border-color:#2196F3;
+}
+
+.totalPointsBox{
+margin-top:20px;
+padding:14px;
+background:#f4f4f4;
+border-radius:10px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+}
+
+@media(max-width:600px){
+
+.panaNumber{
+width:68px;
+height:42px;
+font-size:16px;
+}
+
+.panaPointInput{
+font-size:16px;
+padding:11px;
+}
+
+}
+
+
+/* ===================================== */
+/* COMPACT SINGLE PANA */
+/* PART 11 CSS */
+/* ===================================== */
+
+.ankTabs{
+display:grid;
+grid-template-columns:repeat(10,1fr);
+gap:6px;
+margin-top:15px;
+margin-bottom:18px;
+}
+
+.ankTab{
+height:48px;
+border:none;
+border-radius:10px;
+background:#d8b42f;
+color:#111;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.ankTab.active{
+background:#f4c430;
+color:#fff;
+}
+
+.selectedAnkTitle{
+text-align:center;
+font-size:18px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.compactPanaGrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px 16px;
+}
+
+.compactPanaRow{
+display:flex;
+align-items:center;
+gap:10px;
+background:#fafafa;
+padding:8px;
+border-radius:12px;
+}
+
+.compactPanaNumber{
+width:64px;
+height:48px;
+border:2px solid #d8b42f;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+font-weight:bold;
+color:#d8b42f;
+background:#fff;
+flex-shrink:0;
+}
+
+.compactPanaInput{
+flex:1;
+min-width:0;
+padding:12px;
+border:1px solid #b9a58c;
+border-radius:12px;
+font-size:17px;
+outline:none;
+}
+
+.compactPanaInput:focus{
+border-color:#d8b42f;
+}
+
+.bidSummary{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-top:20px;
+padding:14px;
+background:#1b1b1b;
+border-radius:12px;
+color:#fff;
+}
+
+.summaryItem{
+display:flex;
+flex-direction:column;
+align-items:center;
+min-width:70px;
+}
+
+.summaryLabel{
+font-size:14px;
+color:#ddd;
+margin-bottom:4px;
+}
+
+.summaryValue{
+font-size:20px;
+font-weight:bold;
+}
+
+#submitBtn{
+flex:1;
+margin-top:0;
+background:#d8b42f;
+color:#111;
+}
+
+@media(max-width:600px){
+
+.ankTabs{
+grid-template-columns:repeat(5,1fr);
+}
+
+.compactPanaGrid{
+grid-template-columns:1fr;
+}
+
+.compactPanaNumber{
+width:58px;
+height:44px;
+font-size:16px;
+}
+
+.compactPanaInput{
+font-size:16px;
+padding:11px;
+}
+
+.bidSummary{
+flex-wrap:wrap;
+}
+
+#submitBtn{
+width:100%;
+flex-basis:100%;
+}
+
+}
+
+
+
+input{
+width:100%;
+padding:14px;
+margin-top:20px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:8px;
+outline:none;
+}
+
+input:focus{
+border-color:#2196F3;
+}
+
+#submitBtn{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:10px;
+background:#e53935;
+color:#fff;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#submitBtn:hover{
+background:#c62828;
+}
+
+a{
+display:block;
+text-align:center;
+margin-top:20px;
+text-decoration:none;
+font-weight:bold;
+color:#2196F3;
+}
+
+@media(max-width:768px){
+
+.marketTitle{
+font-size:18px;
+}
+
+.walletBox{
+font-size:16px;
+padding:8px 14px;
+}
+
+.dateSection{
+flex-direction:column;
+}
+
+.grid{
+grid-template-columns:repeat(4,1fr);
+}
+
+.grid button{
+font-size:16px;
+padding:12px;
+}
+
+#submitBtn{
+font-size:18px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Top Header -->
+
+<div class="topBar">
+
+<div class="backBtn"
+onclick="history.back()">
+
+←
+
+</div>
+
+<div
+class="marketTitle"
+id="marketTitle">
+
+Loading...
+
+</div>
+
+<div
+class="walletBox">
+
+🪙 ₹
+<span id="topWallet">
+0
+</span>
+
+</div>
+
+</div>
+
+<!-- Date -->
+
+<div class="dateSection">
+
+<div
+class="dateBox"
+id="todayDate">
+
+00-00-0000
+
+</div>
+
+
+<div
+class="sessionBox"
+id="sessionBox">
+
+<select id="sessionSelect">
+
+<option value="OPEN">
+OPEN
+</option>
+
+<option value="CLOSE">
+CLOSE
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h1 id="appTitle">
+
+HR MATKA
+
+</h1>
+
+<div class="wallet">
+
+Wallet Balance
+
+<br><br>
+
+₹
+<span id="wallet">
+
+0
+
+</span>
+
+</div>
+
+<h2>
+
+Single Pana
+
+</h2>
+
+<!-- Single Pana Grid -->
+
+<!-- ===================================== -->
+<!-- SINGLE PANA PART 10 -->
+<!-- PANA + INDIVIDUAL POINT SYSTEM -->
+<!-- ===================================== -->
+
+
+<!-- ===================================== -->
+<!-- SINGLE PANA COMPACT DESIGN -->
+<!-- PART 11 HTML -->
+<!-- ===================================== -->
+
+<!-- 0 TO 9 ANK TABS -->
+
+<div
+class="ankTabs"
+id="ankTabs">
+
+<button
+type="button"
+class="ankTab active"
+data-ank="0">
+0
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="1">
+1
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="2">
+2
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="3">
+3
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="4">
+4
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="5">
+5
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="6">
+6
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="7">
+7
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="8">
+8
+</button>
+
+<button
+type="button"
+class="ankTab"
+data-ank="9">
+9
+</button>
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- SELECTED ANK TITLE -->
+<!-- ===================================== -->
+
+<div class="selectedAnkTitle">
+
+Ank :
+
+<span id="selectedAnk">
+0
+</span>
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- PANA + POINT GRID -->
+<!-- ===================================== -->
+
+<div
+class="compactPanaGrid"
+id="singlePanaGrid">
+
+<!-- JavaScript selected Ank के Pana यहाँ बनाएगा -->
+
+</div>
+
+
+<!-- ===================================== -->
+<!-- BOTTOM SUMMARY -->
+<!-- ===================================== -->
+
+<div class="bidSummary">
+
+<div class="summaryItem">
+
+<span class="summaryLabel">
+Bid
+</span>
+
+<span
+class="summaryValue"
+id="bidCount">
+
+0
+
+</span>
+
+</div>
+
+
+<div class="summaryItem">
+
+<span class="summaryLabel">
+Total
+</span>
+
+₹ <span
+class="summaryValue"
+id="totalPoints">
+
+0
+
+</span>
+
+</div>
+
+
+<button
+type="button"
+id="submitBtn">
+
+SUBMIT
+
+</button>
+
+</div>
+
+
+
+<a href="marketgame.html">
+
+⬅ Back
+
+</a>
+
+</div>
+
+</div>
+
+
+
+
+<script>
+
+// =====================================================
+// HR MATKA
+// COMPACT SINGLE PANA
+// PART 11 - FINAL JAVASCRIPT
+// =====================================================
+
+
+// =====================================================
+// 1. BASIC DATA
+// =====================================================
+
+let currentUser =
+JSON.parse(localStorage.getItem("currentUser")) || {};
+
+let balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+let markets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+let currentMarket = null;
+
+let currentSession = "OPEN";
+
+let selectedAnk = "0";
+
+let totalPoints = 0;
+
+
+// =====================================================
+// 2. URL MARKET NAME
+// =====================================================
+
+const urlParams =
+new URLSearchParams(window.location.search);
+
+const marketName =
+(urlParams.get("market") || "").trim();
+
+
+// =====================================================
+// 3. OFFICIAL SINGLE PANA LIST
+// 120 UNIQUE PANAS
+// 12 PANAS FOR EACH ANK
+// =====================================================
+
+const singlePanaGroups = {
+
+"0":[
+"127","136","145","190",
+"235","280","370","389",
+"460","479","569","578"
+],
+
+"1":[
+"128","137","146","236",
+"245","290","380","470",
+"489","560","579","678"
+],
+
+"2":[
+"129","138","147","156",
+"237","246","345","390",
+"480","570","589","679"
+],
+
+"3":[
+"120","139","148","157",
+"238","247","256","346",
+"490","580","670","689"
+],
+
+"4":[
+"130","149","158","167",
+"239","248","257","347",
+"356","590","680","789"
+],
+
+"5":[
+"140","159","168","230",
+"249","258","267","348",
+"357","456","690","780"
+],
+
+"6":[
+"123","150","169","178",
+"240","259","268","349",
+"358","367","457","790"
+],
+
+"7":[
+"124","160","179","250",
+"269","278","340","359",
+"368","458","467","890"
+],
+
+"8":[
+"125","134","170","189",
+"260","279","350","369",
+"378","459","468","567"
+],
+
+"9":[
+"126","135","180","234",
+"270","289","360","379",
+"450","469","478","568"
+]
+
+};
+
+// =====================================================
+// 4. SAFE TEXT FUNCTION
+// =====================================================
+
+function setText(id,value){
+
+let element =
+document.getElementById(id);
+
+if(element){
+
+element.innerText = value;
+
+}
+
+}
+
+
+// =====================================================
+// 5. LOAD WALLET
+// =====================================================
+
+function loadWallet(){
+
+currentUser =
+JSON.parse(localStorage.getItem("currentUser")) || {};
+
+balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+if(!currentUser.mobile){
+
+setText("wallet","0");
+setText("topWallet","0");
+
+return;
+
+}
+
+let wallet =
+Number(
+balances[currentUser.mobile] || 0
+);
+
+setText(
+"wallet",
+wallet.toFixed(2)
+);
+
+setText(
+"topWallet",
+wallet.toFixed(2)
+);
+
+}
+
+
+// =====================================================
+// 6. LOAD MARKET
+// =====================================================
+
+function loadMarket(){
+
+if(!marketName){
+
+alert("Market Not Found");
+
+history.back();
+
+return false;
+
+}
+
+markets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+currentMarket =
+markets.find(function(item){
+
+return (
+String(item.market || "").trim() ===
+marketName
+);
+
+}) || null;
+
+if(!currentMarket){
+
+alert("Market Data Missing");
+
+history.back();
+
+return false;
+
+}
+
+setText(
+"marketTitle",
+currentMarket.market + " [Single Pana]"
+);
+
+return true;
+
+}
+
+
+// =====================================================
+// 7. LOAD TODAY DATE
+// =====================================================
+
+function loadTodayDate(){
+
+let today =
+new Date();
+
+let dd =
+String(today.getDate()).padStart(2,"0");
+
+let mm =
+String(today.getMonth()+1).padStart(2,"0");
+
+let yyyy =
+today.getFullYear();
+
+setText(
+"todayDate",
+dd + "-" + mm + "-" + yyyy
+);
+
+}
+
+
+// =====================================================
+// 8. GET LATEST RESULT
+// =====================================================
+
+function getLatestMarketResult(){
+
+let results =
+JSON.parse(localStorage.getItem("results")) || [];
+
+let marketResults =
+results.filter(function(item){
+
+return (
+String(item.market || "").trim() ===
+String(currentMarket.market || "").trim()
+);
+
+});
+
+if(marketResults.length === 0){
+
+return null;
+
+}
+
+return marketResults[
+marketResults.length - 1
+];
+
+}
+
+
+// =====================================================
+// 9. SESSION ENGINE
+//
+// FRESH MARKET
+// OPEN + CLOSE AVAILABLE
+//
+// OPEN RESULT
+// ONLY CLOSE AVAILABLE
+//
+// CLOSE RESULT
+// COMPLETE LOCK
+// =====================================================
+
+function loadSession(){
+
+if(!currentMarket){
+
+currentSession = "CLOSED";
+
+return;
+
+}
+
+let sessionSelect =
+document.getElementById("sessionSelect");
+
+if(!sessionSelect){
+
+return;
+
+}
+
+markets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+let liveMarket =
+markets.find(function(item){
+
+return (
+String(item.market || "").trim() ===
+String(currentMarket.market || "").trim()
+);
+
+});
+
+if(!liveMarket){
+
+currentSession = "CLOSED";
+
+sessionSelect.disabled = true;
+
+return;
+
+}
+
+
+let manualStatus =
+String(
+liveMarket.manualStatus || "OPEN"
+).toUpperCase();
+
+
+let gameStatus =
+String(
+liveMarket.gameStatus || ""
+).toUpperCase();
+
+
+let latestResult =
+getLatestMarketResult();
+
+
+let hasOpenResult =
+Boolean(
+latestResult &&
+latestResult.openPanel &&
+String(latestResult.openPanel).trim() !== ""
+);
+
+
+let hasCloseResult =
+Boolean(
+latestResult &&
+latestResult.closePanel &&
+String(latestResult.closePanel).trim() !== ""
+);
+
+
+// -----------------------------------------------------
+// HOLIDAY
+// -----------------------------------------------------
+
+if(manualStatus === "HOLIDAY"){
+
+currentSession = "HOLIDAY";
+
+sessionSelect.disabled = true;
+
+return;
+
+}
+
+
+// -----------------------------------------------------
+// CLOSE RESULT = COMPLETE MARKET CLOSED
+// -----------------------------------------------------
+
+if(
+hasCloseResult ||
+gameStatus === "CLOSE" ||
+gameStatus === "RESULT_COMPLETE" ||
+manualStatus === "CLOSE"
+){
+
+currentSession = "CLOSED";
+
+sessionSelect.value = "CLOSE";
+
+sessionSelect.disabled = true;
+
+return;
+
+}
+
+
+// -----------------------------------------------------
+// OPEN RESULT = ONLY CLOSE SESSION
+// -----------------------------------------------------
+
+if(
+hasOpenResult ||
+gameStatus === "OPEN_RESULT"
+){
+
+currentSession = "CLOSE";
+
+sessionSelect.value = "CLOSE";
+
+let openOption =
+sessionSelect.querySelector(
+'option[value="OPEN"]'
+);
+
+if(openOption){
+
+openOption.disabled = true;
+
+}
+
+sessionSelect.disabled = false;
+
+return;
+
+}
+
+
+// -----------------------------------------------------
+// FRESH MARKET
+// OPEN + CLOSE BOTH AVAILABLE
+// -----------------------------------------------------
+
+let openOption =
+sessionSelect.querySelector(
+'option[value="OPEN"]'
+);
+
+if(openOption){
+
+openOption.disabled = false;
+
+}
+
+sessionSelect.disabled = false;
+
+currentSession =
+sessionSelect.value || "OPEN";
+
+}
+
+
+// =====================================================
+// 10. SESSION CHANGE
+// =====================================================
+
+let sessionSelectElement =
+document.getElementById("sessionSelect");
+
+if(sessionSelectElement){
+
+sessionSelectElement.addEventListener(
+"change",
+function(){
+
+if(
+currentSession === "CLOSED" ||
+currentSession === "HOLIDAY"
+){
+
+return;
+
+}
+
+currentSession =
+this.value;
+
+}
+
+);
+
+}
+
+
+// =====================================================
+// 11. LOAD SELECTED ANK PANAS
+// =====================================================
+
+function loadSinglePana(){
+
+let container =
+document.getElementById("singlePanaGrid");
+
+if(!container){
+
+return;
+
+}
+
+container.innerHTML = "";
+
+let panaList =
+singlePanaGroups[selectedAnk] || [];
+
+
+panaList.forEach(function(pana){
+
+container.innerHTML += `
+
+<div class="compactPanaRow">
+
+<div class="compactPanaNumber">
+
+${pana}
+
+</div>
+
+<input
+type="number"
+inputmode="numeric"
+min="0"
+class="compactPanaInput"
+data-pana="${pana}"
+placeholder="Points"
+autocomplete="off">
+
+</div>
+
+`;
+
+});
+
+
+connectPanaInputs();
+
+calculateTotalPoints();
+
+updateGameLock();
+
+}
+
+
+// =====================================================
+// 12. ANK TAB SYSTEM
+// =====================================================
+
+function connectAnkTabs(){
+
+let tabs =
+document.querySelectorAll(".ankTab");
+
+tabs.forEach(function(tab){
+
+tab.addEventListener(
+"click",
+function(){
+
+if(
+currentSession === "CLOSED" ||
+currentSession === "HOLIDAY"
+){
+
+return;
+
+}
+
+
+// -------------------------------------
+// पहले Current Ank के Filled Points Check
+// -------------------------------------
+
+let oldInputs =
+document.querySelectorAll(
+".compactPanaInput"
+);
+
+let hasPoints = false;
+
+oldInputs.forEach(function(input){
+
+if(Number(input.value) > 0){
+
+hasPoints = true;
+
+}
+
+});
+
+
+// Points भरे हैं तो गलती से Tab Change रोकना
+
+if(hasPoints){
+
+let allowChange =
+confirm(
+"Current Ank me Points bhare hue hain.\n\nAnk change karne par ye Points clear ho jayenge.\n\nContinue?"
+);
+
+if(!allowChange){
+
+return;
+
+}
+
+}
+
+
+selectedAnk =
+String(this.dataset.ank);
+
+
+tabs.forEach(function(item){
+
+item.classList.remove("active");
+
+});
+
+
+this.classList.add("active");
+
+
+setText(
+"selectedAnk",
+selectedAnk
+);
+
+
+loadSinglePana();
+
+}
+
+);
+
+});
+
+}
+
+
+// =====================================================
+// 13. GET CURRENT PANA INPUTS
+// =====================================================
+
+function getPanaInputs(){
+
+return document.querySelectorAll(
+".compactPanaInput"
+);
+
+}
+
+
+// =====================================================
+// 14. CONNECT POINT INPUTS
+// =====================================================
+
+function connectPanaInputs(){
+
+let inputs =
+getPanaInputs();
+
+inputs.forEach(function(input){
+
+
+// -------------------------------------
+// LIVE TOTAL
+// -------------------------------------
+
+input.addEventListener(
+"input",
+function(){
+
+if(Number(this.value) < 0){
+
+this.value = "";
+
+}
+
+calculateTotalPoints();
+
+}
+
+);
+
+
+// -------------------------------------
+// MOUSE WHEEL LOCK
+// -------------------------------------
+
+input.addEventListener(
+"wheel",
+function(event){
+
+event.preventDefault();
+
+this.blur();
+
+},
+{
+passive:false
+}
+
+);
+
+
+// -------------------------------------
+// KEYBOARD ARROW LOCK
+// -------------------------------------
+
+input.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key === "ArrowUp" ||
+event.key === "ArrowDown"
+){
+
+event.preventDefault();
+
+}
+
+}
+
+);
+
+});
+
+}
+
+
+// =====================================================
+// 15. CALCULATE BID COUNT + TOTAL POINTS
+// =====================================================
+
+function calculateTotalPoints(){
+
+totalPoints = 0;
+
+let bidCount = 0;
+
+let inputs =
+getPanaInputs();
+
+inputs.forEach(function(input){
+
+let points =
+Number(input.value);
+
+if(points > 0){
+
+totalPoints += points;
+
+bidCount++;
+
+}
+
+});
+
+
+setText(
+"totalPoints",
+totalPoints
+);
+
+setText(
+"bidCount",
+bidCount
+);
+
+}
+
+
+// =====================================================
+// 16. MARKET PERMISSION
+// =====================================================
+
+function isMarketOpen(){
+
+if(!currentMarket){
+
+return false;
+
+}
+
+if(
+currentSession === "CLOSED" ||
+currentSession === "HOLIDAY"
+){
+
+return false;
+
+}
+
+return true;
+
+}
+
+
+// =====================================================
+// 17. LIVE GAME LOCK
+// =====================================================
+
+function updateGameLock(){
+
+if(!currentMarket){
+
+return;
+
+}
+
+loadSession();
+
+
+let submitBtn =
+document.getElementById("submitBtn");
+
+let sessionSelect =
+document.getElementById("sessionSelect");
+
+let panaInputs =
+getPanaInputs();
+
+let ankTabs =
+document.querySelectorAll(".ankTab");
+
+
+let shouldLock =
+currentSession === "CLOSED" ||
+currentSession === "HOLIDAY";
+
+
+// -----------------------------------------------------
+// PANA INPUT LOCK
+// -----------------------------------------------------
+
+panaInputs.forEach(function(input){
+
+input.disabled =
+shouldLock;
+
+input.style.opacity =
+shouldLock ? ".35" : "1";
+
+});
+
+
+// -----------------------------------------------------
+// ANK TAB LOCK
+// -----------------------------------------------------
+
+ankTabs.forEach(function(tab){
+
+tab.disabled =
+shouldLock;
+
+tab.style.opacity =
+shouldLock ? ".35" : "1";
+
+});
+
+
+// -----------------------------------------------------
+// SUBMIT LOCK
+// -----------------------------------------------------
+
+if(submitBtn){
+
+submitBtn.disabled =
+shouldLock;
+
+submitBtn.style.opacity =
+shouldLock ? ".45" : "1";
+
+submitBtn.style.cursor =
+shouldLock
+? "not-allowed"
+: "pointer";
+
+}
+
+
+// -----------------------------------------------------
+// SESSION LOCK
+// -----------------------------------------------------
+
+if(
+sessionSelect &&
+shouldLock
+){
+
+sessionSelect.disabled = true;
+
+}
+
+}
+
+
+// =====================================================
+// 18. FINAL VALIDATION
+// =====================================================
+
+const MIN_POINTS = 10;
+
+
+function finalValidation(){
+
+loadSession();
+
+calculateTotalPoints();
+
+
+if(!isMarketOpen()){
+
+alert(
+currentSession === "HOLIDAY"
+? "Market Holiday"
+: "Market Closed"
+);
+
+return false;
+
+}
+
+
+let filledBids = [];
+
+getPanaInputs().forEach(function(input){
+
+let points =
+Number(input.value);
+
+if(points > 0){
+
+filledBids.push({
+
+pana:
+String(input.dataset.pana),
+
+amount:
+points
+
+});
+
+}
+
+});
+
+
+if(filledBids.length === 0){
+
+alert(
+"Please Enter Points"
+);
+
+return false;
+
+}
+
+
+// -----------------------------------------------------
+// EACH FILLED PANA MINIMUM ₹10
+// -----------------------------------------------------
+
+let invalidBid =
+filledBids.find(function(item){
+
+return item.amount < MIN_POINTS;
+
+});
+
+if(invalidBid){
+
+alert(
+"Pana " +
+invalidBid.pana +
+" par Minimum ₹" +
+MIN_POINTS +
+" Points Required"
+);
+
+return false;
+
+}
+
+
+// -----------------------------------------------------
+// WALLET CHECK
+// -----------------------------------------------------
+
+balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+let wallet =
+Number(
+balances[currentUser.mobile] || 0
+);
+
+if(totalPoints > wallet){
+
+alert(
+"Insufficient Wallet Balance"
+);
+
+return false;
+
+}
+
+return true;
+
+}
+
+
+// =====================================================
+// 19. SUBMIT BID
+// =====================================================
+
+function submitBid(){
+
+// Latest Data Check
+
+loadSession();
+
+calculateTotalPoints();
+
+
+if(!isMarketOpen()){
+
+alert(
+currentSession === "HOLIDAY"
+? "Market Holiday"
+: "Market Closed"
+);
+
+return;
+
+}
+
+
+// -----------------------------------------------------
+// SESSION
+// -----------------------------------------------------
+
+let sessionSelect =
+document.getElementById("sessionSelect");
+
+
+if(
+sessionSelect &&
+!sessionSelect.disabled
+){
+
+currentSession =
+sessionSelect.value;
+
+}
+
+
+let gameName = "";
+
+
+if(currentSession === "OPEN"){
+
+gameName =
+"Single Pana Open";
+
+}
+else if(currentSession === "CLOSE"){
+
+gameName =
+"Single Pana Close";
+
+}
+else{
+
+alert("Market Closed");
+
+return;
+
+}
+
+
+// -----------------------------------------------------
+// FILLED BIDS
+// -----------------------------------------------------
+
+let filledBids = [];
+
+
+getPanaInputs().forEach(function(input){
+
+let points =
+Number(input.value);
+
+if(points > 0){
+
+filledBids.push({
+
+number:
+String(input.dataset.pana),
+
+amount:
+points
+
+});
+
+}
+
+});
+
+
+if(filledBids.length === 0){
+
+alert("Please Enter Points");
+
+return;
+
+}
+
+
+// -----------------------------------------------------
+// LATEST WALLET
+// -----------------------------------------------------
+
+balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+let wallet =
+Number(
+balances[currentUser.mobile] || 0
+);
+
+
+if(totalPoints > wallet){
+
+alert(
+"Insufficient Wallet Balance"
+);
+
+return;
+
+}
+
+
+let previousBalance =
+wallet;
+
+
+// -----------------------------------------------------
+// DATE + TIME
+// -----------------------------------------------------
+
+let now =
+new Date();
+
+
+let date =
+now.toLocaleDateString("en-GB");
+
+
+let time =
+now.toLocaleTimeString(
+"en-US",
+{
+
+hour:"2-digit",
+
+minute:"2-digit",
+
+second:"2-digit",
+
+hour12:true
+
+}
+);
+
+
+// -----------------------------------------------------
+// LOAD STORAGE
+// -----------------------------------------------------
+
+let bets =
+JSON.parse(localStorage.getItem("bets")) || [];
+
+let todayPlay =
+JSON.parse(localStorage.getItem("todayPlay")) || [];
+
+let passbook =
+JSON.parse(localStorage.getItem("passbook")) || [];
+
+
+// =====================================================
+// 20. DUPLICATE SESSION CONFIRMATION
+// =====================================================
+
+let previousBidExists =
+bets.some(function(item){
+
+return (
+
+item.mobile == currentUser.mobile &&
+
+item.market == currentMarket.market &&
+
+item.game == gameName &&
+
+item.date == date &&
+
+item.status == "Pending"
+
+);
+
+});
+
+
+if(previousBidExists){
+
+let allowAgain =
+confirm(
+
+"Is Market aur Session me pehle se Single Pana Bid lagi hai.\n\nKya dobara Bid lagani hai?"
+
+);
+
+if(!allowAgain){
+
+return;
+
+}
+
+}
+
+
+// =====================================================
+// 21. SAVE / MERGE EVERY FILLED PANA
+// =====================================================
+
+filledBids.forEach(function(newBid){
+
+let oldBet =
+bets.find(function(item){
+
+return (
+
+item.mobile == currentUser.mobile &&
+
+item.market == currentMarket.market &&
+
+item.game == gameName &&
+
+String(item.number) == newBid.number &&
+
+item.date == date &&
+
+item.status == "Pending"
+
+);
+
+});
+
+
+if(oldBet){
+
+oldBet.amount =
+Number(oldBet.amount) +
+Number(newBid.amount);
+
+oldBet.updatedTime =
+time;
+
+}
+else{
+
+bets.push({
+
+id:
+Date.now() +
+Math.random(),
+
+mobile:
+currentUser.mobile,
+
+name:
+currentUser.name || "",
+
+market:
+currentMarket.market,
+
+game:
+gameName,
+
+gameType:
+"Single Pana",
+
+session:
+currentSession,
+
+ank:
+selectedAnk,
+
+number:
+newBid.number,
+
+amount:
+Number(newBid.amount),
+
+winRate:
+150,
+
+winAmount:
+0,
+
+date:
+date,
+
+time:
+time,
+
+status:
+"Pending"
+
+});
+
+}
+
+});
+
+
+// =====================================================
+// 22. WALLET DEDUCT
+// =====================================================
+
+let currentBalance =
+wallet - totalPoints;
+
+
+balances[currentUser.mobile] =
+currentBalance;
+
+
+// =====================================================
+// 23. TODAY PLAY
+// =====================================================
+
+todayPlay.push({
+
+id:
+Date.now() +
+Math.random(),
+
+mobile:
+currentUser.mobile,
+
+name:
+currentUser.name || "",
+
+market:
+currentMarket.market,
+
+game:
+gameName,
+
+gameType:
+"Single Pana",
+
+session:
+currentSession,
+
+amount:
+totalPoints,
+
+date:
+date,
+
+time:
+time,
+
+status:
+"Success"
+
+});
+
+
+// =====================================================
+// 24. PASSBOOK
+// =====================================================
+
+passbook.push({
+
+id:
+Date.now() +
+Math.random(),
+
+mobile:
+currentUser.mobile,
+
+date:
+date,
+
+time:
+time,
+
+type:
+"Game Play",
+
+previousBalance:
+previousBalance,
+
+amount:
+totalPoints,
+
+currentBalance:
+currentBalance,
+
+status:
+"Success",
+
+details:
+currentMarket.market +
+" - " +
+gameName
+
+});
+
+
+// =====================================================
+// 25. SAVE EVERYTHING
+// =====================================================
+
+localStorage.setItem(
+"bets",
+JSON.stringify(bets)
+);
+
+
+localStorage.setItem(
+"userBalances",
+JSON.stringify(balances)
+);
+
+
+localStorage.setItem(
+"todayPlay",
+JSON.stringify(todayPlay)
+);
+
+
+localStorage.setItem(
+"passbook",
+JSON.stringify(passbook)
+);
+
+
+// =====================================================
+// 26. ADMIN AUTO SYNC
+// =====================================================
+
+localStorage.setItem(
+
+"lastBetSync",
+
+JSON.stringify({
+
+mobile:
+currentUser.mobile,
+
+market:
+currentMarket.market,
+
+game:
+gameName,
+
+gameType:
+"Single Pana",
+
+session:
+currentSession,
+
+amount:
+totalPoints,
+
+date:
+date,
+
+time:
+time,
+
+updatedAt:
+Date.now()
+
+})
+
+);
+
+
+window.dispatchEvent(
+new Event("betUpdated")
+);
+
+
+// =====================================================
+// 27. UPDATE WALLET
+// =====================================================
+
+setText(
+"wallet",
+currentBalance.toFixed(2)
+);
+
+setText(
+"topWallet",
+currentBalance.toFixed(2)
+);
+
+
+// =====================================================
+// 28. SUCCESS
+// =====================================================
+
+alert(
+
+gameName +
+"\nBid Submitted Successfully"
+
+);
+
+
+// Clear Current Inputs
+
+getPanaInputs().forEach(function(input){
+
+input.value = "";
+
+});
+
+
+totalPoints = 0;
+
+setText(
+"totalPoints",
+"0"
+);
+
+setText(
+"bidCount",
+"0"
+);
+
+}
+
+
+// =====================================================
+// 29. SUBMIT BUTTON
+// =====================================================
+
+let submitButton =
+document.getElementById("submitBtn");
+
+
+if(submitButton){
+
+submitButton.addEventListener(
+"click",
+function(){
+
+if(finalValidation()){
+
+submitBid();
+
+}
+
+}
+
+);
+
+}
+
+
+// =====================================================
+// 30. FIRST LOAD
+// =====================================================
+
+function startSinglePana(){
+
+loadWallet();
+
+if(!loadMarket()){
+
+return;
+
+}
+
+loadTodayDate();
+
+loadSession();
+
+connectAnkTabs();
+
+setText(
+"selectedAnk",
+selectedAnk
+);
+
+loadSinglePana();
+
+updateGameLock();
+
+}
+
+
+startSinglePana();
+
+
+// =====================================================
+// 31. AUTO LIVE REFRESH
+// =====================================================
+
+setInterval(function(){
+
+balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+markets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+loadWallet();
+
+updateGameLock();
+
+},2000);
+
+
+// =====================================================
+// 32. OTHER TAB UPDATE
+// =====================================================
+
+window.addEventListener(
+"storage",
+function(event){
+
+if(
+event.key === "markets" ||
+event.key === "results" ||
+event.key === "userBalances"
+){
+
+balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+markets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+loadWallet();
+
+updateGameLock();
+
+}
+
+}
+
+);
+
+
+// =====================================================
+// 33. RESULT UPDATE SIGNAL
+// =====================================================
+
+window.addEventListener(
+"resultUpdated",
+function(){
+
+updateGameLock();
+
+}
+
+);
+
+
+console.log(
+"✅ Compact Single Pana Final Connected"
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2153 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Withdraw Money - HR MATKA</title>
+
+
+<style>
+
+/* =====================================================
+   HR MATKA USER APP
+   WITHDRAW.HTML
+   COMPLETE REPLACEMENT
+===================================================== */
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+
+body{
+    background:#eeeeee;
+    color:#222222;
+    min-height:100vh;
+    padding-bottom:100px;
+}
+
+
+.app{
+    width:100%;
+    max-width:600px;
+    margin:auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    background:#191919;
+    color:#ffffff;
+    min-height:82px;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+
+
+.backBtn{
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:50%;
+    background:#2b2b2b;
+    color:#ffffff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+
+.headerTitle{
+    flex:1;
+}
+
+
+.headerTitle h1{
+    font-size:22px;
+    color:#d9b436;
+    margin-bottom:3px;
+}
+
+
+.headerTitle p{
+    font-size:12px;
+    color:#cccccc;
+}
+
+
+.headerWallet{
+    background:#2b2b2b;
+    color:#63d86c;
+    padding:10px 13px;
+    border-radius:24px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+    padding:16px;
+}
+
+
+/* =====================================================
+   WALLET BOX
+===================================================== */
+
+.walletBox{
+    background:
+    linear-gradient(
+        135deg,
+        #43a047,
+        #2e7d32
+    );
+
+    color:#ffffff;
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+    margin-bottom:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+
+.walletBox p{
+    font-size:15px;
+    margin-bottom:7px;
+}
+
+
+.walletBox h2{
+    font-size:31px;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card{
+    background:#ffffff;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,.14);
+    margin-bottom:16px;
+}
+
+
+.cardTitle{
+    text-align:center;
+    color:#1565c0;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+label{
+    display:block;
+    margin-top:14px;
+    margin-bottom:6px;
+    font-size:15px;
+    font-weight:bold;
+    color:#333333;
+}
+
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #cccccc;
+    border-radius:9px;
+    font-size:16px;
+    outline:none;
+}
+
+
+input:focus{
+    border-color:#d9b436;
+    box-shadow:
+    0 0 0 2px
+    rgba(217,180,54,.15);
+}
+
+
+.infoText{
+    margin-top:8px;
+    color:#666666;
+    font-size:13px;
+}
+
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.notice{
+    margin-top:16px;
+    padding:12px;
+    background:#fff3cd;
+    color:#6e5500;
+    border-radius:9px;
+    font-size:13px;
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.saveBtn,
+.withdrawBtn{
+    width:100%;
+    border:none;
+    border-radius:10px;
+    padding:14px;
+    margin-top:18px;
+    color:#ffffff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+.saveBtn{
+    background:#1565c0;
+}
+
+
+.withdrawBtn{
+    background:#e53935;
+}
+
+
+.withdrawBtn:disabled{
+    background:#aaaaaa;
+    cursor:not-allowed;
+}
+
+
+/* =====================================================
+   PENDING REQUEST
+===================================================== */
+
+.requestStatus{
+    display:none;
+    margin-top:16px;
+    padding:14px;
+    border-radius:10px;
+    background:#fff8e1;
+    color:#8a6400;
+    font-weight:bold;
+    line-height:1.6;
+}
+
+
+.requestStatus.show{
+    display:block;
+}
+
+
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottomNav{
+    position:fixed;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:82px;
+    background:#191919;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    align-items:center;
+    z-index:1000;
+    box-shadow:0 -3px 12px rgba(0,0,0,.20);
+    border-radius:18px 18px 0 0;
+}
+
+
+.navItem{
+    height:100%;
+    border:none;
+    background:transparent;
+    color:#ffffff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    cursor:pointer;
+}
+
+
+.navIcon{
+    font-size:25px;
+}
+
+
+.navText{
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+.homeCircle{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:#d9b436;
+    border:3px solid #ffd700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+    .header{
+        padding:11px 10px;
+        gap:9px;
+    }
+
+
+    .headerTitle h1{
+        font-size:18px;
+    }
+
+
+    .headerWallet{
+        font-size:14px;
+        padding:9px 10px;
+    }
+
+
+    .container{
+        padding:12px;
+    }
+
+
+    .card{
+        padding:16px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+    <button
+    class="backBtn"
+    type="button"
+    onclick="goBack()">
+
+        ←
+
+    </button>
+
+
+    <div class="headerTitle">
+
+        <h1 id="appName">
+            HR MATKA
+        </h1>
+
+        <p>
+            Withdraw Money
+        </p>
+
+    </div>
+
+
+    <div class="headerWallet">
+
+        ₹ <span id="topWallet">0.00</span>
+
+    </div>
+
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     WALLET
+===================================================== -->
+
+<div class="walletBox">
+
+    <p>
+        Current Wallet Balance
+    </p>
+
+    <h2>
+
+        ₹ <span id="walletBalance">0.00</span>
+
+    </h2>
+
+</div>
+
+
+
+<!-- =====================================================
+     WITHDRAW REQUEST
+===================================================== -->
+
+<div class="card">
+
+
+    <div class="cardTitle">
+
+        Withdraw Request
+
+    </div>
+
+
+    <label>
+
+        Withdraw Amount
+
+    </label>
+
+
+    <input
+    type="text"
+    id="withdrawAmount"
+    placeholder="Enter Withdraw Amount"
+    inputmode="numeric"
+    autocomplete="off">
+
+
+    <p class="infoText">
+
+        Minimum Withdraw :
+
+        <b id="minWithdraw">
+
+            ₹ 0
+
+        </b>
+
+    </p>
+
+
+    <div
+    id="pendingRequestBox"
+    class="requestStatus">
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     PAYMENT DETAILS
+===================================================== -->
+
+<div class="card">
+
+
+    <div class="cardTitle">
+
+        Withdraw Account Details
+
+    </div>
+
+
+    <label>
+
+        Account Holder Name
+
+    </label>
+
+
+    <input
+    type="text"
+    id="holderName"
+    placeholder="Enter Account Holder Name">
+
+
+    <label>
+
+        Bank Name
+
+    </label>
+
+
+    <input
+    type="text"
+    id="bankName"
+    placeholder="Enter Bank Name">
+
+
+    <label>
+
+        Account Number
+
+    </label>
+
+
+    <input
+    type="text"
+    id="accountNumber"
+    placeholder="Enter Account Number"
+    inputmode="numeric">
+
+
+    <label>
+
+        IFSC Code
+
+    </label>
+
+
+    <input
+    type="text"
+    id="ifscCode"
+    placeholder="Enter IFSC Code">
+
+
+    <div
+    style="
+    text-align:center;
+    font-weight:bold;
+    margin:20px 0 5px;
+    color:#666666;
+    ">
+
+        OR
+
+    </div>
+
+
+    <label>
+
+        UPI ID / PhonePe
+
+    </label>
+
+
+    <input
+    type="text"
+    id="upiId"
+    placeholder="Example: mobile@upi">
+
+
+    <div class="notice">
+
+        पूरा Bank Account भरना जरूरी नहीं है।
+
+        <br><br>
+
+        <b>
+            Full Bank Details
+        </b>
+
+        या
+
+        <b>
+            सिर्फ UPI ID
+        </b>
+
+        में से कोई एक होने पर Withdraw Request भेज सकते हैं।
+
+    </div>
+
+
+    <button
+    type="button"
+    class="saveBtn"
+    onclick="savePaymentDetails()">
+
+        Save Account Details
+
+    </button>
+
+
+    <button
+    type="button"
+    class="withdrawBtn"
+    id="withdrawBtn">
+
+        Submit Withdraw Request
+
+    </button>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<nav class="bottomNav">
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('mybid.html')">
+
+        <span class="navIcon">
+            🎯
+        </span>
+
+        <span class="navText">
+            My Bid
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('history.html')">
+
+        <span class="navIcon">
+            📒
+        </span>
+
+        <span class="navText">
+            Passbook
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('index.html')">
+
+        <span class="homeCircle">
+            🏠
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('fund.html')">
+
+        <span class="navIcon">
+            💰
+        </span>
+
+        <span class="navText">
+            Fund
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('chart.html')">
+
+        <span class="navIcon">
+            📊
+        </span>
+
+        <span class="navText">
+            Chart
+        </span>
+
+    </button>
+
+
+</nav>
+
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   1. STORAGE
+===================================================== */
+
+function getStorage(
+    key,
+    fallback
+){
+
+    try{
+
+        let data =
+        localStorage.getItem(
+            key
+        );
+
+
+        if(!data){
+
+            return fallback;
+
+        }
+
+
+        return JSON.parse(
+            data
+        );
+
+    }
+    catch(error){
+
+        console.log(
+            "Storage Error:",
+            error
+        );
+
+
+        return fallback;
+
+    }
+
+}
+
+
+
+function saveStorage(
+    key,
+    value
+){
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(
+            value
+        )
+    );
+
+}
+
+
+
+/* =====================================================
+   2. CAPITAL AM / PM TIME
+===================================================== */
+
+function formatTimeAMPM(
+    date = new Date()
+){
+
+    return date
+    .toLocaleTimeString(
+        "en-US",
+        {
+            hour:"2-digit",
+            minute:"2-digit",
+            second:"2-digit",
+            hour12:true
+        }
+    )
+    .replace(
+        " am",
+        " AM"
+    )
+    .replace(
+        " pm",
+        " PM"
+    );
+
+}
+
+
+
+/* =====================================================
+   3. DATE
+===================================================== */
+
+function formatDate(
+    date = new Date()
+){
+
+    return date
+    .toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   4. FULL DATE + CAPITAL AM PM
+===================================================== */
+
+function formatDateTimeAMPM(
+    date = new Date()
+){
+
+    return (
+        formatDate(
+            date
+        )
+        +
+        ", "
+        +
+        formatTimeAMPM(
+            date
+        )
+    );
+
+}
+
+
+
+/* =====================================================
+   5. CURRENT USER
+===================================================== */
+
+let currentUser =
+getStorage(
+    "currentUser",
+    null
+);
+
+
+if(
+    !currentUser ||
+    !currentUser.mobile
+){
+
+    alert(
+        "Please Login First"
+    );
+
+
+    window.location.href =
+    "login.html";
+
+}
+
+
+
+/* =====================================================
+   6. PAGE LINKS
+===================================================== */
+
+function goPage(
+    page
+){
+
+    window.location.href =
+    page;
+
+}
+
+
+
+function goBack(){
+
+    if(
+        window.history.length > 1
+    ){
+
+        window.history.back();
+
+    }
+    else{
+
+        window.location.href =
+        "index.html";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   7. ADMIN SETTINGS
+===================================================== */
+
+let adminSettings =
+getStorage(
+    "adminSettings",
+    {}
+);
+
+
+let minimumWithdraw =
+Number(
+    adminSettings.withdrawLimit
+    ||
+    adminSettings.minimumWithdraw
+    ||
+    0
+);
+
+
+document.getElementById(
+    "minWithdraw"
+).innerText =
+"₹ " +
+minimumWithdraw;
+
+
+document.getElementById(
+    "appName"
+).innerText =
+adminSettings.appName
+||
+"HR MATKA";
+
+
+
+/* =====================================================
+   8. CAPITALIZATION
+===================================================== */
+
+function capitalizeWords(
+    value
+){
+
+    return String(
+        value || ""
+    )
+    .toLowerCase()
+    .replace(
+        /\b\w/g,
+        function(letter){
+
+            return letter
+            .toUpperCase();
+
+        }
+    );
+
+}
+
+
+
+document.getElementById(
+    "holderName"
+)
+.addEventListener(
+    "input",
+    function(){
+
+        let position =
+        this.selectionStart;
+
+
+        this.value =
+        capitalizeWords(
+            this.value
+        );
+
+
+        try{
+
+            this.setSelectionRange(
+                position,
+                position
+            );
+
+        }
+        catch(error){}
+
+    }
+);
+
+
+
+document.getElementById(
+    "bankName"
+)
+.addEventListener(
+    "input",
+    function(){
+
+        let position =
+        this.selectionStart;
+
+
+        this.value =
+        capitalizeWords(
+            this.value
+        );
+
+
+        try{
+
+            this.setSelectionRange(
+                position,
+                position
+            );
+
+        }
+        catch(error){}
+
+    }
+);
+
+
+
+document.getElementById(
+    "ifscCode"
+)
+.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value
+        .toUpperCase()
+        .replace(
+            /\s/g,
+            ""
+        );
+
+    }
+);
+
+
+
+document.getElementById(
+    "accountNumber"
+)
+.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value.replace(
+            /\D/g,
+            ""
+        );
+
+    }
+);
+
+
+
+document.getElementById(
+    "withdrawAmount"
+)
+.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value.replace(
+            /\D/g,
+            ""
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   9. WALLET
+===================================================== */
+
+let walletBalance = 0;
+
+
+function refreshWallet(){
+
+    let balances =
+    getStorage(
+        "userBalances",
+        {}
+    );
+
+
+    walletBalance =
+    Number(
+        balances[
+            currentUser.mobile
+        ] || 0
+    );
+
+
+    if(
+        !Number.isFinite(
+            walletBalance
+        )
+    ){
+
+        walletBalance = 0;
+
+    }
+
+
+    document.getElementById(
+        "walletBalance"
+    ).innerText =
+    walletBalance
+    .toFixed(
+        2
+    );
+
+
+    document.getElementById(
+        "topWallet"
+    ).innerText =
+    walletBalance
+    .toFixed(
+        2
+    );
+
+}
+
+
+
+/* =====================================================
+   10. IMPORT OLD PAYMENT DETAILS
+===================================================== */
+
+function importOldDetails(){
+
+    let userPaymentDetails =
+    getStorage(
+        "userPaymentDetails",
+        {}
+    );
+
+
+    if(
+        userPaymentDetails[
+            currentUser.mobile
+        ]
+    ){
+
+        return;
+
+    }
+
+
+    let bankDetails =
+    getStorage(
+        "bankDetails",
+        {}
+    );
+
+
+    let upiDetails =
+    getStorage(
+        "upiDetails",
+        {}
+    );
+
+
+    let oldBank =
+    bankDetails[
+        currentUser.mobile
+    ] || {};
+
+
+    let oldUpi =
+    upiDetails[
+        currentUser.mobile
+    ] || {};
+
+
+    if(
+        oldBank.holder
+        ||
+        oldBank.bank
+        ||
+        oldBank.number
+        ||
+        oldBank.ifsc
+        ||
+        oldUpi.upiId
+    ){
+
+        userPaymentDetails[
+            currentUser.mobile
+        ] = {
+
+            holderName:
+            oldBank.holder || "",
+
+            bankName:
+            oldBank.bank || "",
+
+            accountNumber:
+            oldBank.number || "",
+
+            ifscCode:
+            oldBank.ifsc || "",
+
+            upiId:
+            oldUpi.upiId || ""
+
+        };
+
+
+        saveStorage(
+            "userPaymentDetails",
+            userPaymentDetails
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   11. LOAD PAYMENT DETAILS
+===================================================== */
+
+function loadPaymentDetails(){
+
+    let userPaymentDetails =
+    getStorage(
+        "userPaymentDetails",
+        {}
+    );
+
+
+    let details =
+    userPaymentDetails[
+        currentUser.mobile
+    ] || {};
+
+
+    document.getElementById(
+        "holderName"
+    ).value =
+    details.holderName
+    || "";
+
+
+    document.getElementById(
+        "bankName"
+    ).value =
+    details.bankName
+    || "";
+
+
+    document.getElementById(
+        "accountNumber"
+    ).value =
+    details.accountNumber
+    || "";
+
+
+    document.getElementById(
+        "ifscCode"
+    ).value =
+    details.ifscCode
+    || "";
+
+
+    document.getElementById(
+        "upiId"
+    ).value =
+    details.upiId
+    || "";
+
+}
+
+
+
+/* =====================================================
+   12. PAYMENT FORM DATA
+===================================================== */
+
+function getPaymentFormData(){
+
+    let holderName =
+    document.getElementById(
+        "holderName"
+    )
+    .value
+    .trim();
+
+
+    let bankName =
+    document.getElementById(
+        "bankName"
+    )
+    .value
+    .trim();
+
+
+    let accountNumber =
+    document.getElementById(
+        "accountNumber"
+    )
+    .value
+    .trim();
+
+
+    let ifscCode =
+    document.getElementById(
+        "ifscCode"
+    )
+    .value
+    .trim()
+    .toUpperCase();
+
+
+    let upiId =
+    document.getElementById(
+        "upiId"
+    )
+    .value
+    .trim();
+
+
+    let bankAvailable =
+
+    holderName !== ""
+    &&
+    bankName !== ""
+    &&
+    accountNumber !== ""
+    &&
+    ifscCode !== "";
+
+
+    let upiAvailable =
+    upiId !== "";
+
+
+    return {
+
+        holderName,
+
+        bankName,
+
+        accountNumber,
+
+        ifscCode,
+
+        upiId,
+
+        bankAvailable,
+
+        upiAvailable
+
+    };
+
+}
+
+
+
+/* =====================================================
+   13. SAVE PAYMENT DETAILS
+===================================================== */
+
+function savePaymentDetails(
+    showMessage = true
+){
+
+    let form =
+    getPaymentFormData();
+
+
+    if(
+        !form.bankAvailable
+        &&
+        !form.upiAvailable
+    ){
+
+        alert(
+            "Please Enter Full Bank Details Or UPI ID"
+        );
+
+        return false;
+
+    }
+
+
+    let anyBankField =
+
+    form.holderName !== ""
+    ||
+    form.bankName !== ""
+    ||
+    form.accountNumber !== ""
+    ||
+    form.ifscCode !== "";
+
+
+    if(
+        anyBankField
+        &&
+        !form.bankAvailable
+        &&
+        !form.upiAvailable
+    ){
+
+        alert(
+            "Please Complete Bank Details Or Enter UPI ID"
+        );
+
+        return false;
+
+    }
+
+
+    let userPaymentDetails =
+    getStorage(
+        "userPaymentDetails",
+        {}
+    );
+
+
+    userPaymentDetails[
+        currentUser.mobile
+    ] = {
+
+        holderName:
+        form.holderName,
+
+        bankName:
+        form.bankName,
+
+        accountNumber:
+        form.accountNumber,
+
+        ifscCode:
+        form.ifscCode,
+
+        upiId:
+        form.upiId,
+
+        updatedAt:
+        formatDateTimeAMPM(
+            new Date()
+        )
+
+    };
+
+
+    saveStorage(
+        "userPaymentDetails",
+        userPaymentDetails
+    );
+
+
+    let bankDetails =
+    getStorage(
+        "bankDetails",
+        {}
+    );
+
+
+    bankDetails[
+        currentUser.mobile
+    ] = {
+
+        holder:
+        form.holderName,
+
+        bank:
+        form.bankName,
+
+        number:
+        form.accountNumber,
+
+        ifsc:
+        form.ifscCode
+
+    };
+
+
+    saveStorage(
+        "bankDetails",
+        bankDetails
+    );
+
+
+    let upiDetails =
+    getStorage(
+        "upiDetails",
+        {}
+    );
+
+
+    upiDetails[
+        currentUser.mobile
+    ] = {
+
+        upiId:
+        form.upiId
+
+    };
+
+
+    saveStorage(
+        "upiDetails",
+        upiDetails
+    );
+
+
+    if(
+        showMessage
+    ){
+
+        alert(
+            "Account Details Saved Successfully"
+        );
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   14. GET PENDING REQUEST
+===================================================== */
+
+function getPendingRequest(){
+
+    let withdrawals =
+    getStorage(
+        "withdrawals",
+        []
+    );
+
+
+    if(
+        !Array.isArray(
+            withdrawals
+        )
+    ){
+
+        withdrawals = [];
+
+    }
+
+
+    return withdrawals.find(
+        function(item){
+
+            return (
+
+                String(
+                    item.mobile
+                )
+                ===
+                String(
+                    currentUser.mobile
+                )
+
+                &&
+
+                String(
+                    item.status
+                )
+                .toLowerCase()
+                ===
+                "pending"
+
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   15. PENDING DISPLAY
+===================================================== */
+
+function showPendingRequest(){
+
+    let pending =
+    getPendingRequest();
+
+
+    let box =
+    document.getElementById(
+        "pendingRequestBox"
+    );
+
+
+    if(!pending){
+
+        box.classList.remove(
+            "show"
+        );
+
+
+        box.innerHTML =
+        "";
+
+
+        return;
+
+    }
+
+
+    let requestDate =
+    pending.requestDate
+    ||
+    "";
+
+
+    let requestTime =
+    pending.requestTime
+    ||
+    pending.time
+    ||
+    "";
+
+
+    /*
+       Old record compatibility
+       only display purpose.
+    */
+
+    if(
+        !requestDate
+        &&
+        pending.date
+    ){
+
+        let text =
+        String(
+            pending.date
+        );
+
+
+        if(
+            text.includes(
+                ","
+            )
+        ){
+
+            let parts =
+            text.split(
+                ","
+            );
+
+
+            requestDate =
+            parts[0]
+            .trim();
+
+
+            if(
+                !requestTime
+            ){
+
+                requestTime =
+                parts
+                .slice(1)
+                .join(",")
+                .trim();
+
+            }
+
+        }
+        else{
+
+            requestDate =
+            text;
+
+        }
+
+    }
+
+
+    let dateTimeText =
+    requestDate || "-";
+
+
+    if(
+        requestTime
+    ){
+
+        dateTimeText +=
+        ", "
+        +
+        requestTime;
+
+    }
+
+
+    box.innerHTML =
+
+    "Previous Request Pending"
+    +
+    "<br>"
+    +
+    "Amount : ₹"
+    +
+    Number(
+        pending.amount || 0
+    )
+    .toFixed(
+        2
+    )
+    +
+    "<br>"
+    +
+    "Date : "
+    +
+    dateTimeText;
+
+
+    box.classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* =====================================================
+   16. SUBMIT WITHDRAW
+===================================================== */
+
+function submitWithdraw(){
+
+    refreshWallet();
+
+
+    let amount =
+    Number(
+        document.getElementById(
+            "withdrawAmount"
+        ).value
+    );
+
+
+    if(
+        !amount
+        ||
+        amount <= 0
+    ){
+
+        alert(
+            "Please Enter Valid Amount"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        amount <
+        minimumWithdraw
+    ){
+
+        alert(
+            "Minimum Withdraw ₹ "
+            +
+            minimumWithdraw
+        );
+
+        return;
+
+    }
+
+
+    if(
+        amount >
+        walletBalance
+    ){
+
+        alert(
+            "Insufficient Wallet Balance"
+        );
+
+        return;
+
+    }
+
+
+    let pendingRequest =
+    getPendingRequest();
+
+
+    if(
+        pendingRequest
+    ){
+
+        alert(
+            "Your Previous Withdrawal Request Is Pending"
+        );
+
+        return;
+
+    }
+
+
+    let form =
+    getPaymentFormData();
+
+
+    if(
+        !form.bankAvailable
+        &&
+        !form.upiAvailable
+    ){
+
+        alert(
+            "Please Enter Bank Details Or UPI ID"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !savePaymentDetails(
+            false
+        )
+    ){
+
+        return;
+
+    }
+
+
+    let paymentMode =
+    "";
+
+
+    if(
+        form.bankAvailable
+        &&
+        form.upiAvailable
+    ){
+
+        paymentMode =
+        "BANK + UPI";
+
+    }
+    else if(
+        form.upiAvailable
+    ){
+
+        paymentMode =
+        "UPI";
+
+    }
+    else{
+
+        paymentMode =
+        "BANK";
+
+    }
+
+
+    let withdrawals =
+    getStorage(
+        "withdrawals",
+        []
+    );
+
+
+    if(
+        !Array.isArray(
+            withdrawals
+        )
+    ){
+
+        withdrawals = [];
+
+    }
+
+
+    let now =
+    new Date();
+
+
+    let uniqueId =
+    Date.now();
+
+
+    let requestDate =
+    formatDate(
+        now
+    );
+
+
+    let requestTime =
+    formatTimeAMPM(
+        now
+    );
+
+
+    /*
+       IMPORTANT
+
+       New records:
+       date = only date
+       time = CAPITAL AM / PM time
+
+       Also requestDate and requestTime
+       are saved separately.
+    */
+
+    withdrawals.push({
+
+        id:
+        uniqueId,
+
+        requestId:
+        "WD"
+        +
+        uniqueId,
+
+        type:
+        "Withdrawal Request",
+
+        name:
+        currentUser.name
+        || "",
+
+        mobile:
+        currentUser.mobile,
+
+        holderName:
+        form.holderName,
+
+        bankName:
+        form.bankName,
+
+        accountNumber:
+        form.accountNumber,
+
+        ifsc:
+        form.ifscCode,
+
+        ifscCode:
+        form.ifscCode,
+
+        upi:
+        form.upiId,
+
+        upiId:
+        form.upiId,
+
+        paymentMode:
+        paymentMode,
+
+        amount:
+        amount,
+
+        requestDate:
+        requestDate,
+
+        requestTime:
+        requestTime,
+
+        date:
+        requestDate,
+
+        time:
+        requestTime,
+
+        createdAt:
+        now.toISOString(),
+
+        status:
+        "Pending"
+
+    });
+
+
+    saveStorage(
+        "withdrawals",
+        withdrawals
+    );
+
+
+    alert(
+        "Withdraw Request Submitted Successfully"
+    );
+
+
+    document.getElementById(
+        "withdrawAmount"
+    ).value =
+    "";
+
+
+    showPendingRequest();
+
+
+    /*
+       Wallet yahan deduct nahi hoga.
+       Admin Approve par deduct hoga.
+    */
+
+}
+
+
+
+/* =====================================================
+   17. SUBMIT BUTTON
+===================================================== */
+
+document.getElementById(
+    "withdrawBtn"
+)
+.addEventListener(
+    "click",
+    submitWithdraw
+);
+
+
+
+/* =====================================================
+   18. LIVE UPDATE
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            "withdrawals"
+
+            ||
+
+            event.key ===
+            "userBalances"
+
+            ||
+
+            event.key ===
+            "adminSettings"
+        ){
+
+            refreshWallet();
+
+            showPendingRequest();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   19. PAGE LOAD
+===================================================== */
+
+importOldDetails();
+
+loadPaymentDetails();
+
+refreshWallet();
+
+showPendingRequest();
+
+
+
+setInterval(
+    function(){
+
+        refreshWallet();
+
+        showPendingRequest();
+
+    },
+    3000
+);
+
+
+
+console.log(
+    "✅ HR MATKA User Withdraw Complete Replacement Connected"
+);
+
+</script>
+
+
+</body>
+
+</html>
