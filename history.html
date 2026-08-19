@@ -1,0 +1,3091 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Passbook - HR MATKA</title>
+
+<style>
+
+/* =====================================================
+   HR MATKA USER APP
+   HISTORY.HTML / PASSBOOK
+   FINAL COMPLETE REPLACEMENT
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#eeeeee;
+    color:#222222;
+    min-height:100vh;
+    padding-bottom:100px;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+.app{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    background:#191919;
+    color:#ffffff;
+    min-height:78px;
+    padding:13px 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+
+.backBtn{
+    width:44px;
+    min-width:44px;
+    height:44px;
+    border:none;
+    border-radius:50%;
+    background:#2b2b2b;
+    color:#ffffff;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.headerTitle{
+    flex:1;
+    min-width:0;
+}
+
+.headerTitle h1{
+    color:#d9b436;
+    font-size:21px;
+    margin-bottom:3px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.headerTitle p{
+    color:#cccccc;
+    font-size:12px;
+}
+
+.headerWallet{
+    background:#2b2b2b;
+    color:#63d86c;
+    padding:9px 13px;
+    border-radius:22px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:#ffffff;
+    padding:18px;
+    border-radius:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.13);
+}
+
+
+/* =====================================================
+   HISTORY BUTTONS
+===================================================== */
+
+.topButtons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+    margin-bottom:16px;
+}
+
+.topButtons button{
+    min-height:48px;
+    padding:10px 6px;
+    border:none;
+    border-radius:9px;
+    background:#283593;
+    color:#ffffff;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.topButtons button.active{
+    background:#d9b436;
+    color:#111111;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summaryGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-bottom:16px;
+}
+
+.summaryBox{
+    padding:13px 8px;
+    border-radius:10px;
+    text-align:center;
+    background:#f7f7f7;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.summaryBox p{
+    font-size:12px;
+    color:#666666;
+    margin-bottom:5px;
+}
+
+.summaryBox h3{
+    font-size:20px;
+}
+
+.recordBox{
+    border-left:4px solid #1976d2;
+}
+
+.creditBox{
+    border-left:4px solid #28a745;
+}
+
+.debitBox{
+    border-left:4px solid #e53935;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.filterBox{
+    display:grid;
+    grid-template-columns:1.4fr 2fr auto auto auto;
+    gap:9px;
+    margin-bottom:16px;
+}
+
+.filterBox input{
+    width:100%;
+    min-height:42px;
+    padding:9px 10px;
+    border:1px solid #cccccc;
+    border-radius:8px;
+    font-size:14px;
+    outline:none;
+}
+
+.filterBox input:focus{
+    border-color:#d9b436;
+}
+
+.filterBox button{
+    min-height:42px;
+    padding:9px 15px;
+    border:none;
+    border-radius:8px;
+    color:#ffffff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.searchBtn{
+    background:#2196f3;
+}
+
+.todayBtn{
+    background:#ff9800;
+}
+
+.clearBtn{
+    background:#607d8b;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.tableBox{
+    overflow-x:auto;
+    border-radius:9px;
+    border:1px solid #dddddd;
+    -webkit-overflow-scrolling:touch;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1050px;
+    background:#ffffff;
+}
+
+th{
+    background:#283593;
+    color:#ffffff;
+    padding:11px 7px;
+    border:1px solid #dddddd;
+    font-size:13px;
+    white-space:nowrap;
+}
+
+td{
+    padding:10px 7px;
+    border:1px solid #dddddd;
+    text-align:center;
+    font-size:13px;
+    white-space:nowrap;
+}
+
+tbody tr:nth-child(even){
+    background:#f8f8f8;
+}
+
+.noData{
+    padding:28px;
+    color:#777777;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status{
+    display:inline-block;
+    min-width:70px;
+    padding:5px 9px;
+    border-radius:18px;
+    font-weight:bold;
+}
+
+.status-pending{
+    background:#fff3df;
+    color:#a85f00;
+}
+
+.status-success{
+    background:#e4f8ea;
+    color:#11783a;
+}
+
+.status-win{
+    background:#e4f8ea;
+    color:#11783a;
+}
+
+.status-lose{
+    background:#fde7e7;
+    color:#c62828;
+}
+
+.status-rejected{
+    background:#fde7e7;
+    color:#c62828;
+}
+
+.status-active{
+    background:#e7f1ff;
+    color:#1565c0;
+}
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+.credit{
+    color:#159447;
+    font-weight:bold;
+}
+
+.debit{
+    color:#e53935;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottomNav{
+    position:fixed;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:82px;
+    background:#191919;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    align-items:center;
+    z-index:2000;
+    box-shadow:0 -3px 12px rgba(0,0,0,.20);
+    border-radius:18px 18px 0 0;
+}
+
+.navItem{
+    height:100%;
+    border:none;
+    background:transparent;
+    color:#ffffff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    cursor:pointer;
+}
+
+.navIcon{
+    font-size:24px;
+}
+
+.navText{
+    font-size:11px;
+    font-weight:bold;
+}
+
+.homeCircle{
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:#d9b436;
+    border:3px solid #ffd700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+}
+
+.activeNav{
+    color:#ffd75a;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .container{
+        padding:10px;
+    }
+
+    .card{
+        padding:11px;
+    }
+
+    .topButtons{
+        grid-template-columns:repeat(2,1fr);
+        gap:7px;
+    }
+
+    .topButtons button{
+        font-size:12px;
+    }
+
+    .summaryGrid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .summaryGrid .recordBox{
+        grid-column:1/-1;
+    }
+
+    .filterBox{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filterBox input:nth-child(2){
+        grid-column:1/-1;
+    }
+
+    .header{
+        padding:10px;
+        gap:8px;
+    }
+
+    .headerTitle h1{
+        font-size:18px;
+    }
+
+    .headerWallet{
+        font-size:13px;
+        padding:8px 9px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<header class="header">
+
+<button
+type="button"
+class="backBtn"
+onclick="goBack()">
+    ←
+</button>
+
+<div class="headerTitle">
+
+    <h1 id="appTitle">
+        HR MATKA
+    </h1>
+
+    <p>
+        My History / Passbook
+    </p>
+
+</div>
+
+<div class="headerWallet">
+
+    ₹ <span id="topWallet">0.00</span>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+
+<!-- =====================================================
+     HISTORY TABS
+===================================================== -->
+
+<div class="topButtons">
+
+<button
+type="button"
+id="gameBtn"
+onclick="changeHistory('game')">
+
+    🎯 Game History
+
+</button>
+
+<button
+type="button"
+id="depositBtn"
+onclick="changeHistory('deposit')">
+
+    💰 Deposit History
+
+</button>
+
+<button
+type="button"
+id="withdrawBtn"
+onclick="changeHistory('withdraw')">
+
+    💸 Withdraw History
+
+</button>
+
+<button
+type="button"
+id="walletBtn"
+onclick="changeHistory('wallet')">
+
+    📒 Wallet Passbook
+
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     SUMMARY
+===================================================== -->
+
+<div class="summaryGrid">
+
+<div class="summaryBox recordBox">
+
+    <p>
+        Total Records
+    </p>
+
+    <h3 id="totalRecords">
+        0
+    </h3>
+
+</div>
+
+
+<div class="summaryBox creditBox">
+
+    <p>
+        Total Credit
+    </p>
+
+    <h3>
+        ₹ <span id="totalCredit">0.00</span>
+    </h3>
+
+</div>
+
+
+<div class="summaryBox debitBox">
+
+    <p>
+        Total Debit
+    </p>
+
+    <h3>
+        ₹ <span id="totalDebit">0.00</span>
+    </h3>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     FILTER
+===================================================== -->
+
+<div class="filterBox">
+
+<input
+type="date"
+id="filterDate">
+
+
+<input
+type="text"
+id="searchText"
+placeholder="Search Market / Type / Status / Number"
+autocomplete="off">
+
+
+<button
+type="button"
+class="searchBtn"
+onclick="renderCurrentHistory()">
+
+    Search
+
+</button>
+
+
+<button
+type="button"
+class="todayBtn"
+onclick="todayHistory()">
+
+    Today
+
+</button>
+
+
+<button
+type="button"
+class="clearBtn"
+onclick="clearHistory()">
+
+    Clear
+
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     TABLE
+===================================================== -->
+
+<div class="tableBox">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>ID</th>
+
+    <th>Market / Type</th>
+
+    <th>Game / Details</th>
+
+    <th>Number / Ref.</th>
+
+    <th>Amount</th>
+
+    <th>Balance</th>
+
+    <th>Date</th>
+
+    <th>Time</th>
+
+    <th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<nav class="bottomNav">
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('mybid.html')">
+
+    <span class="navIcon">🎯</span>
+
+    <span class="navText">
+        My Bid
+    </span>
+
+</button>
+
+
+<button
+class="navItem activeNav"
+type="button"
+onclick="goPage('history.html')">
+
+    <span class="navIcon">📒</span>
+
+    <span class="navText">
+        Passbook
+    </span>
+
+</button>
+
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('index.html')">
+
+    <span class="homeCircle">🏠</span>
+
+</button>
+
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('fund.html')">
+
+    <span class="navIcon">💰</span>
+
+    <span class="navText">
+        Fund
+    </span>
+
+</button>
+
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('chart.html')">
+
+    <span class="navIcon">📊</span>
+
+    <span class="navText">
+        Chart
+    </span>
+
+</button>
+
+</nav>
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   HR MATKA USER APP
+   HISTORY / PASSBOOK
+   FINAL COMPLETE ENGINE
+===================================================== */
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+function getStorage(
+    key,
+    fallback
+){
+
+    try{
+
+        let raw =
+        localStorage.getItem(
+            key
+        );
+
+
+        if(
+            raw === null ||
+            raw === undefined ||
+            raw === ""
+        ){
+
+            return fallback;
+
+        }
+
+
+        return JSON.parse(
+            raw
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Storage Read Error:",
+            key,
+            error
+        );
+
+
+        return fallback;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CURRENT USER
+===================================================== */
+
+let currentUser =
+getStorage(
+    "currentUser",
+    null
+);
+
+
+if(
+    !currentUser ||
+    !currentUser.mobile
+){
+
+    alert(
+        "Please Login First"
+    );
+
+
+    window.location.href =
+    "login.html";
+
+}
+
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goPage(page){
+
+    window.location.href =
+    page;
+
+}
+
+
+function goBack(){
+
+    if(
+        window.history.length > 1
+    ){
+
+        window.history.back();
+
+    }
+
+    else{
+
+        window.location.href =
+        "index.html";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAFE
+===================================================== */
+
+function safe(value){
+
+    if(
+        value === undefined ||
+        value === null ||
+        value === ""
+    ){
+
+        return "-";
+
+    }
+
+
+    return String(
+        value
+    );
+
+}
+
+
+function escapeHTML(value){
+
+    return String(
+        value === undefined ||
+        value === null
+        ? ""
+        : value
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+
+/* =====================================================
+   MOBILE NORMALIZE
+===================================================== */
+
+function normalizeMobile(value){
+
+    return String(
+        value || ""
+    )
+    .replace(
+        /\D/g,
+        ""
+    );
+
+}
+
+
+
+/* =====================================================
+   ADMIN SETTINGS
+===================================================== */
+
+function loadAdminSettings(){
+
+    let settings =
+    getStorage(
+        "adminSettings",
+        {}
+    );
+
+
+    document
+    .getElementById(
+        "appTitle"
+    )
+    .innerText =
+
+    settings.appName ||
+    "HR MATKA";
+
+}
+
+
+
+/* =====================================================
+   WALLET
+===================================================== */
+
+function refreshWallet(){
+
+    let balances =
+    getStorage(
+        "userBalances",
+        {}
+    );
+
+
+    let mobile =
+    String(
+        currentUser.mobile
+    );
+
+
+    let normalized =
+    normalizeMobile(
+        mobile
+    );
+
+
+    let balance =
+    Number(
+
+        balances[mobile]
+
+        ??
+
+        balances[normalized]
+
+        ??
+
+        0
+
+    );
+
+
+    if(
+        !Number.isFinite(
+            balance
+        )
+    ){
+
+        balance = 0;
+
+    }
+
+
+    document
+    .getElementById(
+        "topWallet"
+    )
+    .innerText =
+    balance.toFixed(2);
+
+}
+
+
+
+/* =====================================================
+   DATE HELPERS
+===================================================== */
+
+function getTodayISO(){
+
+    let d =
+    new Date();
+
+
+    return (
+
+        d.getFullYear()
+
+        +
+
+        "-"
+
+        +
+
+        String(
+            d.getMonth()+1
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+        +
+
+        "-"
+
+        +
+
+        String(
+            d.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+    );
+
+}
+
+
+function normalizeDate(value){
+
+    if(!value){
+
+        return "";
+
+    }
+
+
+    let text =
+    String(
+        value
+    )
+    .trim();
+
+
+    let slash =
+    text.match(
+        /^(\d{1,2})\/(\d{1,2})\/(\d{4})/
+    );
+
+
+    if(slash){
+
+        return (
+
+            slash[3]
+
+            +
+
+            "-"
+
+            +
+
+            String(
+                slash[2]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+
+            +
+
+            "-"
+
+            +
+
+            String(
+                slash[1]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+
+        );
+
+    }
+
+
+    let dash =
+    text.match(
+        /^(\d{1,2})-(\d{1,2})-(\d{4})/
+    );
+
+
+    if(dash){
+
+        return (
+
+            dash[3]
+
+            +
+
+            "-"
+
+            +
+
+            String(
+                dash[2]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+
+            +
+
+            "-"
+
+            +
+
+            String(
+                dash[1]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+
+        );
+
+    }
+
+
+    if(
+        /^\d{4}-\d{2}-\d{2}/
+        .test(
+            text
+        )
+    ){
+
+        return text.substring(
+            0,
+            10
+        );
+
+    }
+
+
+    let parsed =
+    new Date(
+        text
+    );
+
+
+    if(
+        isNaN(
+            parsed.getTime()
+        )
+    ){
+
+        return "";
+
+    }
+
+
+    return (
+
+        parsed.getFullYear()
+
+        +
+
+        "-"
+
+        +
+
+        String(
+            parsed.getMonth()+1
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+        +
+
+        "-"
+
+        +
+
+        String(
+            parsed.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+    );
+
+}
+
+
+function displayDate(value){
+
+    let normalized =
+    normalizeDate(
+        value
+    );
+
+
+    if(!normalized){
+
+        return safe(
+            value
+        );
+
+    }
+
+
+    let parts =
+    normalized.split(
+        "-"
+    );
+
+
+    return (
+
+        parts[2]
+
+        +
+
+        "/"
+
+        +
+
+        parts[1]
+
+        +
+
+        "/"
+
+        +
+
+        parts[0]
+
+    );
+
+}
+
+
+
+/* =====================================================
+   TIME FORMAT
+   CAPITAL AM / PM
+===================================================== */
+
+function formatTime12(value){
+
+    if(
+        !value ||
+        value === "-"
+    ){
+
+        return "-";
+
+    }
+
+
+    let text =
+    String(
+        value
+    )
+    .trim();
+
+
+    if(
+        /\b(am|pm)\b/i
+        .test(
+            text
+        )
+    ){
+
+        return text
+        .replace(
+            /\bam\b/gi,
+            "AM"
+        )
+        .replace(
+            /\bpm\b/gi,
+            "PM"
+        );
+
+    }
+
+
+    let match =
+    text.match(
+        /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/
+    );
+
+
+    if(match){
+
+        let hour =
+        Number(
+            match[1]
+        );
+
+
+        if(
+            hour >= 0 &&
+            hour <= 23
+        ){
+
+            let suffix =
+            hour >= 12
+            ? "PM"
+            : "AM";
+
+
+            let hour12 =
+            hour % 12;
+
+
+            if(
+                hour12 === 0
+            ){
+
+                hour12 =
+                12;
+
+            }
+
+
+            return (
+
+                String(
+                    hour12
+                )
+                .padStart(
+                    2,
+                    "0"
+                )
+
+                +
+
+                ":"
+
+                +
+
+                match[2]
+
+                +
+
+                (
+                    match[3]
+                    ?
+                    ":" + match[3]
+                    :
+                    ""
+                )
+
+                +
+
+                " "
+
+                +
+
+                suffix
+
+            );
+
+        }
+
+    }
+
+
+    return text;
+
+}
+
+
+
+/* =====================================================
+   LEGACY DATE / TIME
+===================================================== */
+
+function splitDateTime(value){
+
+    let result = {
+
+        date:"",
+
+        time:""
+
+    };
+
+
+    if(!value){
+
+        return result;
+
+    }
+
+
+    let text =
+    String(
+        value
+    )
+    .trim();
+
+
+    if(
+        text.includes(",")
+    ){
+
+        let parts =
+        text.split(
+            ","
+        );
+
+
+        result.date =
+        parts.shift()
+        .trim();
+
+
+        result.time =
+        parts.join(",")
+        .trim();
+
+
+        return result;
+
+    }
+
+
+    result.date =
+    text;
+
+
+    return result;
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function statusClass(status){
+
+    let value =
+    String(
+        status || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+    if(
+        value === "pending"
+    ){
+
+        return "status-pending";
+
+    }
+
+
+    if(
+        value === "success" ||
+        value === "successful" ||
+        value === "paid" ||
+        value === "approved"
+    ){
+
+        return "status-success";
+
+    }
+
+
+    if(
+        value === "win" ||
+        value === "won"
+    ){
+
+        return "status-win";
+
+    }
+
+
+    if(
+        value === "lose" ||
+        value === "lost"
+    ){
+
+        return "status-lose";
+
+    }
+
+
+    if(
+        value === "rejected" ||
+        value === "blocked"
+    ){
+
+        return "status-rejected";
+
+    }
+
+
+    return "status-active";
+
+}
+
+
+
+/* =====================================================
+   SORT TIME
+===================================================== */
+
+function getSortTime(item){
+
+    let values = [
+
+        item.timestamp,
+
+        item.createdTimestamp,
+
+        item.updatedTimestamp,
+
+        item.id
+
+    ];
+
+
+    for(
+        let value of values
+    ){
+
+        let number =
+        Number(
+            value
+        );
+
+
+        if(
+            Number.isFinite(number) &&
+            number > 0
+        ){
+
+            return number;
+
+        }
+
+    }
+
+
+    if(
+        item.createdAt
+    ){
+
+        let parsed =
+        new Date(
+            item.createdAt
+        );
+
+
+        if(
+            !isNaN(
+                parsed.getTime()
+            )
+        ){
+
+            return parsed.getTime();
+
+        }
+
+    }
+
+
+    return 0;
+
+}
+
+
+
+/* =====================================================
+   USER MATCH
+===================================================== */
+
+function isCurrentUser(item){
+
+    let current =
+    normalizeMobile(
+        currentUser.mobile
+    );
+
+
+    let recordMobile =
+    normalizeMobile(
+
+        item.mobile ||
+
+        item.userMobile ||
+
+        item.phone ||
+
+        item.mobileNumber
+
+    );
+
+
+    return (
+
+        recordMobile !== ""
+
+        &&
+
+        recordMobile ===
+        current
+
+    );
+
+}
+
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let currentHistory =
+"game";
+
+
+function arrayStorage(key){
+
+    let value =
+    getStorage(
+        key,
+        []
+    );
+
+
+    return Array.isArray(value)
+    ? value
+    : [];
+
+}
+
+
+
+/* =====================================================
+   GAME HISTORY
+===================================================== */
+
+function getGameRecords(){
+
+    return arrayStorage(
+        "bets"
+    )
+
+    .filter(
+        isCurrentUser
+    )
+
+    .map(
+        function(item){
+
+            let legacy =
+            splitDateTime(
+                item.date
+            );
+
+
+            let date =
+
+            item.bidDate ||
+
+            item.gameDate ||
+
+            legacy.date ||
+
+            item.date ||
+
+            "-";
+
+
+            let time =
+
+            item.bidTime ||
+
+            item.time ||
+
+            legacy.time ||
+
+            "-";
+
+
+            return {
+
+                type:
+                item.market ||
+                "Game",
+
+                game:
+                item.game ||
+                item.gameType ||
+                "-",
+
+                number:
+                item.number ??
+                item.bidNumber ??
+                "-",
+
+                amount:
+                Number(
+                    item.amount ||
+                    item.bidAmount ||
+                    0
+                ),
+
+                balance:
+                "-",
+
+                date:
+                date,
+
+                time:
+                formatTime12(
+                    time
+                ),
+
+                status:
+                item.status ||
+                "Pending",
+
+                direction:
+                "debit",
+
+                sortTime:
+                getSortTime(
+                    item
+                )
+
+            };
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   DEPOSIT HISTORY
+===================================================== */
+
+function getDepositRecords(){
+
+    return arrayStorage(
+        "deposits"
+    )
+
+    .filter(
+        isCurrentUser
+    )
+
+    .map(
+        function(item){
+
+            let legacy =
+            splitDateTime(
+                item.date
+            );
+
+
+            let displayTime =
+
+            item.approvedTime ||
+
+            item.time ||
+
+            legacy.time ||
+
+            "-";
+
+
+            let status =
+            item.status ||
+            "Pending";
+
+
+            return {
+
+                type:
+                "Deposit",
+
+                game:
+                item.paymentMode ||
+                item.type ||
+                "Deposit",
+
+                number:
+                item.utr ||
+                item.transactionId ||
+                item.requestId ||
+                "-",
+
+                amount:
+                Number(
+                    item.amount || 0
+                ),
+
+                balance:
+                "-",
+
+                date:
+                item.approvedDate ||
+                legacy.date ||
+                item.date ||
+                "-",
+
+                time:
+                formatTime12(
+                    displayTime
+                ),
+
+                status:
+                status,
+
+                direction:
+                (
+                    String(status)
+                    .toLowerCase()
+                    === "approved"
+                )
+                ?
+                "credit"
+                :
+                "none",
+
+                sortTime:
+                getSortTime(
+                    item
+                )
+
+            };
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   WITHDRAW HISTORY
+===================================================== */
+
+function getWithdrawRecords(){
+
+    return arrayStorage(
+        "withdrawals"
+    )
+
+    .filter(
+        isCurrentUser
+    )
+
+    .map(
+        function(item){
+
+            let legacy =
+            splitDateTime(
+                item.date
+            );
+
+
+            let paid =
+            String(
+                item.status || ""
+            )
+            .toLowerCase()
+            ===
+            "paid";
+
+
+            return {
+
+                type:
+                "Withdraw",
+
+                game:
+                item.paymentMode ||
+                "-",
+
+                number:
+                item.requestId ||
+                "-",
+
+                amount:
+                Number(
+                    item.amount || 0
+                ),
+
+                balance:
+                "-",
+
+                date:
+                paid
+                ?
+                (
+                    item.paidDate ||
+                    legacy.date ||
+                    item.date ||
+                    "-"
+                )
+                :
+                (
+                    legacy.date ||
+                    item.date ||
+                    "-"
+                ),
+
+                time:
+                formatTime12(
+
+                    paid
+
+                    ?
+
+                    (
+                        item.paidTime ||
+                        legacy.time ||
+                        "-"
+                    )
+
+                    :
+
+                    (
+                        item.time ||
+                        legacy.time ||
+                        "-"
+                    )
+
+                ),
+
+                status:
+                item.status ||
+                "Pending",
+
+                direction:
+                paid
+                ?
+                "debit"
+                :
+                "none",
+
+                sortTime:
+                getSortTime(
+                    item
+                )
+
+            };
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   WALLET PASSBOOK
+   FINAL CREDIT / DEBIT ENGINE
+
+   IMPORTANT:
+   Bid Cancel Refund = CREDIT
+   Winning = CREDIT
+   Deposit = CREDIT
+
+   Game Play / Bid = DEBIT
+   Withdraw = DEBIT
+===================================================== */
+
+function getWalletRecords(){
+
+    return arrayStorage(
+        "passbook"
+    )
+
+    .filter(
+        isCurrentUser
+    )
+
+    .map(
+        function(item){
+
+            let type =
+            String(
+                item.type || "Transaction"
+            )
+            .trim();
+
+
+            let details =
+            String(
+                item.details || ""
+            )
+            .trim();
+
+
+            let fullText =
+            (
+                type +
+                " " +
+                details
+            )
+            .toLowerCase();
+
+
+            let direction =
+            "none";
+
+
+            /* =================================================
+               1. REFUND / CANCEL REFUND
+               HIGHEST PRIORITY = CREDIT
+
+               Example:
+               Bid Cancel Refund
+               Bid Cancellation Refund
+               Game Cancel Refund
+               Refund
+            ================================================= */
+
+            if(
+                fullText.includes(
+                    "refund"
+                )
+                ||
+                fullText.includes(
+                    "cancel refund"
+                )
+                ||
+                fullText.includes(
+                    "cancelled refund"
+                )
+                ||
+                fullText.includes(
+                    "canceled refund"
+                )
+                ||
+                fullText.includes(
+                    "bid cancel"
+                )
+                ||
+                fullText.includes(
+                    "bid cancelled"
+                )
+                ||
+                fullText.includes(
+                    "bid canceled"
+                )
+            ){
+
+                direction =
+                "credit";
+
+            }
+
+
+            /* =================================================
+               2. NORMAL CREDIT
+            ================================================= */
+
+            else if(
+                fullText.includes(
+                    "deposit"
+                )
+                ||
+                fullText.includes(
+                    "winning"
+                )
+                ||
+                fullText.includes(
+                    "winner"
+                )
+                ||
+                fullText.includes(
+                    "credit"
+                )
+                ||
+                fullText.includes(
+                    "add money"
+                )
+            ){
+
+                direction =
+                "credit";
+
+            }
+
+
+            /* =================================================
+               3. NORMAL DEBIT
+            ================================================= */
+
+            else if(
+                fullText.includes(
+                    "withdraw"
+                )
+                ||
+                fullText.includes(
+                    "game play"
+                )
+                ||
+                fullText.includes(
+                    "bid play"
+                )
+                ||
+                fullText.includes(
+                    "bid amount"
+                )
+                ||
+                fullText.includes(
+                    "debit"
+                )
+            ){
+
+                direction =
+                "debit";
+
+            }
+
+
+            /* =================================================
+               4. LEGACY BID ENTRY
+               Refund ऊपर already handle हो चुका है.
+            ================================================= */
+
+            else if(
+                fullText.includes(
+                    "bid"
+                )
+            ){
+
+                direction =
+                "debit";
+
+            }
+
+
+            /* =================================================
+               BALANCE
+            ================================================= */
+
+            let balanceText =
+            "-";
+
+
+            if(
+                item.currentBalance !== undefined &&
+                item.currentBalance !== null &&
+                item.currentBalance !== ""
+            ){
+
+                let currentBalance =
+                Number(
+                    item.currentBalance || 0
+                );
+
+
+                if(
+                    !Number.isFinite(
+                        currentBalance
+                    )
+                ){
+
+                    currentBalance =
+                    0;
+
+                }
+
+
+                balanceText =
+
+                "₹ " +
+                currentBalance.toFixed(
+                    2
+                );
+
+            }
+
+
+            /* =================================================
+               NUMBER / REFERENCE
+            ================================================= */
+
+            let reference =
+
+            item.requestId ||
+
+            item.betId ||
+
+            item.settlementKey ||
+
+            item.transactionId ||
+
+            item.referenceId ||
+
+            "-";
+
+
+            /* =================================================
+               RECORD
+            ================================================= */
+
+            return {
+
+                type:
+                type,
+
+                game:
+                item.details ||
+                item.game ||
+                item.market ||
+                "-",
+
+                number:
+                reference,
+
+                amount:
+                Math.abs(
+                    Number(
+                        item.amount || 0
+                    )
+                ),
+
+                balance:
+                balanceText,
+
+                date:
+                item.date ||
+                "-",
+
+                time:
+                formatTime12(
+                    item.time ||
+                    "-"
+                ),
+
+                status:
+                item.status ||
+                "Success",
+
+                direction:
+                direction,
+
+                sortTime:
+                getSortTime(
+                    item
+                )
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CURRENT RECORDS
+===================================================== */
+
+function getCurrentRecords(){
+
+    if(
+        currentHistory === "deposit"
+    ){
+
+        return getDepositRecords();
+
+    }
+
+
+    if(
+        currentHistory === "withdraw"
+    ){
+
+        return getWithdrawRecords();
+
+    }
+
+
+    if(
+        currentHistory === "wallet"
+    ){
+
+        return getWalletRecords();
+
+    }
+
+
+    return getGameRecords();
+
+}
+
+
+
+/* =====================================================
+   BUTTON ACTIVE
+===================================================== */
+
+function updateButtons(){
+
+    [
+        "gameBtn",
+        "depositBtn",
+        "withdrawBtn",
+        "walletBtn"
+    ]
+    .forEach(
+        function(id){
+
+            document
+            .getElementById(
+                id
+            )
+            .classList
+            .remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    let id =
+
+    currentHistory === "deposit"
+
+    ? "depositBtn"
+
+    :
+
+    currentHistory === "withdraw"
+
+    ? "withdrawBtn"
+
+    :
+
+    currentHistory === "wallet"
+
+    ? "walletBtn"
+
+    :
+
+    "gameBtn";
+
+
+    document
+    .getElementById(
+        id
+    )
+    .classList
+    .add(
+        "active"
+    );
+
+}
+
+
+
+/* =====================================================
+   CHANGE TAB
+===================================================== */
+
+function changeHistory(type){
+
+    currentHistory =
+    type;
+
+
+    document
+    .getElementById(
+        "filterDate"
+    )
+    .value =
+    "";
+
+
+    document
+    .getElementById(
+        "searchText"
+    )
+    .value =
+    "";
+
+
+    updateButtons();
+
+    renderCurrentHistory();
+
+}
+
+
+
+/* =====================================================
+   RENDER SUMMARY
+===================================================== */
+
+function renderSummary(records){
+
+    let credit =
+    0;
+
+
+    let debit =
+    0;
+
+
+    records.forEach(
+        function(item){
+
+            if(
+                item.direction === "credit"
+            ){
+
+                credit +=
+                Number(
+                    item.amount || 0
+                );
+
+            }
+
+
+            if(
+                item.direction === "debit"
+            ){
+
+                debit +=
+                Number(
+                    item.amount || 0
+                );
+
+            }
+
+        }
+    );
+
+
+    document
+    .getElementById(
+        "totalRecords"
+    )
+    .innerText =
+    records.length;
+
+
+    document
+    .getElementById(
+        "totalCredit"
+    )
+    .innerText =
+    credit.toFixed(
+        2
+    );
+
+
+    document
+    .getElementById(
+        "totalDebit"
+    )
+    .innerText =
+    debit.toFixed(
+        2
+    );
+
+}
+
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderCurrentHistory(){
+
+    updateButtons();
+
+
+    let records =
+    getCurrentRecords();
+
+
+    records.sort(
+        function(a,b){
+
+            return (
+
+                Number(
+                    b.sortTime
+                )
+
+                -
+
+                Number(
+                    a.sortTime
+                )
+
+            );
+
+        }
+    );
+
+
+    let selectedDate =
+    document
+    .getElementById(
+        "filterDate"
+    )
+    .value;
+
+
+    let search =
+    document
+    .getElementById(
+        "searchText"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    records =
+    records.filter(
+        function(item){
+
+            let dateMatch =
+            true;
+
+
+            if(
+                selectedDate
+            ){
+
+                dateMatch =
+
+                normalizeDate(
+                    item.date
+                )
+
+                ===
+
+                selectedDate;
+
+            }
+
+
+            let searchable =
+            [
+
+                item.type,
+
+                item.game,
+
+                item.number,
+
+                item.amount,
+
+                item.balance,
+
+                item.date,
+
+                item.time,
+
+                item.status
+
+            ]
+            .join(
+                " "
+            )
+            .toLowerCase();
+
+
+            let searchMatch =
+
+            search === ""
+
+            ||
+
+            searchable.includes(
+                search
+            );
+
+
+            return (
+
+                dateMatch
+
+                &&
+
+                searchMatch
+
+            );
+
+        }
+    );
+
+
+    renderSummary(
+        records
+    );
+
+
+    let table =
+    document
+    .getElementById(
+        "historyTable"
+    );
+
+
+    table.innerHTML =
+    "";
+
+
+    if(
+        records.length === 0
+    ){
+
+        table.innerHTML = `
+
+        <tr>
+
+            <td
+            colspan="9"
+            class="noData">
+
+                No History Found
+
+            </td>
+
+        </tr>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    records.forEach(
+        function(item,index){
+
+            let amountClass =
+
+            item.direction === "credit"
+
+            ? "credit"
+
+            :
+
+            item.direction === "debit"
+
+            ? "debit"
+
+            :
+
+            "";
+
+
+            let amountPrefix =
+
+            item.direction === "credit"
+
+            ? "+ "
+
+            :
+
+            item.direction === "debit"
+
+            ? "- "
+
+            :
+
+            "";
+
+
+            let row =
+            document.createElement(
+                "tr"
+            );
+
+
+            row.innerHTML = `
+
+            <td>
+                ${index + 1}
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    safe(
+                        item.type
+                    )
+                )}
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    safe(
+                        item.game
+                    )
+                )}
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    safe(
+                        item.number
+                    )
+                )}
+            </td>
+
+
+            <td class="${amountClass}">
+
+                ${amountPrefix}
+
+                ₹ ${Number(
+                    item.amount || 0
+                )
+                .toFixed(
+                    2
+                )}
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    safe(
+                        item.balance
+                    )
+                )}
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    displayDate(
+                        item.date
+                    )
+                )}
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(
+                    formatTime12(
+                        item.time
+                    )
+                )}
+
+            </td>
+
+
+            <td>
+
+                <span
+                class="
+                status
+                ${statusClass(
+                    item.status
+                )}
+                ">
+
+                    ${escapeHTML(
+                        safe(
+                            item.status
+                        )
+                    )}
+
+                </span>
+
+            </td>
+
+            `;
+
+
+            table.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   TODAY
+===================================================== */
+
+function todayHistory(){
+
+    document
+    .getElementById(
+        "filterDate"
+    )
+    .value =
+    getTodayISO();
+
+
+    renderCurrentHistory();
+
+}
+
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+function clearHistory(){
+
+    document
+    .getElementById(
+        "filterDate"
+    )
+    .value =
+    "";
+
+
+    document
+    .getElementById(
+        "searchText"
+    )
+    .value =
+    "";
+
+
+    renderCurrentHistory();
+
+}
+
+
+
+/* =====================================================
+   EVENTS
+===================================================== */
+
+document
+.getElementById(
+    "filterDate"
+)
+.addEventListener(
+    "change",
+    renderCurrentHistory
+);
+
+
+document
+.getElementById(
+    "searchText"
+)
+.addEventListener(
+    "input",
+    renderCurrentHistory
+);
+
+
+
+/* =====================================================
+   LIVE STORAGE UPDATE
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key === "bets" ||
+            event.key === "deposits" ||
+            event.key === "withdrawals" ||
+            event.key === "passbook" ||
+            event.key === "userBalances" ||
+            event.key === "adminSettings" ||
+            event.key === "results" ||
+            event.key === "lastResultSync"
+        ){
+
+            loadAdminSettings();
+
+            refreshWallet();
+
+            renderCurrentHistory();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   RESULT EVENT
+===================================================== */
+
+window.addEventListener(
+    "resultUpdated",
+    function(){
+
+        refreshWallet();
+
+        renderCurrentHistory();
+
+    }
+);
+
+
+
+/* =====================================================
+   PAGE FOCUS
+===================================================== */
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        refreshWallet();
+
+        renderCurrentHistory();
+
+    }
+);
+
+
+
+/* =====================================================
+   VISIBILITY
+===================================================== */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            loadAdminSettings();
+
+            refreshWallet();
+
+            renderCurrentHistory();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   FIRST LOAD
+===================================================== */
+
+loadAdminSettings();
+
+refreshWallet();
+
+updateButtons();
+
+renderCurrentHistory();
+
+
+
+/* =====================================================
+   LOCAL TEST REFRESH
+===================================================== */
+
+setInterval(
+    function(){
+
+        refreshWallet();
+
+        renderCurrentHistory();
+
+    },
+    3000
+);
+
+
+
+console.log(
+    "✅ HR MATKA User History / Passbook FINAL Complete Replacement Connected"
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,958 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fund - HR MATKA</title>
+
+<style>
+
+/* =====================================================
+   HR MATKA USER APP
+   FUND.HTML
+   HTML + CSS + JAVASCRIPT SINGLE FILE
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --dark:#191919;
+    --gold:#d9b436;
+    --green:#2e9d4d;
+    --blue:#1565c0;
+    --red:#e53935;
+    --purple:#6a1b9a;
+    --page:#eeeeee;
+    --white:#ffffff;
+}
+
+body{
+    background:var(--page);
+    color:#222;
+    min-height:100vh;
+    padding-bottom:100px;
+}
+
+.app{
+    width:100%;
+    max-width:600px;
+    margin:auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    background:var(--dark);
+    color:#fff;
+    min-height:82px;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+
+.backBtn{
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:50%;
+    background:#2b2b2b;
+    color:#fff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.headerTitle{
+    flex:1;
+}
+
+.headerTitle h1{
+    color:var(--gold);
+    font-size:21px;
+    margin-bottom:3px;
+}
+
+.headerTitle p{
+    color:#ccc;
+    font-size:12px;
+}
+
+.headerWallet{
+    background:#2b2b2b;
+    color:#63d86c;
+    padding:10px 13px;
+    border-radius:24px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.container{
+    padding:16px;
+}
+
+
+/* =====================================================
+   WALLET CARD
+===================================================== */
+
+.walletCard{
+    background:linear-gradient(
+        135deg,
+        #43a047,
+        #1b5e20
+    );
+    color:#fff;
+    border-radius:18px;
+    padding:24px 18px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.18);
+    margin-bottom:18px;
+}
+
+.walletCard p{
+    font-size:14px;
+    opacity:.9;
+    margin-bottom:7px;
+}
+
+.walletCard h2{
+    font-size:34px;
+}
+
+.userText{
+    margin-top:10px;
+    font-size:13px;
+    opacity:.9;
+}
+
+
+/* =====================================================
+   FUND TITLE
+===================================================== */
+
+.sectionTitle{
+    font-size:19px;
+    font-weight:bold;
+    margin:4px 2px 13px;
+    color:#333;
+}
+
+
+/* =====================================================
+   FUND OPTIONS
+===================================================== */
+
+.fundGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+.fundCard{
+    border:none;
+    background:#fff;
+    min-height:145px;
+    border-radius:16px;
+    padding:16px 10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    transition:.2s;
+}
+
+.fundCard:active{
+    transform:scale(.97);
+}
+
+.iconCircle{
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    color:#fff;
+}
+
+.depositIcon{
+    background:var(--green);
+}
+
+.withdrawIcon{
+    background:var(--red);
+}
+
+.bankIcon{
+    background:var(--blue);
+}
+
+.historyIcon{
+    background:var(--purple);
+}
+
+.fundName{
+    font-size:16px;
+    font-weight:bold;
+    color:#222;
+}
+
+.fundDescription{
+    color:#777;
+    font-size:12px;
+    text-align:center;
+    line-height:1.4;
+}
+
+
+/* =====================================================
+   INFORMATION BOX
+===================================================== */
+
+.infoBox{
+    margin-top:18px;
+    background:#fff8e1;
+    border-left:5px solid var(--gold);
+    padding:14px;
+    border-radius:10px;
+    color:#6e5500;
+    font-size:13px;
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottomNav{
+    position:fixed;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:82px;
+    background:#191919;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    align-items:center;
+    z-index:1000;
+    box-shadow:0 -3px 12px rgba(0,0,0,.20);
+    border-radius:18px 18px 0 0;
+}
+
+.navItem{
+    height:100%;
+    border:none;
+    background:transparent;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    cursor:pointer;
+}
+
+.navIcon{
+    font-size:25px;
+}
+
+.navText{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.homeCircle{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:var(--gold);
+    border:3px solid #ffd700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+
+/* Active Fund */
+
+.navItem.active{
+    color:#ffd54f;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+    .header{
+        padding:11px 10px;
+        gap:8px;
+    }
+
+    .headerTitle h1{
+        font-size:18px;
+    }
+
+    .headerWallet{
+        font-size:13px;
+        padding:9px 9px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .walletCard h2{
+        font-size:30px;
+    }
+
+    .fundGrid{
+        gap:10px;
+    }
+
+    .fundCard{
+        min-height:135px;
+        padding:13px 7px;
+    }
+
+    .iconCircle{
+        width:55px;
+        height:55px;
+        font-size:26px;
+    }
+
+    .fundName{
+        font-size:15px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <button
+    class="backBtn"
+    type="button"
+    onclick="goBack()">
+        ←
+    </button>
+
+    <div class="headerTitle">
+
+        <h1 id="appName">
+            HR MATKA
+        </h1>
+
+        <p>
+            Fund Center
+        </p>
+
+    </div>
+
+    <div class="headerWallet">
+
+        ₹ <span id="topWallet">0</span>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="container">
+
+
+    <!-- WALLET -->
+
+    <div class="walletCard">
+
+        <p>
+            Available Wallet Balance
+        </p>
+
+        <h2>
+            ₹ <span id="walletBalance">0.00</span>
+        </h2>
+
+        <div
+        class="userText"
+        id="userText">
+
+            HR MATKA User
+
+        </div>
+
+    </div>
+
+
+    <div class="sectionTitle">
+        Fund Services
+    </div>
+
+
+    <!-- =================================================
+         FUND BUTTONS
+    ================================================== -->
+
+    <div class="fundGrid">
+
+
+        <!-- DEPOSIT -->
+
+        <button
+        class="fundCard"
+        type="button"
+        onclick="goPage('deposit.html')">
+
+            <div class="iconCircle depositIcon">
+                ₹
+            </div>
+
+            <div class="fundName">
+                Add Fund
+            </div>
+
+            <div class="fundDescription">
+                Deposit money into your wallet
+            </div>
+
+        </button>
+
+
+        <!-- WITHDRAW -->
+
+        <button
+        class="fundCard"
+        type="button"
+        onclick="goPage('withdraw.html')">
+
+            <div class="iconCircle withdrawIcon">
+                💸
+            </div>
+
+            <div class="fundName">
+                Withdraw
+            </div>
+
+            <div class="fundDescription">
+                Send withdrawal request
+            </div>
+
+        </button>
+
+
+        <!-- BANK DETAILS -->
+
+        <button
+        class="fundCard"
+        type="button"
+        onclick="goPage('bankdetails.html')">
+
+            <div class="iconCircle bankIcon">
+                🏦
+            </div>
+
+            <div class="fundName">
+                Bank Details
+            </div>
+
+            <div class="fundDescription">
+                Manage bank and UPI details
+            </div>
+
+        </button>
+
+
+        <!-- HISTORY -->
+
+        <button
+        class="fundCard"
+        type="button"
+        onclick="goPage('history.html')">
+
+            <div class="iconCircle historyIcon">
+                📒
+            </div>
+
+            <div class="fundName">
+                Passbook
+            </div>
+
+            <div class="fundDescription">
+                View deposit and withdrawal history
+            </div>
+
+        </button>
+
+
+    </div>
+
+
+    <div class="infoBox">
+
+        <b>Fund Information</b>
+
+        <br>
+
+        Add Fund, Withdrawal, Bank Details और Passbook
+        के लिए ऊपर दिए गए विकल्पों का उपयोग करें।
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<nav class="bottomNav">
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('mybid.html')">
+
+        <span class="navIcon">
+            🎯
+        </span>
+
+        <span class="navText">
+            My Bid
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('history.html')">
+
+        <span class="navIcon">
+            📒
+        </span>
+
+        <span class="navText">
+            Passbook
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('index.html')">
+
+        <span class="homeCircle">
+            🏠
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem active"
+    type="button">
+
+        <span class="navIcon">
+            💰
+        </span>
+
+        <span class="navText">
+            Fund
+        </span>
+
+    </button>
+
+
+    <button
+    class="navItem"
+    type="button"
+    onclick="goPage('chart.html')">
+
+        <span class="navIcon">
+            📊
+        </span>
+
+        <span class="navText">
+            Chart
+        </span>
+
+    </button>
+
+
+</nav>
+
+
+<script>
+"use strict";
+
+
+/* =====================================================
+   1. SAFE LOCAL STORAGE
+===================================================== */
+
+function getStorage(key,fallback){
+
+    try{
+
+        const data =
+        localStorage.getItem(key);
+
+        if(!data){
+
+            return fallback;
+
+        }
+
+        return JSON.parse(data);
+
+    }
+    catch(error){
+
+        console.log(
+            "Storage Error:",
+            key,
+            error
+        );
+
+        return fallback;
+
+    }
+
+}
+
+
+/* =====================================================
+   2. PAGE LINKS
+===================================================== */
+
+function goPage(page){
+
+    window.location.href =
+    page;
+
+}
+
+
+function goBack(){
+
+    if(
+        window.history.length > 1
+    ){
+
+        window.history.back();
+
+    }
+    else{
+
+        window.location.href =
+        "index.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   3. CURRENT USER
+===================================================== */
+
+function getCurrentUser(){
+
+    return getStorage(
+        "currentUser",
+        {}
+    );
+
+}
+
+
+/* =====================================================
+   4. APP NAME
+===================================================== */
+
+function loadAppName(){
+
+    const settings =
+    getStorage(
+        "adminSettings",
+        {}
+    );
+
+
+    const element =
+    document.getElementById(
+        "appName"
+    );
+
+
+    if(element){
+
+        element.textContent =
+        settings.appName ||
+        "HR MATKA";
+
+    }
+
+}
+
+
+/* =====================================================
+   5. USER DETAILS
+===================================================== */
+
+function loadUser(){
+
+    const user =
+    getCurrentUser();
+
+
+    const userText =
+    document.getElementById(
+        "userText"
+    );
+
+
+    if(!userText){
+
+        return;
+
+    }
+
+
+    if(user.name){
+
+        userText.textContent =
+        user.name;
+
+    }
+    else if(user.mobile){
+
+        userText.textContent =
+        user.mobile;
+
+    }
+    else{
+
+        userText.textContent =
+        "HR MATKA User";
+
+    }
+
+}
+
+
+/* =====================================================
+   6. WALLET BALANCE
+
+   IMPORTANT:
+   वही userBalances इस्तेमाल हो रहा है जो आपके
+   index.html और withdraw.html में है।
+===================================================== */
+
+function loadWallet(){
+
+    const currentUser =
+    getCurrentUser();
+
+
+    const balances =
+    getStorage(
+        "userBalances",
+        {}
+    );
+
+
+    const mobile =
+    String(
+        currentUser.mobile ||
+        ""
+    ).trim();
+
+
+    let balance = 0;
+
+
+    if(mobile){
+
+        balance =
+        Number(
+            balances[mobile] ||
+            0
+        );
+
+    }
+
+
+    if(
+        !Number.isFinite(balance)
+    ){
+
+        balance = 0;
+
+    }
+
+
+    const formatted =
+    balance.toFixed(2);
+
+
+    const wallet =
+    document.getElementById(
+        "walletBalance"
+    );
+
+
+    const topWallet =
+    document.getElementById(
+        "topWallet"
+    );
+
+
+    if(wallet){
+
+        wallet.textContent =
+        formatted;
+
+    }
+
+
+    if(topWallet){
+
+        topWallet.textContent =
+        formatted;
+
+    }
+
+}
+
+
+/* =====================================================
+   7. REFRESH PAGE DATA
+===================================================== */
+
+function refreshFund(){
+
+    loadAppName();
+
+    loadUser();
+
+    loadWallet();
+
+}
+
+
+/* =====================================================
+   8. CROSS TAB LIVE UPDATE
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            [
+                "userBalances",
+                "currentUser",
+                "adminSettings",
+                "deposits",
+                "withdrawals"
+            ]
+            .includes(event.key)
+        ){
+
+            refreshFund();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   9. PAGE FIRST LOAD
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        refreshFund();
+
+
+        console.log(
+            "✅ HR MATKA User Fund Connected"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   10. AUTO REFRESH
+===================================================== */
+
+setInterval(
+    function(){
+
+        loadWallet();
+
+    },
+    3000
+);
+
+</script>
+
+</body>
+</html>

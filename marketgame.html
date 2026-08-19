@@ -1,0 +1,1949 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Market Game</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#111;
+color:#fff;
+min-height:100vh;
+}
+
+/* ===================================== */
+/* HEADER */
+/* ===================================== */
+
+.header{
+height:70px;
+background:#1b1b1b;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 15px;
+position:sticky;
+top:0;
+z-index:999;
+box-shadow:0 3px 10px rgba(0,0,0,.45);
+}
+
+.backBtn{
+width:44px;
+height:44px;
+border:none;
+border-radius:50%;
+background:#2c2c2c;
+color:#fff;
+font-size:24px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.marketTitle{
+flex:1;
+text-align:center;
+padding:0 8px;
+}
+
+.marketTitle h2{
+font-size:21px;
+color:#ffd54f;
+word-break:break-word;
+}
+
+.marketTitle p{
+font-size:12px;
+color:#bbb;
+margin-top:3px;
+}
+
+.walletBox{
+background:#2c2c2c;
+padding:9px 14px;
+border-radius:24px;
+font-size:17px;
+font-weight:bold;
+color:#00e676;
+white-space:nowrap;
+}
+
+
+/* ===================================== */
+/* MARKET STATUS CARD */
+/* ===================================== */
+
+.marketStatusCard{
+margin:15px;
+padding:16px;
+background:#1e1e1e;
+border-radius:15px;
+box-shadow:0 3px 12px rgba(0,0,0,.4);
+}
+
+.statusRow{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:15px;
+}
+
+.statusTitle{
+font-size:18px;
+font-weight:bold;
+}
+
+.statusBadge{
+padding:8px 17px;
+border-radius:25px;
+font-size:14px;
+font-weight:bold;
+text-align:center;
+}
+
+.statusOpen{
+background:#16a34a;
+}
+
+.statusCloseRunning{
+background:#f59e0b;
+}
+
+.statusClosed{
+background:#ef4444;
+}
+
+.statusHoliday{
+background:#757575;
+}
+
+
+/* ===================================== */
+/* RESULT */
+/* ===================================== */
+
+.resultSection{
+display:flex;
+gap:12px;
+}
+
+.resultItem{
+flex:1;
+background:#292929;
+padding:15px 8px;
+border-radius:12px;
+text-align:center;
+}
+
+.resultItem h4{
+font-size:14px;
+color:#ffd54f;
+margin-bottom:9px;
+}
+
+.resultValue{
+font-size:25px;
+font-weight:bold;
+letter-spacing:2px;
+color:#00e5ff;
+word-break:break-word;
+}
+
+
+/* ===================================== */
+/* LIVE STATUS */
+/* ===================================== */
+
+.gameStatusBox{
+margin:15px;
+padding:15px;
+border-radius:13px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.35);
+}
+
+.gameStatusBox h2{
+font-size:20px;
+}
+
+.openStatus{
+background:#15803d;
+}
+
+.closeRunningStatus{
+background:#d97706;
+}
+
+.closeStatus{
+background:#dc2626;
+}
+
+.holidayStatus{
+background:#616161;
+}
+
+
+/* ===================================== */
+/* GAME GRID */
+/* ===================================== */
+
+.gameContainer{
+padding:0 15px 20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.gameCard{
+background:#1f1f1f;
+border:2px solid #ffd54f;
+border-radius:17px;
+padding:18px 10px;
+text-align:center;
+cursor:pointer;
+transition:.2s;
+user-select:none;
+}
+
+.gameCard:hover{
+transform:scale(1.025);
+}
+
+.gameCard.disabled{
+pointer-events:none;
+opacity:.35;
+filter:grayscale(.65);
+}
+
+.gameIcon{
+width:70px;
+height:70px;
+margin:0 auto 13px;
+border-radius:50%;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:36px;
+}
+
+.gameTitle{
+font-size:19px;
+font-weight:bold;
+margin-bottom:7px;
+}
+
+.gameSub{
+font-size:13px;
+font-weight:bold;
+color:#ffd54f;
+}
+
+
+/* ===================================== */
+/* NOTICE */
+/* ===================================== */
+
+.notice{
+margin:0 15px 20px;
+padding:12px;
+border-radius:10px;
+background:#1f1f1f;
+color:#ccc;
+text-align:center;
+font-size:13px;
+line-height:1.6;
+}
+
+
+/* ===================================== */
+/* MOBILE */
+/* ===================================== */
+
+@media(max-width:600px){
+
+.header{
+padding:0 9px;
+}
+
+.marketTitle h2{
+font-size:17px;
+}
+
+.walletBox{
+font-size:14px;
+padding:8px 11px;
+}
+
+.resultValue{
+font-size:22px;
+}
+
+.gameCard{
+padding:16px 7px;
+}
+
+.gameTitle{
+font-size:17px;
+}
+
+.gameIcon{
+width:62px;
+height:62px;
+font-size:32px;
+}
+
+.gameStatusBox h2{
+font-size:17px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ===================================== -->
+<!-- HEADER -->
+<!-- ===================================== -->
+
+<div class="header">
+
+<button
+type="button"
+class="backBtn"
+onclick="history.back()">
+
+←
+
+</button>
+
+
+<div class="marketTitle">
+
+<h2 id="marketName">
+Loading...
+</h2>
+
+<p>
+HR MATKA OFFICIAL
+</p>
+
+</div>
+
+
+<div class="walletBox">
+
+₹ <span id="walletBalance">0.00</span>
+
+</div>
+
+</div>
+
+
+
+<!-- ===================================== -->
+<!-- MARKET STATUS + RESULT -->
+<!-- ===================================== -->
+
+<div class="marketStatusCard">
+
+<div class="statusRow">
+
+<div class="statusTitle">
+Market Status
+</div>
+
+<div
+id="marketStatus"
+class="statusBadge statusClosed">
+
+LOADING
+
+</div>
+
+</div>
+
+
+<div class="resultSection">
+
+
+<div class="resultItem">
+
+<h4>
+Open Result
+</h4>
+
+<div
+id="openResult"
+class="resultValue">
+
+***
+
+</div>
+
+</div>
+
+
+<div class="resultItem">
+
+<h4>
+Close Result
+</h4>
+
+<div
+id="closeResult"
+class="resultValue">
+
+***
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ===================================== -->
+<!-- LIVE STATUS -->
+<!-- ===================================== -->
+
+<div
+id="gameStatusBox"
+class="gameStatusBox closeStatus">
+
+<h2 id="gameStatusText">
+LOADING...
+</h2>
+
+</div>
+
+
+
+<!-- ===================================== -->
+<!-- GAME CARDS -->
+<!-- ===================================== -->
+
+<div class="gameContainer">
+
+
+<div
+class="gameCard"
+data-page="singleank.html"
+onclick="openGame('singleank.html')">
+
+<div class="gameIcon">
+🎯
+</div>
+
+<div class="gameTitle">
+Single Ank
+</div>
+
+<div class="gameSub statusLabel">
+CHECKING...
+</div>
+
+</div>
+
+
+
+<div
+class="gameCard"
+data-page="singlepana.html"
+onclick="openGame('singlepana.html')">
+
+<div class="gameIcon">
+🃏
+</div>
+
+<div class="gameTitle">
+Single Pana
+</div>
+
+<div class="gameSub statusLabel">
+CHECKING...
+</div>
+
+</div>
+
+
+
+<div
+class="gameCard"
+data-page="doublepana.html"
+onclick="openGame('doublepana.html')">
+
+<div class="gameIcon">
+🎴
+</div>
+
+<div class="gameTitle">
+Double Pana
+</div>
+
+<div class="gameSub statusLabel">
+CHECKING...
+</div>
+
+</div>
+
+
+
+<div
+class="gameCard"
+data-page="triplepana.html"
+onclick="openGame('triplepana.html')">
+
+<div class="gameIcon">
+🀄
+</div>
+
+<div class="gameTitle">
+Triple Pana
+</div>
+
+<div class="gameSub statusLabel">
+CHECKING...
+</div>
+
+</div>
+
+
+
+<div
+class="gameCard"
+data-page="jodidigit.html"
+onclick="openGame('jodidigit.html')">
+
+<div class="gameIcon">
+🎲
+</div>
+
+<div class="gameTitle">
+Jodi Digit
+</div>
+
+<div class="gameSub statusLabel">
+CHECKING...
+</div>
+
+</div>
+
+
+
+<div
+class="gameCard"
+data-page="halfsangam.html"
+onclick="openGame('halfsangam.html')">
+
+<div class="gameIcon">
+⭐
+</div>
+
+<div class="gameTitle">
+Half Sangam
+</div>
+
+<div class="gameSub statusLabel">
+CHECKING...
+</div>
+
+</div>
+
+
+
+<div
+class="gameCard"
+data-page="fullsangam.html"
+onclick="openGame('fullsangam.html')">
+
+<div class="gameIcon">
+💎
+</div>
+
+<div class="gameTitle">
+Full Sangam
+</div>
+
+<div class="gameSub statusLabel">
+CHECKING...
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="notice">
+
+🟢 Market Open → सभी 7 Game चालू
+
+<br>
+
+🟡 Open Result → Single Ank, Single Pana,
+Double Pana, Triple Pana CLOSE Session में चालू
+
+<br>
+
+🔴 Close Result → सभी Game बंद
+
+</div>
+
+
+
+<script>
+
+// =====================================================
+// HR MATKA
+// MARKET GAME FINAL STABLE VERSION
+// =====================================================
+
+
+// =====================================================
+// 1. BASIC VARIABLES
+// =====================================================
+
+let currentUser =
+JSON.parse(
+localStorage.getItem("currentUser")
+) || {};
+
+
+let currentMarket = null;
+
+let currentPhase = "CLOSED";
+
+let resolvedMarketName = "";
+
+const gameCards =
+document.querySelectorAll(".gameCard");
+
+
+// =====================================================
+// 2. GAME PERMISSIONS
+// =====================================================
+
+const closeSessionAllowedPages = [
+
+"singleank.html",
+"singlepana.html",
+"doublepana.html",
+"triplepana.html"
+
+];
+
+
+const openOnlyPages = [
+
+"jodidigit.html",
+"halfsangam.html",
+"fullsangam.html"
+
+];
+
+
+// =====================================================
+// 3. SAFE TEXT
+// =====================================================
+
+function setText(id,value){
+
+let element =
+document.getElementById(id);
+
+if(element){
+
+element.innerText = value;
+
+}
+
+}
+
+
+// =====================================================
+// 4. NORMALIZE MARKET NAME
+// =====================================================
+
+function normalizeMarket(value){
+
+return String(
+value || ""
+)
+.trim()
+.replace(/\+/g," ")
+.replace(/\s+/g," ")
+.toUpperCase();
+
+}
+
+
+// =====================================================
+// 5. GET SAVED MARKET NAME
+// =====================================================
+
+function getStoredMarketName(){
+
+let possibleKeys = [
+
+"selectedMarket",
+"selectedMarketName",
+"currentMarketName",
+"marketName"
+
+];
+
+
+for(
+let i = 0;
+i < possibleKeys.length;
+i++
+){
+
+let value =
+localStorage.getItem(
+possibleKeys[i]
+);
+
+if(!value){
+continue;
+}
+
+
+// -------------------------------------
+// TRY JSON
+// -------------------------------------
+
+try{
+
+let parsed =
+JSON.parse(value);
+
+if(
+typeof parsed === "string" &&
+parsed.trim() !== ""
+){
+
+return parsed.trim();
+
+}
+
+if(
+parsed &&
+typeof parsed === "object"
+){
+
+if(parsed.market){
+
+return String(
+parsed.market
+).trim();
+
+}
+
+if(parsed.name){
+
+return String(
+parsed.name
+).trim();
+
+}
+
+}
+
+}
+catch(error){
+
+if(
+String(value).trim() !== ""
+){
+
+return String(
+value
+).trim();
+
+}
+
+}
+
+}
+
+
+// -------------------------------------
+// LAST MARKET UPDATE FALLBACK
+// -------------------------------------
+
+try{
+
+let lastUpdate =
+JSON.parse(
+localStorage.getItem(
+"lastMarketUpdate"
+)
+);
+
+if(
+lastUpdate &&
+lastUpdate.market
+){
+
+return String(
+lastUpdate.market
+).trim();
+
+}
+
+}
+catch(error){}
+
+
+// -------------------------------------
+// LIVE MARKET FALLBACK
+// -------------------------------------
+
+try{
+
+let live =
+JSON.parse(
+localStorage.getItem(
+"liveMarketStatus"
+)
+);
+
+if(
+live &&
+live.market
+){
+
+return String(
+live.market
+).trim();
+
+}
+
+}
+catch(error){}
+
+
+return "";
+
+}
+
+
+// =====================================================
+// 6. RESOLVE MARKET NAME
+// =====================================================
+
+function resolveMarketName(){
+
+let params =
+new URLSearchParams(
+window.location.search
+);
+
+
+// FIRST PRIORITY = URL
+
+let urlMarket =
+params.get("market");
+
+
+if(
+urlMarket &&
+urlMarket.trim() !== ""
+){
+
+resolvedMarketName =
+urlMarket.trim();
+
+return resolvedMarketName;
+
+}
+
+
+// SECOND PRIORITY = STORAGE
+
+let storedMarket =
+getStoredMarketName();
+
+
+if(storedMarket){
+
+resolvedMarketName =
+storedMarket;
+
+return resolvedMarketName;
+
+}
+
+
+resolvedMarketName = "";
+
+return "";
+
+}
+
+
+// =====================================================
+// 7. LOAD WALLET
+// =====================================================
+
+function loadWallet(){
+
+currentUser =
+JSON.parse(
+localStorage.getItem("currentUser")
+) || {};
+
+
+if(!currentUser.mobile){
+
+setText(
+"walletBalance",
+"0.00"
+);
+
+return;
+
+}
+
+
+let balances =
+JSON.parse(
+localStorage.getItem("userBalances")
+) || {};
+
+
+let wallet =
+Number(
+balances[currentUser.mobile] || 0
+);
+
+
+setText(
+"walletBalance",
+wallet.toFixed(2)
+);
+
+}
+
+
+// =====================================================
+// 8. LOAD CURRENT MARKET
+// =====================================================
+
+function loadCurrentMarket(){
+
+let marketName =
+resolveMarketName();
+
+
+let markets =
+JSON.parse(
+localStorage.getItem("markets")
+) || [];
+
+
+if(!marketName){
+
+currentMarket = null;
+
+setText(
+"marketName",
+"MARKET NOT FOUND"
+);
+
+return false;
+
+}
+
+
+// -------------------------------------
+// CASE INSENSITIVE MATCH
+// -------------------------------------
+
+currentMarket =
+markets.find(
+function(item){
+
+return (
+
+normalizeMarket(item.market) ===
+normalizeMarket(marketName)
+
+);
+
+}
+) || null;
+
+
+// -------------------------------------
+// NOT FOUND
+// -------------------------------------
+
+if(!currentMarket){
+
+setText(
+"marketName",
+marketName
+);
+
+return false;
+
+}
+
+
+// -------------------------------------
+// FOUND
+// -------------------------------------
+
+resolvedMarketName =
+currentMarket.market;
+
+
+setText(
+"marketName",
+currentMarket.market
+);
+
+
+// SAVE CURRENT SELECTION
+
+localStorage.setItem(
+"selectedMarketName",
+currentMarket.market
+);
+
+
+return true;
+
+}
+
+
+// =====================================================
+// 9. LOAD RESULT DIRECTLY FROM MARKET
+//
+// IMPORTANT:
+//
+// Result History से status नहीं लेना.
+//
+// Result.html already current market के अंदर
+// openPanel / closePanel / jodi save करता है.
+//
+// इससे OLD HISTORY नया round खराब नहीं करेगी.
+// =====================================================
+
+function loadResult(){
+
+if(!currentMarket){
+
+setText(
+"openResult",
+"***"
+);
+
+setText(
+"closeResult",
+"***"
+);
+
+return;
+
+}
+
+
+let openPanel =
+String(
+currentMarket.openPanel || ""
+).trim();
+
+
+let closePanel =
+String(
+currentMarket.closePanel || ""
+).trim();
+
+
+setText(
+"openResult",
+openPanel || "***"
+);
+
+
+setText(
+"closeResult",
+closePanel || "***"
+);
+
+}
+
+
+// =====================================================
+// 10. ENABLE CARD
+// =====================================================
+
+function enableCard(
+card,
+text
+){
+
+card.classList.remove(
+"disabled"
+);
+
+
+let label =
+card.querySelector(
+".statusLabel"
+);
+
+
+if(label){
+
+label.innerText =
+text || "🟢 PLAY NOW";
+
+}
+
+}
+
+
+// =====================================================
+// 11. DISABLE CARD
+// =====================================================
+
+function disableCard(
+card,
+text
+){
+
+card.classList.add(
+"disabled"
+);
+
+
+let label =
+card.querySelector(
+".statusLabel"
+);
+
+
+if(label){
+
+label.innerText =
+text || "🔴 CLOSED";
+
+}
+
+}
+
+
+// =====================================================
+// 12. OPEN ALL GAMES
+// =====================================================
+
+function openAllGames(){
+
+gameCards.forEach(
+function(card){
+
+enableCard(
+card,
+"🟢 PLAY NOW"
+);
+
+}
+);
+
+}
+
+
+// =====================================================
+// 13. YELLOW CLOSE SESSION
+// =====================================================
+
+function openCloseSessionGames(){
+
+gameCards.forEach(
+function(card){
+
+let page =
+card.dataset.page;
+
+
+if(
+closeSessionAllowedPages.includes(
+page
+)
+){
+
+enableCard(
+card,
+"🟡 CLOSE PLAY"
+);
+
+}
+else{
+
+disableCard(
+card,
+"🔴 OPEN GAME CLOSED"
+);
+
+}
+
+}
+);
+
+}
+
+
+// =====================================================
+// 14. CLOSE ALL
+// =====================================================
+
+function closeAllGames(
+message
+){
+
+gameCards.forEach(
+function(card){
+
+disableCard(
+card,
+message || "🔴 CLOSED"
+);
+
+}
+);
+
+}
+
+
+// =====================================================
+// 15. GREEN STATUS
+// =====================================================
+
+function showGreenStatus(){
+
+currentPhase =
+"OPEN";
+
+
+let badge =
+document.getElementById(
+"marketStatus"
+);
+
+let box =
+document.getElementById(
+"gameStatusBox"
+);
+
+let text =
+document.getElementById(
+"gameStatusText"
+);
+
+
+badge.className =
+"statusBadge statusOpen";
+
+badge.innerText =
+"RUNNING";
+
+
+box.className =
+"gameStatusBox openStatus";
+
+text.innerText =
+"🟢 OPEN GAME RUNNING";
+
+
+openAllGames();
+
+}
+
+
+// =====================================================
+// 16. YELLOW STATUS
+// =====================================================
+
+function showYellowStatus(){
+
+currentPhase =
+"CLOSE";
+
+
+let badge =
+document.getElementById(
+"marketStatus"
+);
+
+let box =
+document.getElementById(
+"gameStatusBox"
+);
+
+let text =
+document.getElementById(
+"gameStatusText"
+);
+
+
+badge.className =
+"statusBadge statusCloseRunning";
+
+badge.innerText =
+"RUNNING CLOSE";
+
+
+box.className =
+"gameStatusBox closeRunningStatus";
+
+text.innerText =
+"🟡 CLOSE GAME RUNNING";
+
+
+openCloseSessionGames();
+
+}
+
+
+// =====================================================
+// 17. RED STATUS
+// =====================================================
+
+function showRedStatus(
+message
+){
+
+currentPhase =
+"CLOSED";
+
+
+let badge =
+document.getElementById(
+"marketStatus"
+);
+
+let box =
+document.getElementById(
+"gameStatusBox"
+);
+
+let text =
+document.getElementById(
+"gameStatusText"
+);
+
+
+badge.className =
+"statusBadge statusClosed";
+
+badge.innerText =
+"MARKET CLOSED";
+
+
+box.className =
+"gameStatusBox closeStatus";
+
+text.innerText =
+message ||
+"🔴 MARKET CLOSED";
+
+
+closeAllGames(
+"🔴 MARKET CLOSED"
+);
+
+}
+
+
+// =====================================================
+// 18. HOLIDAY STATUS
+// =====================================================
+
+function showHoliday(){
+
+currentPhase =
+"HOLIDAY";
+
+
+let badge =
+document.getElementById(
+"marketStatus"
+);
+
+let box =
+document.getElementById(
+"gameStatusBox"
+);
+
+let text =
+document.getElementById(
+"gameStatusText"
+);
+
+
+badge.className =
+"statusBadge statusHoliday";
+
+badge.innerText =
+"HOLIDAY";
+
+
+box.className =
+"gameStatusBox holidayStatus";
+
+text.innerText =
+"⚫ MARKET HOLIDAY";
+
+
+closeAllGames(
+"⚫ HOLIDAY"
+);
+
+}
+
+
+// =====================================================
+// 19. MARKET STATUS ENGINE
+//
+// SOURCE OF TRUTH:
+//
+// manualStatus
+// gameStatus
+// currentMarket.openPanel
+// currentMarket.closePanel
+//
+// OLD RESULTS ARRAY IS NOT USED FOR STATUS.
+// =====================================================
+
+function updateMarketStatus(){
+
+let available =
+loadCurrentMarket();
+
+
+if(!available){
+
+currentPhase =
+"CLOSED";
+
+
+let badge =
+document.getElementById(
+"marketStatus"
+);
+
+let box =
+document.getElementById(
+"gameStatusBox"
+);
+
+let text =
+document.getElementById(
+"gameStatusText"
+);
+
+
+badge.className =
+"statusBadge statusClosed";
+
+badge.innerText =
+"NO MARKET";
+
+
+box.className =
+"gameStatusBox closeStatus";
+
+text.innerText =
+"🔴 MARKET DATA MISSING";
+
+
+closeAllGames(
+"🔴 MARKET UNAVAILABLE"
+);
+
+
+return;
+
+}
+
+
+// -------------------------------------
+// CURRENT STATUS VALUES
+// -------------------------------------
+
+let manualStatus =
+String(
+currentMarket.manualStatus || "AUTO"
+).toUpperCase();
+
+
+let gameStatus =
+String(
+currentMarket.gameStatus || ""
+).toUpperCase();
+
+
+let openPanel =
+String(
+currentMarket.openPanel || ""
+).trim();
+
+
+let closePanel =
+String(
+currentMarket.closePanel || ""
+).trim();
+
+
+console.log(
+"========================="
+);
+
+console.log(
+"Market:",
+currentMarket.market
+);
+
+console.log(
+"Manual:",
+manualStatus
+);
+
+console.log(
+"Game:",
+gameStatus
+);
+
+console.log(
+"Open:",
+openPanel
+);
+
+console.log(
+"Close:",
+closePanel
+);
+
+
+// =====================================================
+// PRIORITY 1 : HOLIDAY
+// =====================================================
+
+if(
+manualStatus === "HOLIDAY"
+){
+
+showHoliday();
+
+return;
+
+}
+
+
+// =====================================================
+// PRIORITY 2 : FINAL CLOSE RESULT
+// =====================================================
+
+if(
+
+gameStatus === "CLOSE" ||
+
+gameStatus === "RESULT_COMPLETE" ||
+
+closePanel !== ""
+
+){
+
+showRedStatus();
+
+return;
+
+}
+
+
+// =====================================================
+// PRIORITY 3 : OPEN RESULT
+//
+// THIS MUST SHOW YELLOW
+// =====================================================
+
+if(
+
+gameStatus === "OPEN_RESULT" ||
+
+(
+openPanel !== "" &&
+closePanel === ""
+)
+
+){
+
+showYellowStatus();
+
+return;
+
+}
+
+
+// =====================================================
+// PRIORITY 4 : MANUAL CLOSE
+// =====================================================
+
+if(
+
+manualStatus === "CLOSE" ||
+
+gameStatus === "MANUAL_CLOSE"
+
+){
+
+showRedStatus();
+
+return;
+
+}
+
+
+// =====================================================
+// PRIORITY 5 : MANUAL OPEN
+// =====================================================
+
+if(
+manualStatus === "OPEN"
+){
+
+showGreenStatus();
+
+return;
+
+}
+
+
+// =====================================================
+// PRIORITY 6 : AUTO TIME
+// =====================================================
+
+if(
+manualStatus === "AUTO"
+){
+
+let now =
+new Date();
+
+
+let currentMinutes =
+now.getHours() * 60 +
+now.getMinutes();
+
+
+let openParts =
+String(
+currentMarket.openTime ||
+"00:00"
+).split(":");
+
+
+let closeParts =
+String(
+currentMarket.closeTime ||
+"00:00"
+).split(":");
+
+
+let openMinutes =
+Number(openParts[0]) * 60 +
+Number(openParts[1]);
+
+
+let closeMinutes =
+Number(closeParts[0]) * 60 +
+Number(closeParts[1]);
+
+
+let isTimeOpen = false;
+
+
+// -------------------------------------
+// NORMAL SAME-DAY MARKET
+// -------------------------------------
+
+if(
+closeMinutes >= openMinutes
+){
+
+isTimeOpen =
+
+currentMinutes >= openMinutes &&
+
+currentMinutes <= closeMinutes;
+
+}
+
+
+// -------------------------------------
+// MIDNIGHT CROSSING MARKET
+// -------------------------------------
+
+else{
+
+isTimeOpen =
+
+currentMinutes >= openMinutes ||
+
+currentMinutes <= closeMinutes;
+
+}
+
+
+if(isTimeOpen){
+
+showGreenStatus();
+
+}
+else{
+
+showRedStatus(
+"🔴 MARKET CLOSED"
+);
+
+}
+
+
+return;
+
+}
+
+
+// =====================================================
+// DEFAULT
+// =====================================================
+
+showGreenStatus();
+
+}
+
+
+// =====================================================
+// 20. OPEN GAME PAGE
+// =====================================================
+
+function openGame(page){
+
+updateMarketStatus();
+
+
+if(
+currentPhase === "HOLIDAY"
+){
+
+alert(
+"Market Holiday"
+);
+
+return;
+
+}
+
+
+if(
+currentPhase === "CLOSED"
+){
+
+alert(
+"Market Closed"
+);
+
+return;
+
+}
+
+
+// -------------------------------------
+// CLOSE SESSION RESTRICTION
+// -------------------------------------
+
+if(
+
+currentPhase === "CLOSE" &&
+
+openOnlyPages.includes(
+page
+)
+
+){
+
+alert(
+"Open Result Declared.\nThis Game Is Closed."
+);
+
+return;
+
+}
+
+
+// -------------------------------------
+// SAVE MARKET BEFORE NAVIGATION
+// -------------------------------------
+
+localStorage.setItem(
+"selectedMarketName",
+currentMarket.market
+);
+
+
+window.location.href =
+
+page +
+
+"?market=" +
+
+encodeURIComponent(
+currentMarket.market
+);
+
+}
+
+
+// =====================================================
+// 21. REFRESH PAGE
+// =====================================================
+
+function refreshMarket(){
+
+loadWallet();
+
+
+let available =
+loadCurrentMarket();
+
+
+if(available){
+
+loadResult();
+
+}
+
+
+updateMarketStatus();
+
+}
+
+
+// =====================================================
+// 22. FIRST LOAD
+// =====================================================
+
+refreshMarket();
+
+
+// =====================================================
+// 23. AUTO REFRESH
+// =====================================================
+
+setInterval(
+function(){
+
+refreshMarket();
+
+},
+2000
+);
+
+
+// =====================================================
+// 24. STORAGE EVENT
+// =====================================================
+
+window.addEventListener(
+"storage",
+function(event){
+
+if(
+
+event.key === "markets" ||
+
+event.key === "results" ||
+
+event.key === "userBalances" ||
+
+event.key === "selectedMarketName"
+
+){
+
+refreshMarket();
+
+}
+
+}
+);
+
+
+// =====================================================
+// 25. RESULT EVENT
+// =====================================================
+
+window.addEventListener(
+"resultUpdated",
+function(){
+
+refreshMarket();
+
+}
+);
+
+
+// =====================================================
+// 26. MARKET EVENT
+// =====================================================
+
+window.addEventListener(
+"marketUpdated",
+function(){
+
+refreshMarket();
+
+}
+);
+
+
+console.log(
+"✅ HR MATKA Market Game Stable Final Connected"
+);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,2913 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>My Bid - HR MATKA</title>
+
+
+<style>
+
+/* =====================================================
+   HR MATKA USER APP
+   MYBID.HTML
+   FINAL COMPLETE REPLACEMENT
+===================================================== */
+
+
+/* =====================================================
+   1. RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+    background:#eeeeee;
+    color:#222222;
+    min-height:100vh;
+    padding-bottom:100px;
+}
+
+
+button,
+input{
+    font:inherit;
+}
+
+
+button{
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+.app{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+}
+
+
+/* =====================================================
+   2. HEADER
+===================================================== */
+
+.header{
+    background:#191919;
+    color:#ffffff;
+    min-height:78px;
+    padding:13px 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+
+
+.backBtn{
+    width:44px;
+    min-width:44px;
+    height:44px;
+    border:none;
+    border-radius:50%;
+    background:#2b2b2b;
+    color:#ffffff;
+    font-size:24px;
+    cursor:pointer;
+}
+
+
+.backBtn:active{
+    transform:scale(.96);
+}
+
+
+.headerTitle{
+    flex:1;
+    min-width:0;
+}
+
+
+.headerTitle h1{
+    color:#d9b436;
+    font-size:21px;
+    margin-bottom:3px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+
+.headerTitle p{
+    color:#cccccc;
+    font-size:12px;
+}
+
+
+.headerWallet{
+    background:#2b2b2b;
+    color:#63d86c;
+    padding:9px 13px;
+    border-radius:22px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   3. CONTAINER
+===================================================== */
+
+.container{
+    padding:15px;
+}
+
+
+/* =====================================================
+   4. MAIN CARD
+===================================================== */
+
+.card{
+    background:#ffffff;
+    padding:18px;
+    border-radius:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.13);
+}
+
+
+/* =====================================================
+   5. PAGE TITLE
+===================================================== */
+
+.pageTitle{
+    background:#283593;
+    color:#ffffff;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+
+/* =====================================================
+   6. SUMMARY
+===================================================== */
+
+.summaryGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:15px;
+}
+
+
+.summaryBox{
+    background:#f7f7f7;
+    padding:14px 8px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+
+.summaryBox p{
+    color:#666666;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+
+.summaryBox h3{
+    font-size:22px;
+}
+
+
+.totalBox{
+    border-left:4px solid #1976d2;
+}
+
+
+.pendingBox{
+    border-left:4px solid #ff9800;
+}
+
+
+.winBox{
+    border-left:4px solid #28a745;
+}
+
+
+.loseBox{
+    border-left:4px solid #e53935;
+}
+
+
+/* =====================================================
+   7. FILTER
+===================================================== */
+
+.filterBox{
+    display:grid;
+    grid-template-columns:1.4fr 2fr auto auto auto;
+    gap:9px;
+    margin-bottom:15px;
+}
+
+
+.filterBox input{
+    width:100%;
+    min-height:42px;
+    padding:9px 10px;
+    border:1px solid #cccccc;
+    border-radius:8px;
+    font-size:14px;
+    outline:none;
+    background:#ffffff;
+}
+
+
+.filterBox input:focus{
+    border-color:#d9b436;
+    box-shadow:0 0 0 2px rgba(217,180,54,.10);
+}
+
+
+.filterBox button{
+    min-height:42px;
+    padding:9px 15px;
+    border:none;
+    border-radius:8px;
+    color:#ffffff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+.filterBox button:active{
+    transform:scale(.98);
+}
+
+
+.searchBtn{
+    background:#2196f3;
+}
+
+
+.todayBtn{
+    background:#ff9800;
+}
+
+
+.clearBtn{
+    background:#607d8b;
+}
+
+
+/* =====================================================
+   8. RECORD INFO
+===================================================== */
+
+.recordInfo{
+    background:#177d65;
+    color:#ffffff;
+    padding:10px 14px;
+    border-radius:9px;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+
+/* =====================================================
+   9. TABLE
+===================================================== */
+
+.tableBox{
+    overflow-x:auto;
+    border-radius:9px;
+    border:1px solid #dddddd;
+    -webkit-overflow-scrolling:touch;
+}
+
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:980px;
+    background:#ffffff;
+}
+
+
+th{
+    background:#283593;
+    color:#ffffff;
+    padding:11px 7px;
+    border:1px solid #dddddd;
+    font-size:13px;
+    white-space:nowrap;
+}
+
+
+td{
+    padding:10px 7px;
+    border:1px solid #dddddd;
+    text-align:center;
+    font-size:13px;
+    white-space:nowrap;
+}
+
+
+tbody tr:nth-child(even){
+    background:#f8f8f8;
+}
+
+
+tbody tr:hover{
+    background:#f2f4ff;
+}
+
+
+.noData{
+    padding:28px;
+    color:#777777;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   10. STATUS
+===================================================== */
+
+.status{
+    display:inline-block;
+    min-width:72px;
+    padding:5px 9px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+
+.status-pending{
+    color:#a85f00;
+    background:#fff3df;
+}
+
+
+.status-win{
+    color:#11783a;
+    background:#e4f8ea;
+}
+
+
+.status-lose{
+    color:#c62828;
+    background:#fde7e7;
+}
+
+
+.status-cancelled{
+    color:#666666;
+    background:#eeeeee;
+}
+
+
+.status-active{
+    color:#1565c0;
+    background:#e7f1ff;
+}
+
+
+/* =====================================================
+   11. AMOUNT
+===================================================== */
+
+.amountText{
+    font-weight:bold;
+    color:#222222;
+}
+
+
+.winAmount{
+    color:#159447;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   12. BOTTOM NAVIGATION
+===================================================== */
+
+.bottomNav{
+    position:fixed;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:82px;
+    background:#191919;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    align-items:center;
+    z-index:2000;
+    box-shadow:0 -3px 12px rgba(0,0,0,.20);
+    border-radius:18px 18px 0 0;
+}
+
+
+.navItem{
+    height:100%;
+    border:none;
+    background:transparent;
+    color:#ffffff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    cursor:pointer;
+}
+
+
+.navIcon{
+    font-size:24px;
+}
+
+
+.navText{
+    font-size:11px;
+    font-weight:bold;
+}
+
+
+.homeCircle{
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:#d9b436;
+    border:3px solid #ffd700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+}
+
+
+.activeNav{
+    color:#ffd75a;
+}
+
+
+/* =====================================================
+   13. MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .container{
+        padding:10px;
+    }
+
+
+    .card{
+        padding:11px;
+    }
+
+
+    .summaryGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+
+    .filterBox{
+        grid-template-columns:1fr 1fr;
+    }
+
+
+    .filterBox input:nth-child(2){
+        grid-column:1/-1;
+    }
+
+
+    .header{
+        padding:10px;
+        gap:8px;
+    }
+
+
+    .headerTitle h1{
+        font-size:18px;
+    }
+
+
+    .headerWallet{
+        font-size:13px;
+        padding:8px 9px;
+    }
+
+
+    .pageTitle{
+        font-size:19px;
+    }
+
+
+    .summaryBox h3{
+        font-size:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+<button
+type="button"
+class="backBtn"
+onclick="goBack()">
+
+    ←
+
+</button>
+
+
+<div class="headerTitle">
+
+    <h1 id="appTitle">
+        HR MATKA
+    </h1>
+
+    <p>
+        My Bid History
+    </p>
+
+</div>
+
+
+<div class="headerWallet">
+
+    ₹ <span id="topWallet">0.00</span>
+
+</div>
+
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="pageTitle">
+
+    🎯 My Bid
+
+</div>
+
+
+
+<!-- =====================================================
+     SUMMARY
+===================================================== -->
+
+<div class="summaryGrid">
+
+
+<div class="summaryBox totalBox">
+
+    <p>
+        Total Bids
+    </p>
+
+    <h3 id="totalBidCount">
+        0
+    </h3>
+
+</div>
+
+
+<div class="summaryBox pendingBox">
+
+    <p>
+        Pending
+    </p>
+
+    <h3 id="pendingCount">
+        0
+    </h3>
+
+</div>
+
+
+<div class="summaryBox winBox">
+
+    <p>
+        Win
+    </p>
+
+    <h3 id="winCount">
+        0
+    </h3>
+
+</div>
+
+
+<div class="summaryBox loseBox">
+
+    <p>
+        Lose
+    </p>
+
+    <h3 id="loseCount">
+        0
+    </h3>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FILTER
+===================================================== -->
+
+<div class="filterBox">
+
+
+<input
+type="date"
+id="filterDate">
+
+
+<input
+type="text"
+id="searchText"
+placeholder="Search Market / Game / Number / Status"
+autocomplete="off">
+
+
+<button
+type="button"
+class="searchBtn"
+onclick="renderMyBids()">
+
+    Search
+
+</button>
+
+
+<button
+type="button"
+class="todayBtn"
+onclick="todayBids()">
+
+    Today
+
+</button>
+
+
+<button
+type="button"
+class="clearBtn"
+onclick="clearFilters()">
+
+    Clear
+
+</button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     RECORD COUNT
+===================================================== -->
+
+<div
+id="recordInfo"
+class="recordInfo">
+
+    Total Records : 0
+
+</div>
+
+
+
+<!-- =====================================================
+     TABLE
+===================================================== -->
+
+<div class="tableBox">
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+    <th>ID</th>
+
+    <th>Market</th>
+
+    <th>Game</th>
+
+    <th>Session</th>
+
+    <th>Number</th>
+
+    <th>Bid Amount</th>
+
+    <th>Win Amount</th>
+
+    <th>Date</th>
+
+    <th>Time</th>
+
+    <th>Status</th>
+
+</tr>
+
+
+</thead>
+
+
+<tbody id="myBidTable">
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<nav class="bottomNav">
+
+
+<button
+class="navItem activeNav"
+type="button"
+onclick="goPage('mybid.html')">
+
+    <span class="navIcon">
+        🎯
+    </span>
+
+    <span class="navText">
+        My Bid
+    </span>
+
+</button>
+
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('passbook.html')">
+
+    <span class="navIcon">
+        📒
+    </span>
+
+    <span class="navText">
+        Passbook
+    </span>
+
+</button>
+
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('index.html')">
+
+    <span class="homeCircle">
+        🏠
+    </span>
+
+</button>
+
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('fund.html')">
+
+    <span class="navIcon">
+        💰
+    </span>
+
+    <span class="navText">
+        Fund
+    </span>
+
+</button>
+
+
+<button
+class="navItem"
+type="button"
+onclick="goPage('chart.html')">
+
+    <span class="navIcon">
+        📊
+    </span>
+
+    <span class="navText">
+        Chart
+    </span>
+
+</button>
+
+
+</nav>
+
+
+
+<script>
+
+"use strict";
+
+
+/* =====================================================
+   HR MATKA
+   USER MY BID
+   FINAL COMPLETE ENGINE
+===================================================== */
+
+
+/* =====================================================
+   1. STORAGE GET
+===================================================== */
+
+function getStorage(
+    key,
+    fallback
+){
+
+    try{
+
+        let raw =
+        localStorage.getItem(
+            key
+        );
+
+
+        if(
+            raw === null ||
+            raw === undefined ||
+            raw === ""
+        ){
+
+            return fallback;
+
+        }
+
+
+        return JSON.parse(
+            raw
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Storage Read Error:",
+            key,
+            error
+        );
+
+
+        return fallback;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   2. CURRENT USER
+===================================================== */
+
+let currentUser =
+getStorage(
+    "currentUser",
+    null
+);
+
+
+if(
+    !currentUser ||
+    !currentUser.mobile
+){
+
+    alert(
+        "Please Login First"
+    );
+
+
+    window.location.href =
+    "login.html";
+
+}
+
+
+
+/* =====================================================
+   3. PAGE LINKS
+===================================================== */
+
+function goPage(page){
+
+    window.location.href =
+    page;
+
+}
+
+
+function goBack(){
+
+    if(
+        window.history.length > 1
+    ){
+
+        window.history.back();
+
+    }
+    else{
+
+        window.location.href =
+        "index.html";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   4. ADMIN SETTINGS
+===================================================== */
+
+function loadAdminSettings(){
+
+    let settings =
+    getStorage(
+        "adminSettings",
+        {}
+    );
+
+
+    document
+    .getElementById(
+        "appTitle"
+    )
+    .innerText =
+
+    settings.appName ||
+    settings.applicationName ||
+    "HR MATKA";
+
+}
+
+
+
+/* =====================================================
+   5. SAFE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value === undefined ||
+        value === null
+        ? ""
+        : value
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+
+/* =====================================================
+   6. SAFE DISPLAY
+===================================================== */
+
+function safe(value){
+
+    if(
+        value === undefined ||
+        value === null ||
+        value === ""
+    ){
+
+        return "-";
+
+    }
+
+
+    return String(
+        value
+    );
+
+}
+
+
+
+/* =====================================================
+   7. NORMALIZE MOBILE
+===================================================== */
+
+function normalizeMobile(value){
+
+    return String(
+        value || ""
+    )
+    .replace(
+        /\D/g,
+        ""
+    )
+    .trim();
+
+}
+
+
+
+/* =====================================================
+   8. WALLET
+===================================================== */
+
+function getCurrentWallet(){
+
+    let balances =
+    getStorage(
+        "userBalances",
+        {}
+    );
+
+
+    let mobile =
+    currentUser.mobile;
+
+
+    let value = 0;
+
+
+    if(
+        balances &&
+        typeof balances === "object"
+    ){
+
+        value =
+        Number(
+            balances[mobile]
+            ??
+            balances[
+                normalizeMobile(
+                    mobile
+                )
+            ]
+            ??
+            0
+        );
+
+    }
+
+
+    if(
+        !Number.isFinite(
+            value
+        )
+    ){
+
+        value = 0;
+
+    }
+
+
+    return value;
+
+}
+
+
+function refreshWallet(){
+
+    document
+    .getElementById(
+        "topWallet"
+    )
+    .innerText =
+    getCurrentWallet()
+    .toFixed(2);
+
+}
+
+
+
+/* =====================================================
+   9. TODAY ISO
+===================================================== */
+
+function getTodayISO(){
+
+    let now =
+    new Date();
+
+
+    let year =
+    now.getFullYear();
+
+
+    let month =
+    String(
+        now.getMonth()+1
+    )
+    .padStart(
+        2,
+        "0"
+    );
+
+
+    let day =
+    String(
+        now.getDate()
+    )
+    .padStart(
+        2,
+        "0"
+    );
+
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
+
+}
+
+
+
+/* =====================================================
+   10. NORMALIZE DATE
+===================================================== */
+
+function normalizeDate(value){
+
+    if(!value){
+
+        return "";
+
+    }
+
+
+    let text =
+    String(value)
+    .trim();
+
+
+    /*
+       DD/MM/YYYY
+    */
+
+    let slash =
+    text.match(
+        /^(\d{1,2})\/(\d{1,2})\/(\d{4})/
+    );
+
+
+    if(slash){
+
+        return (
+            slash[3]
+            +
+            "-"
+            +
+            String(
+                slash[2]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+            +
+            "-"
+            +
+            String(
+                slash[1]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+        );
+
+    }
+
+
+    /*
+       DD-MM-YYYY
+    */
+
+    let dash =
+    text.match(
+        /^(\d{1,2})-(\d{1,2})-(\d{4})/
+    );
+
+
+    if(dash){
+
+        return (
+            dash[3]
+            +
+            "-"
+            +
+            String(
+                dash[2]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+            +
+            "-"
+            +
+            String(
+                dash[1]
+            )
+            .padStart(
+                2,
+                "0"
+            )
+        );
+
+    }
+
+
+    /*
+       YYYY-MM-DD
+    */
+
+    if(
+        /^\d{4}-\d{2}-\d{2}/
+        .test(text)
+    ){
+
+        return text.substring(
+            0,
+            10
+        );
+
+    }
+
+
+    let parsed =
+    new Date(
+        text
+    );
+
+
+    if(
+        isNaN(
+            parsed.getTime()
+        )
+    ){
+
+        return "";
+
+    }
+
+
+    return (
+
+        parsed.getFullYear()
+
+        +
+
+        "-"
+
+        +
+
+        String(
+            parsed.getMonth()+1
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+        +
+
+        "-"
+
+        +
+
+        String(
+            parsed.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+    );
+
+}
+
+
+
+/* =====================================================
+   11. DISPLAY DATE
+===================================================== */
+
+function displayDate(value){
+
+    let normalized =
+    normalizeDate(
+        value
+    );
+
+
+    if(!normalized){
+
+        return safe(
+            value
+        );
+
+    }
+
+
+    let parts =
+    normalized.split(
+        "-"
+    );
+
+
+    return (
+        parts[2]
+        +
+        "/"
+        +
+        parts[1]
+        +
+        "/"
+        +
+        parts[0]
+    );
+
+}
+
+
+
+/* =====================================================
+   12. FORMAT TIME 12-HOUR AM/PM
+===================================================== */
+
+function formatTime12(value){
+
+    if(
+        !value ||
+        value === "-"
+    ){
+
+        return "-";
+
+    }
+
+
+    let text =
+    String(
+        value
+    )
+    .trim();
+
+
+    /*
+       Already AM / PM
+    */
+
+    if(
+        /\b(am|pm)\b/i
+        .test(text)
+    ){
+
+        return text
+        .replace(
+            /\bam\b/gi,
+            "AM"
+        )
+        .replace(
+            /\bpm\b/gi,
+            "PM"
+        );
+
+    }
+
+
+    /*
+       HH:MM
+       HH:MM:SS
+    */
+
+    let match =
+    text.match(
+        /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/
+    );
+
+
+    if(match){
+
+        let hour =
+        Number(
+            match[1]
+        );
+
+
+        let minute =
+        match[2];
+
+
+        let second =
+        match[3];
+
+
+        if(
+            hour >= 0 &&
+            hour <= 23
+        ){
+
+            let suffix =
+            hour >= 12
+            ? "PM"
+            : "AM";
+
+
+            let hour12 =
+            hour % 12;
+
+
+            if(
+                hour12 === 0
+            ){
+
+                hour12 =
+                12;
+
+            }
+
+
+            return (
+
+                String(
+                    hour12
+                )
+                .padStart(
+                    2,
+                    "0"
+                )
+
+                +
+
+                ":"
+
+                +
+
+                minute
+
+                +
+
+                (
+                    second
+                    ?
+                    ":" + second
+                    :
+                    ""
+                )
+
+                +
+
+                " "
+
+                +
+
+                suffix
+
+            );
+
+        }
+
+    }
+
+
+    return text;
+
+}
+
+
+
+/* =====================================================
+   13. EXTRACT DATE/TIME FROM LEGACY FIELD
+===================================================== */
+
+function extractLegacyDateTime(value){
+
+    let result = {
+
+        date:"",
+
+        time:""
+
+    };
+
+
+    if(!value){
+
+        return result;
+
+    }
+
+
+    let text =
+    String(
+        value
+    )
+    .trim();
+
+
+    /*
+       "10/08/2026, 05:01:15 PM"
+    */
+
+    if(
+        text.includes(",")
+    ){
+
+        let parts =
+        text.split(
+            ","
+        );
+
+
+        result.date =
+        parts.shift()
+        .trim();
+
+
+        result.time =
+        parts.join(",")
+        .trim();
+
+
+        return result;
+
+    }
+
+
+    /*
+       If only date
+    */
+
+    if(
+        normalizeDate(
+            text
+        )
+    ){
+
+        result.date =
+        text;
+
+        return result;
+
+    }
+
+
+    result.time =
+    text;
+
+
+    return result;
+
+}
+
+
+
+/* =====================================================
+   14. STATUS NORMALIZE
+===================================================== */
+
+function normalizeStatus(value){
+
+    let text =
+    String(
+        value ||
+        "Pending"
+    )
+    .trim()
+    .toLowerCase();
+
+
+    if(
+        text === "won"
+    ){
+
+        return "Win";
+
+    }
+
+
+    if(
+        text === "lost"
+    ){
+
+        return "Lose";
+
+    }
+
+
+    if(
+        text === "canceled"
+    ){
+
+        return "Cancelled";
+
+    }
+
+
+    if(
+        text === "win"
+    ){
+
+        return "Win";
+
+    }
+
+
+    if(
+        text === "lose"
+    ){
+
+        return "Lose";
+
+    }
+
+
+    if(
+        text === "cancelled"
+    ){
+
+        return "Cancelled";
+
+    }
+
+
+    if(
+        text === "pending"
+    ){
+
+        return "Pending";
+
+    }
+
+
+    return (
+        value ||
+        "Pending"
+    );
+
+}
+
+
+
+/* =====================================================
+   15. STATUS CSS
+===================================================== */
+
+function statusClass(status){
+
+    let value =
+    String(
+        status || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+    if(
+        value === "pending"
+    ){
+
+        return "status-pending";
+
+    }
+
+
+    if(
+        value === "win" ||
+        value === "won"
+    ){
+
+        return "status-win";
+
+    }
+
+
+    if(
+        value === "lose" ||
+        value === "lost"
+    ){
+
+        return "status-lose";
+
+    }
+
+
+    if(
+        value === "cancelled" ||
+        value === "canceled"
+    ){
+
+        return "status-cancelled";
+
+    }
+
+
+    return "status-active";
+
+}
+
+
+
+/* =====================================================
+   16. GET ALL BETS
+===================================================== */
+
+function getAllBets(){
+
+    let bets =
+    getStorage(
+        "bets",
+        []
+    );
+
+
+    if(
+        !Array.isArray(
+            bets
+        )
+    ){
+
+        return [];
+
+    }
+
+
+    return bets;
+
+}
+
+
+
+/* =====================================================
+   17. STRICT USER FILTER
+===================================================== */
+
+function getMyBids(){
+
+    let currentMobile =
+    normalizeMobile(
+        currentUser.mobile
+    );
+
+
+    return getAllBets()
+    .filter(
+        function(item){
+
+            let bidMobile =
+            normalizeMobile(
+                item.mobile ||
+                item.userMobile ||
+                item.phone ||
+                item.mobileNumber
+            );
+
+
+            return (
+
+                bidMobile !== ""
+
+                &&
+
+                bidMobile ===
+                currentMobile
+
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   18. BET DATE/TIME
+===================================================== */
+
+function getBidDateTime(item){
+
+    let legacy =
+    extractLegacyDateTime(
+        item.date ||
+        item.createdAt ||
+        ""
+    );
+
+
+    let date =
+    item.bidDate ||
+    item.displayDate ||
+    item.gameDate ||
+    item.playDate ||
+    legacy.date ||
+    "";
+
+
+    let time =
+    item.bidTime ||
+    item.time ||
+    item.playTime ||
+    item.createdTime ||
+    legacy.time ||
+    "";
+
+
+    /*
+       If createdAt is ISO
+    */
+
+    if(
+        (!date || !time) &&
+        item.createdAt
+    ){
+
+        let parsed =
+        new Date(
+            item.createdAt
+        );
+
+
+        if(
+            !isNaN(
+                parsed.getTime()
+            )
+        ){
+
+            if(!date){
+
+                date =
+                parsed.toLocaleDateString(
+                    "en-GB"
+                );
+
+            }
+
+
+            if(!time){
+
+                time =
+                parsed.toLocaleTimeString(
+                    "en-US",
+                    {
+                        hour:"2-digit",
+                        minute:"2-digit",
+                        second:"2-digit",
+                        hour12:true
+                    }
+                );
+
+            }
+
+        }
+
+    }
+
+
+    return {
+
+        date:
+        date || "-",
+
+        time:
+        formatTime12(
+            time
+        )
+
+    };
+
+}
+
+
+
+/* =====================================================
+   19. SORT TIMESTAMP
+===================================================== */
+
+function getSortTimestamp(item){
+
+    if(
+        Number.isFinite(
+            Number(
+                item.timestamp
+            )
+        )
+        &&
+        Number(
+            item.timestamp
+        ) > 0
+    ){
+
+        return Number(
+            item.timestamp
+        );
+
+    }
+
+
+    if(
+        Number.isFinite(
+            Number(
+                item.createdTimestamp
+            )
+        )
+        &&
+        Number(
+            item.createdTimestamp
+        ) > 0
+    ){
+
+        return Number(
+            item.createdTimestamp
+        );
+
+    }
+
+
+    if(
+        item.createdAt
+    ){
+
+        let parsed =
+        new Date(
+            item.createdAt
+        );
+
+
+        if(
+            !isNaN(
+                parsed.getTime()
+            )
+        ){
+
+            return parsed.getTime();
+
+        }
+
+    }
+
+
+    if(
+        Number.isFinite(
+            Number(
+                item.id
+            )
+        )
+    ){
+
+        return Number(
+            item.id
+        );
+
+    }
+
+
+    return 0;
+
+}
+
+
+
+/* =====================================================
+   20. NORMALIZE BID RECORD
+===================================================== */
+
+function normalizeBid(
+    item,
+    originalIndex
+){
+
+    let dt =
+    getBidDateTime(
+        item
+    );
+
+
+    let status =
+    normalizeStatus(
+        item.status
+    );
+
+
+    let amount =
+    Number(
+        item.amount ??
+        item.bidAmount ??
+        item.playAmount ??
+        0
+    );
+
+
+    if(
+        !Number.isFinite(
+            amount
+        )
+    ){
+
+        amount = 0;
+
+    }
+
+
+    let winAmount =
+    Number(
+        item.winAmount ??
+        item.winningAmount ??
+        0
+    );
+
+
+    if(
+        !Number.isFinite(
+            winAmount
+        )
+    ){
+
+        winAmount = 0;
+
+    }
+
+
+    let session =
+    String(
+        item.session ||
+        item.bidSession ||
+        ""
+    )
+    .trim()
+    .toUpperCase();
+
+
+    if(!session){
+
+        session =
+        "-";
+
+    }
+
+
+    let game =
+    item.game ||
+    item.gameType ||
+    item.type ||
+    "-";
+
+
+    let number =
+    item.number ??
+    item.bidNumber ??
+    item.pana ??
+    item.ank ??
+    "-";
+
+
+    return {
+
+        originalIndex:
+        originalIndex,
+
+        id:
+        item.id ||
+        item.betId ||
+        originalIndex + 1,
+
+        market:
+        item.market ||
+        item.marketName ||
+        "-",
+
+        game:
+        game,
+
+        session:
+        session,
+
+        number:
+        number,
+
+        amount:
+        amount,
+
+        winAmount:
+        winAmount,
+
+        date:
+        dt.date,
+
+        normalizedDate:
+        normalizeDate(
+            dt.date
+        ),
+
+        time:
+        dt.time,
+
+        status:
+        status,
+
+        settlementPhase:
+        item.settlementPhase ||
+        "",
+
+        resultNumber:
+        item.resultNumber ??
+        "",
+
+        sortTime:
+        getSortTimestamp(
+            item
+        )
+
+    };
+
+}
+
+
+
+/* =====================================================
+   21. GET NORMALIZED RECORDS
+===================================================== */
+
+function getBidRecords(){
+
+    return getMyBids()
+    .map(
+        function(item,index){
+
+            return normalizeBid(
+                item,
+                index
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   22. SUMMARY
+
+   Summary always user's ALL bids ka hoga.
+===================================================== */
+
+function renderSummary(){
+
+    let records =
+    getBidRecords();
+
+
+    let pending = 0;
+
+    let win = 0;
+
+    let lose = 0;
+
+
+    records.forEach(
+        function(item){
+
+            let status =
+            String(
+                item.status || ""
+            )
+            .toLowerCase();
+
+
+            if(
+                status === "pending"
+            ){
+
+                pending++;
+
+            }
+
+
+            else if(
+                status === "win" ||
+                status === "won"
+            ){
+
+                win++;
+
+            }
+
+
+            else if(
+                status === "lose" ||
+                status === "lost"
+            ){
+
+                lose++;
+
+            }
+
+        }
+    );
+
+
+    document
+    .getElementById(
+        "totalBidCount"
+    )
+    .innerText =
+    records.length;
+
+
+    document
+    .getElementById(
+        "pendingCount"
+    )
+    .innerText =
+    pending;
+
+
+    document
+    .getElementById(
+        "winCount"
+    )
+    .innerText =
+    win;
+
+
+    document
+    .getElementById(
+        "loseCount"
+    )
+    .innerText =
+    lose;
+
+}
+
+
+
+/* =====================================================
+   23. FILTER RECORDS
+===================================================== */
+
+function getFilteredRecords(){
+
+    let records =
+    getBidRecords();
+
+
+    records.sort(
+        function(a,b){
+
+            return (
+
+                Number(
+                    b.sortTime
+                )
+
+                -
+
+                Number(
+                    a.sortTime
+                )
+
+            );
+
+        }
+    );
+
+
+    let selectedDate =
+    document
+    .getElementById(
+        "filterDate"
+    )
+    .value;
+
+
+    let search =
+    document
+    .getElementById(
+        "searchText"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    return records.filter(
+        function(item){
+
+            let dateMatch =
+            true;
+
+
+            if(
+                selectedDate
+            ){
+
+                dateMatch =
+
+                item.normalizedDate
+                ===
+                selectedDate;
+
+            }
+
+
+            let searchable =
+            [
+
+                item.id,
+
+                item.market,
+
+                item.game,
+
+                item.session,
+
+                item.number,
+
+                item.amount,
+
+                item.winAmount,
+
+                item.date,
+
+                item.time,
+
+                item.status,
+
+                item.resultNumber,
+
+                item.settlementPhase
+
+            ]
+            .join(
+                " "
+            )
+            .toLowerCase();
+
+
+            let searchMatch =
+
+            search === ""
+
+            ||
+
+            searchable.includes(
+                search
+            );
+
+
+            return (
+                dateMatch &&
+                searchMatch
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   24. RENDER TABLE
+===================================================== */
+
+function renderMyBids(){
+
+    let records =
+    getFilteredRecords();
+
+
+    let table =
+    document
+    .getElementById(
+        "myBidTable"
+    );
+
+
+    table.innerHTML =
+    "";
+
+
+    document
+    .getElementById(
+        "recordInfo"
+    )
+    .innerText =
+
+    "Total Records : "
+    +
+    records.length;
+
+
+    if(
+        records.length === 0
+    ){
+
+        table.innerHTML = `
+
+        <tr>
+
+            <td
+            colspan="10"
+            class="noData">
+
+                No Bid History Found
+
+            </td>
+
+        </tr>
+
+        `;
+
+
+        renderSummary();
+
+        return;
+
+    }
+
+
+    records.forEach(
+        function(item,index){
+
+            let displayWinAmount =
+
+            String(
+                item.status
+            )
+            .toLowerCase()
+            ===
+            "win"
+
+            ?
+
+            "₹ "
+            +
+            Number(
+                item.winAmount
+            )
+            .toFixed(
+                2
+            )
+
+            :
+
+            "-";
+
+
+            let row =
+            document.createElement(
+                "tr"
+            );
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        safe(
+                            item.market
+                        )
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        safe(
+                            item.game
+                        )
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        safe(
+                            item.session
+                        )
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        safe(
+                            item.number
+                        )
+                    )}
+                </td>
+
+
+                <td class="amountText">
+
+                    ₹ ${Number(
+                        item.amount
+                    )
+                    .toFixed(
+                        2
+                    )}
+
+                </td>
+
+
+                <td class="winAmount">
+
+                    ${escapeHTML(
+                        displayWinAmount
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        displayDate(
+                            item.date
+                        )
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        safe(
+                            item.time
+                        )
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <span
+                    class="
+                    status
+                    ${statusClass(
+                        item.status
+                    )}
+                    ">
+
+                        ${escapeHTML(
+                            safe(
+                                item.status
+                            )
+                        )}
+
+                    </span>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(
+                row
+            );
+
+        }
+    );
+
+
+    renderSummary();
+
+}
+
+
+
+/* =====================================================
+   25. TODAY FILTER
+===================================================== */
+
+function todayBids(){
+
+    document
+    .getElementById(
+        "filterDate"
+    )
+    .value =
+    getTodayISO();
+
+
+    renderMyBids();
+
+}
+
+
+
+/* =====================================================
+   26. CLEAR FILTERS
+===================================================== */
+
+function clearFilters(){
+
+    document
+    .getElementById(
+        "filterDate"
+    )
+    .value =
+    "";
+
+
+    document
+    .getElementById(
+        "searchText"
+    )
+    .value =
+    "";
+
+
+    renderMyBids();
+
+}
+
+
+
+/* =====================================================
+   27. FILTER EVENTS
+===================================================== */
+
+document
+.getElementById(
+    "filterDate"
+)
+.addEventListener(
+    "change",
+    renderMyBids
+);
+
+
+document
+.getElementById(
+    "searchText"
+)
+.addEventListener(
+    "input",
+    renderMyBids
+);
+
+
+
+/* =====================================================
+   28. STORAGE LIVE UPDATE
+
+   Admin result declare/reverse ke baad
+   bets update honge aur My Bid status refresh hoga.
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key === "bets"
+            ||
+            event.key === "userBalances"
+            ||
+            event.key === "adminSettings"
+            ||
+            event.key === "results"
+            ||
+            event.key === "lastResultSync"
+        ){
+
+            loadAdminSettings();
+
+            refreshWallet();
+
+            renderMyBids();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   29. SAME WINDOW RESULT EVENT
+===================================================== */
+
+window.addEventListener(
+    "resultUpdated",
+    function(){
+
+        refreshWallet();
+
+        renderMyBids();
+
+    }
+);
+
+
+
+/* =====================================================
+   30. PAGE VISIBILITY REFRESH
+===================================================== */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState
+            ===
+            "visible"
+        ){
+
+            loadAdminSettings();
+
+            refreshWallet();
+
+            renderMyBids();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   31. PAGE FOCUS
+===================================================== */
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        refreshWallet();
+
+        renderMyBids();
+
+    }
+);
+
+
+
+/* =====================================================
+   32. FIRST LOAD
+===================================================== */
+
+loadAdminSettings();
+
+refreshWallet();
+
+renderMyBids();
+
+
+
+/* =====================================================
+   33. LOCAL TEST AUTO REFRESH
+===================================================== */
+
+setInterval(
+    function(){
+
+        refreshWallet();
+
+        renderMyBids();
+
+    },
+    3000
+);
+
+
+
+console.log(
+    "✅ HR MATKA User My Bid FINAL Complete Replacement Connected"
+);
+
+</script>
+
+
+</body>
+
+</html>

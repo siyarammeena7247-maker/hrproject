@@ -1,0 +1,7457 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+Result Management - HR MATKA
+</title>
+
+
+<style>
+
+/* =========================================================
+   HR MATKA
+   RESULT.HTML COMPLETE REPLACEMENT
+   PART 1 OF 4
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+
+body{
+    background:#eef3f8;
+    color:#1f2937;
+    min-height:100vh;
+    padding:18px;
+}
+
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+
+button{
+    cursor:pointer;
+}
+
+
+.container{
+    width:100%;
+    max-width:1180px;
+    margin:auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    background:linear-gradient(
+        135deg,
+        #172033,
+        #29415f
+    );
+    color:white;
+    padding:24px;
+    border-radius:16px;
+    margin-bottom:18px;
+    box-shadow:0 8px 22px rgba(0,0,0,.14);
+}
+
+
+.header h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+
+.header p{
+    font-size:13px;
+    line-height:1.6;
+    color:#d5e0ec;
+}
+
+
+.statusGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:18px;
+}
+
+
+.statusBox{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.12);
+    padding:12px;
+    border-radius:10px;
+}
+
+
+.statusBox span{
+    display:block;
+}
+
+
+.statusLabel{
+    font-size:11px;
+    color:#cbd7e5;
+    margin-bottom:4px;
+}
+
+
+.statusValue{
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+.green{
+    color:#65e5a4;
+}
+
+
+.red{
+    color:#ffabab;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+    background:white;
+    border:1px solid #dae3ec;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:18px;
+    box-shadow:0 5px 16px rgba(15,23,42,.06);
+}
+
+
+.title{
+    font-size:21px;
+    margin-bottom:7px;
+    color:#243247;
+}
+
+
+.sub{
+    color:#6b7789;
+    font-size:12px;
+    line-height:1.6;
+    margin-bottom:17px;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:bold;
+    color:#445268;
+    margin-bottom:6px;
+}
+
+
+input,
+select{
+    width:100%;
+    height:44px;
+    border:1px solid #ccd6e1;
+    border-radius:8px;
+    padding:0 11px;
+    outline:none;
+    background:white;
+}
+
+
+input:focus,
+select:focus{
+    border-color:#2583df;
+    box-shadow:0 0 0 3px rgba(37,131,223,.10);
+}
+
+
+.grid2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+
+.grid3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+    border:none;
+    min-height:42px;
+    padding:0 15px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+
+.btnGreen{
+    background:#21a76a;
+    color:white;
+}
+
+
+.btnBlue{
+    background:#1976d2;
+    color:white;
+}
+
+
+.btnRed{
+    background:#e54848;
+    color:white;
+}
+
+
+.btnDark{
+    background:#34465d;
+    color:white;
+}
+
+
+.btnSoft{
+    background:#edf2f7;
+    border:1px solid #d7e0e9;
+    color:#35465d;
+}
+
+
+.btnSmall{
+    min-height:32px;
+    font-size:11px;
+    padding:0 10px;
+}
+
+
+.full{
+    width:100%;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.tableWrap{
+    overflow-x:auto;
+    border:1px solid #dce4ec;
+    border-radius:10px;
+}
+
+
+table{
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
+}
+
+
+thead{
+    background:#294d75;
+    color:white;
+}
+
+
+th,
+td{
+    padding:10px 8px;
+    border-bottom:1px solid #e3e9ef;
+    font-size:11px;
+    text-align:center;
+}
+
+
+.sourceName{
+    font-weight:bold;
+    color:#28394f;
+}
+
+
+.sourceUrl{
+    display:block;
+    font-size:10px;
+    color:#7b8797;
+    margin-top:3px;
+    max-width:220px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+
+.badge{
+    display:inline-flex;
+    min-width:68px;
+    justify-content:center;
+    align-items:center;
+    min-height:27px;
+    padding:0 8px;
+    border-radius:7px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+
+.badgeGreen{
+    background:#dcf8e9;
+    color:#148153;
+}
+
+
+.badgeGray{
+    background:#edf0f4;
+    color:#657184;
+}
+
+
+.badgeBlue{
+    background:#dceeff;
+    color:#1769a8;
+}
+
+
+/* =========================================================
+   SOURCE FORM
+========================================================= */
+
+.sourceForm{
+    display:grid;
+    grid-template-columns:1fr 1.4fr 180px;
+    gap:12px;
+    align-items:end;
+}
+
+
+.sourceButton{
+    margin-top:12px;
+}
+
+
+/* =========================================================
+   HISTORICAL IMPORT
+========================================================= */
+
+.historyBox{
+    background:#f8fafc;
+    border:1px solid #e0e7ef;
+    padding:17px;
+    border-radius:12px;
+}
+
+
+.historyNote{
+    background:#eaf5ff;
+    border-left:4px solid #2784df;
+    padding:11px 13px;
+    margin:13px 0;
+    color:#40566f;
+    font-size:12px;
+    line-height:1.55;
+    border-radius:6px;
+}
+
+
+.historyStats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:14px;
+}
+
+
+.historyStat{
+    background:white;
+    border:1px solid #dce4ed;
+    border-radius:8px;
+    padding:11px;
+    text-align:center;
+    color:#647184;
+    font-size:11px;
+}
+
+
+.historyStat b{
+    display:block;
+    font-size:18px;
+    color:#26364d;
+    margin-top:5px;
+}
+
+
+#historyProgress{
+    margin-top:11px;
+    min-height:20px;
+    font-size:12px;
+    color:#566579;
+}
+
+
+/* =========================================================
+   LIVE RESULT
+========================================================= */
+
+.liveBox{
+    background:#f8fafc;
+    border:1px solid #dfe7ef;
+    padding:17px;
+    border-radius:12px;
+}
+
+
+.liveStatus{
+    background:white;
+    border:1px solid #dce4ec;
+    padding:12px;
+    margin-top:13px;
+    border-radius:8px;
+    min-height:48px;
+    color:#566579;
+    font-size:12px;
+    line-height:1.5;
+}
+
+
+.liveValues{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+    margin-top:12px;
+}
+
+
+.liveValue{
+    background:white;
+    border:1px solid #dce4ec;
+    padding:10px 6px;
+    border-radius:8px;
+    text-align:center;
+}
+
+
+.liveValue span{
+    display:block;
+    color:#7a8697;
+    font-size:9px;
+    margin-bottom:4px;
+}
+
+
+.liveValue b{
+    font-size:17px;
+    color:#243249;
+}
+
+
+/* =========================================================
+   POPUP
+========================================================= */
+
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.60);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:16px;
+    z-index:99999;
+}
+
+
+.popup.show{
+    display:flex;
+}
+
+
+.popupBox{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+
+.popupBox h2{
+    margin-bottom:10px;
+    color:#28384e;
+}
+
+
+.popupMessage{
+    white-space:pre-line;
+    line-height:1.6;
+    color:#58677a;
+    margin-bottom:16px;
+}
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    min-height:42px;
+    background:#31445c;
+    color:white;
+    padding:0 15px;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:12px;
+    margin-bottom:25px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:850px){
+
+    .statusGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid3,
+    .sourceForm{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:620px){
+
+    body{
+        padding:9px;
+    }
+
+    .grid2{
+        grid-template-columns:1fr;
+    }
+
+    .historyStats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .liveValues{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<div class="header">
+
+    <h1>
+        RESULT MANAGEMENT
+    </h1>
+
+    <p>
+        HR MATKA historical chart aur live result reader.
+        Historical import primary source se chart-only mode me hoga.
+    </p>
+
+
+    <div class="statusGrid">
+
+        <div class="statusBox">
+
+            <span class="statusLabel">
+                Backend
+            </span>
+
+            <span
+                id="backendStatus"
+                class="statusValue red"
+            >
+                Checking...
+            </span>
+
+        </div>
+
+
+        <div class="statusBox">
+
+            <span class="statusLabel">
+                Historical Source
+            </span>
+
+            <span class="statusValue green">
+                PRIMARY ONLY
+            </span>
+
+        </div>
+
+
+        <div class="statusBox">
+
+            <span class="statusLabel">
+                History Range
+            </span>
+
+            <span class="statusValue">
+                JAN 2026 → TODAY
+            </span>
+
+        </div>
+
+
+        <div class="statusBox">
+
+            <span class="statusLabel">
+                Historical Settlement
+            </span>
+
+            <span class="statusValue green">
+                DISABLED
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     SOURCE MANAGER
+========================================================= -->
+
+<div class="card">
+
+    <h2 class="title">
+        Live Result Source Manager
+    </h2>
+
+    <div class="sub">
+        Live result read karne ke liye sources yahan manage honge.
+    </div>
+
+
+    <div class="sourceForm">
+
+        <div>
+
+            <label>
+                Source Name
+            </label>
+
+            <input
+                id="newSourceName"
+                type="text"
+                placeholder="Example: DPBOSS Boston"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Website URL
+            </label>
+
+            <input
+                id="newSourceUrl"
+                type="text"
+                placeholder="https://example.com/"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Mode
+            </label>
+
+            <select id="newSourceMode">
+
+                <option value="website">
+                    Website HTML
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="btn btnGreen full sourceButton"
+        type="button"
+        onclick="addSource()"
+    >
+        + ADD NEW SOURCE
+    </button>
+
+
+    <div
+        class="tableWrap"
+        style="margin-top:15px;"
+    >
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Source</th>
+                    <th>Mode</th>
+                    <th>Status</th>
+                    <th>Last Check</th>
+                    <th>Active</th>
+                    <th>Delete</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="sourceTableBody">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HISTORICAL IMPORT
+========================================================= -->
+
+<div class="card">
+
+    <h2 class="title">
+        Historical Chart Import - 2026
+    </h2>
+
+    <div class="sub">
+        January 2026 se current date tak historical chart
+        primary chart source se backend ke through import hoga.
+    </div>
+
+
+    <div class="historyBox">
+
+
+        <div class="grid3">
+
+            <div>
+
+                <label>
+                    Market Name
+                </label>
+
+                <input
+                    id="historyMarket"
+                    type="text"
+                    placeholder="Example: SRIDEVI"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Primary Chart URL
+                </label>
+
+                <input
+                    id="historyPrimaryUrl"
+                    type="text"
+                    placeholder="https://dpbossss.boston/..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Primary Source Name
+                </label>
+
+                <input
+                    id="historyPrimarySource"
+                    type="text"
+                    value="DPBOSS"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="historyNote">
+            Historical chart ke liye secondary verification ki
+            zarurat nahi hai. Primary chart source ka data hi
+            chartHistory me save hoga.
+        </div>
+
+
+        <div class="grid2">
+
+            <div>
+
+                <label>
+                    From Date
+                </label>
+
+                <input
+                    id="historyFrom"
+                    type="date"
+                    value="2026-01-01"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    To Date
+                </label>
+
+                <input
+                    id="historyTo"
+                    type="date"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn btnGreen full"
+            type="button"
+            style="margin-top:14px;"
+            onclick="importHistoricalChart()"
+        >
+            IMPORT 2026 HISTORY
+        </button>
+
+
+        <div id="historyProgress">
+        </div>
+
+
+        <div class="historyStats">
+
+            <div class="historyStat">
+                Imported
+                <b id="historyImported">0</b>
+            </div>
+
+            <div class="historyStat">
+                Updated
+                <b id="historyUpdated">0</b>
+            </div>
+
+            <div class="historyStat">
+                Skipped
+                <b id="historySkipped">0</b>
+            </div>
+
+            <div class="historyStat">
+                Received
+                <b id="historyTotal">0</b>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     LIVE RESULT READER
+========================================================= -->
+
+<div class="card">
+
+    <h2 class="title">
+        Live Result Reader
+    </h2>
+
+    <div class="sub">
+        Active source se current market result read aur display hoga.
+    </div>
+
+
+    <div class="liveBox">
+
+
+        <div class="grid2">
+
+            <div>
+
+                <label>
+                    Market Name
+                </label>
+
+                <input
+                    id="liveMarket"
+                    type="text"
+                    placeholder="Example: SRIDEVI"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Active Source
+                </label>
+
+                <select id="liveSource">
+
+                    <option value="">
+                        Select Source
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn btnBlue full"
+            type="button"
+            style="margin-top:14px;"
+            onclick="checkLiveResult()"
+        >
+            CHECK LIVE RESULT
+        </button>
+
+
+        <div
+            id="liveStatus"
+            class="liveStatus"
+        >
+            Live result check abhi run nahi hua.
+        </div>
+
+
+        <div class="liveValues">
+
+            <div class="liveValue">
+                <span>OPEN PANEL</span>
+                <b id="liveOpenPanel">-</b>
+            </div>
+
+            <div class="liveValue">
+                <span>OPEN</span>
+                <b id="liveOpenSingle">-</b>
+            </div>
+
+            <div class="liveValue">
+                <span>JODI</span>
+                <b id="liveJodi">-</b>
+            </div>
+
+            <div class="liveValue">
+                <span>CLOSE</span>
+                <b id="liveCloseSingle">-</b>
+            </div>
+
+            <div class="liveValue">
+                <span>CLOSE PANEL</span>
+                <b id="liveClosePanel">-</b>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     RESULT HISTORY
+========================================================= -->
+
+<div class="card">
+
+    <h2 class="title">
+        Chart History
+    </h2>
+
+    <div class="sub">
+        Imported historical chart records yahan dikhai denge.
+    </div>
+
+
+    <input
+        id="historySearch"
+        type="text"
+        placeholder="Search Market / Date / Result"
+        oninput="renderChartHistory()"
+    >
+
+
+    <div
+        class="tableWrap"
+        style="margin-top:14px;"
+    >
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+                    <th>Market</th>
+                    <th>Date</th>
+                    <th>Open Panel</th>
+                    <th>Jodi</th>
+                    <th>Close Panel</th>
+                    <th>Status</th>
+                    <th>Source</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="historyTableBody">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<a
+    href="index.html"
+    class="back"
+>
+    ← Back To Admin Panel
+</a>
+
+
+</div>
+
+
+<!-- =========================================================
+     POPUP
+========================================================= -->
+
+<div
+    id="popup"
+    class="popup"
+>
+
+    <div class="popupBox">
+
+        <h2 id="popupTitle">
+            Information
+        </h2>
+
+        <div
+            id="popupMessage"
+            class="popupMessage"
+        >
+        </div>
+
+        <button
+            class="btn btnDark full"
+            type="button"
+            onclick="closePopup()"
+        >
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
+
+
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   RESULT.HTML - COMPLETE REPLACEMENT
+   PART 2 OF 4
+
+   BASIC HELPERS
+   STORAGE
+   POPUP
+   BACKEND STATUS
+   SOURCE MANAGER
+========================================================= */
+
+
+/* =========================================================
+   STORAGE KEYS
+========================================================= */
+
+const STORAGE_SOURCES =
+    "hrMatkaResultSources";
+
+const STORAGE_CHART_HISTORY =
+    "chartHistory";
+
+const STORAGE_HISTORY_STATUS =
+    "historicalImportStatus";
+
+const STORAGE_LAST_LIVE =
+    "hrMatkaLastLiveResult";
+
+
+/* =========================================================
+   BASIC TEXT HELPER
+========================================================= */
+
+function text(value){
+
+    return String(
+        value ?? ""
+    ).trim();
+
+}
+
+
+/* =========================================================
+   NORMALIZE MARKET
+========================================================= */
+
+function normalizeMarket(value){
+
+    return text(
+        value
+    )
+    .replace(
+        /\s+/g,
+        " "
+    )
+    .toUpperCase();
+
+}
+
+
+/* =========================================================
+   SAFE STORAGE READ
+========================================================= */
+
+function getStorage(
+    key,
+    fallback
+){
+
+    try{
+
+        const raw =
+            localStorage.getItem(
+                key
+            );
+
+
+        if(
+            raw === null
+        ){
+
+            return fallback;
+
+        }
+
+
+        return JSON.parse(
+            raw
+        );
+
+    }
+    catch(error){
+
+        console.warn(
+            "Storage Read Error:",
+            key,
+            error
+        );
+
+
+        return fallback;
+
+    }
+
+}
+
+
+/* =========================================================
+   SAFE STORAGE SAVE
+========================================================= */
+
+function saveStorage(
+    key,
+    value
+){
+
+    try{
+
+        localStorage.setItem(
+            key,
+            JSON.stringify(
+                value
+            )
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.error(
+            "Storage Save Error:",
+            key,
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   CURRENT TIME - 12 HOUR AM/PM
+========================================================= */
+
+function currentTime(){
+
+    return new Date()
+    .toLocaleTimeString(
+        "en-IN",
+        {
+            hour:"2-digit",
+            minute:"2-digit",
+            second:"2-digit",
+            hour12:true
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CURRENT ISO TIME
+========================================================= */
+
+function currentIsoTime(){
+
+    return new Date()
+    .toISOString();
+
+}
+
+
+/* =========================================================
+   PANEL -> SINGLE
+========================================================= */
+
+function calculateSingle(panel){
+
+    const value =
+        text(
+            panel
+        );
+
+
+    if(
+        !/^\d{3}$/.test(
+            value
+        )
+    ){
+
+        return "";
+
+    }
+
+
+    const total =
+        value
+        .split("")
+        .reduce(
+            function(sum,digit){
+
+                return (
+                    sum +
+                    Number(digit)
+                );
+
+            },
+            0
+        );
+
+
+    return String(
+        total % 10
+    );
+
+
+}
+
+
+
+
+
+/* =========================================================
+   STRICT LIVE RESULT MATH
+
+   OPEN PANEL  -> OPEN SINGLE
+   CLOSE PANEL -> CLOSE SINGLE
+
+   JODI =
+   OPEN SINGLE + CLOSE SINGLE
+
+   Example:
+   160 => 1+6+0 = 7
+   280 => 2+8+0 = 10 => 0
+   JODI = 70
+========================================================= */
+
+function correctLiveResultMath(result){
+
+    if(!result){
+
+        return result;
+
+    }
+
+
+    const openPanel =
+        text(
+            result.openPanel
+        );
+
+
+    const closePanel =
+        text(
+            result.closePanel
+        );
+
+
+    if(
+        /^\d{3}$/.test(
+            openPanel
+        )
+    ){
+
+        result.openSingle =
+            calculateSingle(
+                openPanel
+            );
+
+    }
+
+
+    if(
+        /^\d{3}$/.test(
+            closePanel
+        )
+    ){
+
+        result.closeSingle =
+            calculateSingle(
+                closePanel
+            );
+
+
+        /*
+           IMPORTANT:
+           Source ki Jodi trust nahi karni.
+
+           Apni mathematical Jodi:
+           Open Single + Close Single
+        */
+
+        result.jodi =
+            result.openSingle
+            +
+            result.closeSingle;
+
+
+        result.status =
+            "COMPLETE";
+
+    }
+
+
+    return result;
+
+}
+
+
+console.log(
+    "✅ Strict Jodi Math Ready"
+);
+
+
+
+/* =========================================================
+   POPUP
+========================================================= */
+
+function showPopup(
+    title,
+    message
+){
+
+    const popup =
+        document.getElementById(
+            "popup"
+        );
+
+
+    const titleElement =
+        document.getElementById(
+            "popupTitle"
+        );
+
+
+    const messageElement =
+        document.getElementById(
+            "popupMessage"
+        );
+
+
+    if(titleElement){
+
+        titleElement.textContent =
+            text(title) ||
+            "Information";
+
+    }
+
+
+    if(messageElement){
+
+        messageElement.textContent =
+            text(message);
+
+    }
+
+
+    if(popup){
+
+        popup.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+function closePopup(){
+
+    const popup =
+        document.getElementById(
+            "popup"
+        );
+
+
+    if(popup){
+
+        popup.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SET HISTORY DATES
+========================================================= */
+
+function setHistoryDates(){
+
+    const from =
+        document.getElementById(
+            "historyFrom"
+        );
+
+
+    const to =
+        document.getElementById(
+            "historyTo"
+        );
+
+
+    if(from){
+
+        from.value =
+            "2026-01-01";
+
+        from.min =
+            "2026-01-01";
+
+    }
+
+
+    if(to){
+
+        const now =
+            new Date();
+
+
+        const year =
+            now.getFullYear();
+
+
+        const month =
+            String(
+                now.getMonth() + 1
+            )
+            .padStart(
+                2,
+                "0"
+            );
+
+
+        const day =
+            String(
+                now.getDate()
+            )
+            .padStart(
+                2,
+                "0"
+            );
+
+
+        const today =
+            year +
+            "-" +
+            month +
+            "-" +
+            day;
+
+
+        to.value =
+            today;
+
+        to.max =
+            today;
+
+    }
+
+}
+
+
+/* =========================================================
+   BACKEND HEALTH CHECK
+========================================================= */
+
+async function checkBackend(){
+
+    const headerStatus =
+        document.getElementById(
+            "backendStatus"
+        );
+
+
+    if(headerStatus){
+
+        headerStatus.textContent =
+            "Checking...";
+
+        headerStatus.classList.remove(
+            "green"
+        );
+
+        headerStatus.classList.add(
+            "red"
+        );
+
+    }
+
+
+    try{
+
+        /*
+           Backend ke root ko check karna enough hai.
+           Response JSON ho ya normal text,
+           successful HTTP connection ko online maana jayega.
+        */
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:5000/",
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
+
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+
+        if(headerStatus){
+
+            headerStatus.textContent =
+                "CONNECTED";
+
+            headerStatus.classList.remove(
+                "red"
+            );
+
+            headerStatus.classList.add(
+                "green"
+            );
+
+        }
+
+
+        return true;
+
+    }
+    catch(error){
+
+        if(headerStatus){
+
+            headerStatus.textContent =
+                "OFFLINE";
+
+            headerStatus.classList.remove(
+                "green"
+            );
+
+            headerStatus.classList.add(
+                "red"
+            );
+
+        }
+
+
+        console.warn(
+            "Backend Offline:",
+            error.message
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   DEFAULT SOURCE
+
+   Source manager blank hone par default source dikhega.
+========================================================= */
+
+function defaultSources(){
+
+    return [
+
+        {
+            id:
+                "source-dpboss-boston",
+
+            name:
+                "DPBOSS Boston",
+
+            url:
+                "https://dpbossss.boston/",
+
+            mode:
+                "website",
+
+            active:
+                true,
+
+            status:
+                "Ready",
+
+            lastCheck:
+                ""
+        }
+
+    ];
+
+}
+
+
+/* =========================================================
+   GET SOURCES
+========================================================= */
+
+function getSources(){
+
+    let sources =
+        getStorage(
+            STORAGE_SOURCES,
+            null
+        );
+
+
+    if(
+        !Array.isArray(
+            sources
+        )
+        ||
+        sources.length === 0
+    ){
+
+        sources =
+            defaultSources();
+
+
+        saveStorage(
+            STORAGE_SOURCES,
+            sources
+        );
+
+    }
+
+
+    return sources;
+
+}
+
+
+/* =========================================================
+   SAVE SOURCES
+========================================================= */
+
+function saveSources(
+    sources
+){
+
+    if(
+        !Array.isArray(
+            sources
+        )
+    ){
+
+        return false;
+
+    }
+
+
+    return saveStorage(
+        STORAGE_SOURCES,
+        sources
+    );
+
+}
+
+
+/* =========================================================
+   CREATE SOURCE ID
+========================================================= */
+
+function createSourceId(){
+
+    return (
+        "source-" +
+        Date.now() +
+        "-" +
+        Math.random()
+        .toString(36)
+        .slice(2,8)
+    );
+
+}
+
+
+/* =========================================================
+   ADD SOURCE
+========================================================= */
+
+function addSource(){
+
+    const nameInput =
+        document.getElementById(
+            "newSourceName"
+        );
+
+
+    const urlInput =
+        document.getElementById(
+            "newSourceUrl"
+        );
+
+
+    const modeInput =
+        document.getElementById(
+            "newSourceMode"
+        );
+
+
+    const name =
+        text(
+            nameInput?.value
+        );
+
+
+    const url =
+        text(
+            urlInput?.value
+        );
+
+
+    const mode =
+        text(
+            modeInput?.value
+        )
+        ||
+        "website";
+
+
+    if(!name){
+
+        showPopup(
+            "Source Required",
+            "Source Name enter karo."
+        );
+
+        return;
+
+    }
+
+
+    if(!url){
+
+        showPopup(
+            "URL Required",
+            "Website URL enter karo."
+        );
+
+        return;
+
+    }
+
+
+    let parsedUrl;
+
+
+    try{
+
+        parsedUrl =
+            new URL(
+                url
+            );
+
+    }
+    catch(error){
+
+        showPopup(
+            "Invalid URL",
+            "Valid website URL enter karo."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        parsedUrl.protocol !==
+        "https:"
+    ){
+
+        showPopup(
+            "HTTPS Required",
+            "Source URL https:// se start hona chahiye."
+        );
+
+        return;
+
+    }
+
+
+    const sources =
+        getSources();
+
+
+    const duplicate =
+        sources.some(
+            function(source){
+
+                return (
+                    text(source.url)
+                    .toLowerCase()
+                    ===
+                    parsedUrl
+                    .toString()
+                    .toLowerCase()
+                );
+
+            }
+        );
+
+
+    if(duplicate){
+
+        showPopup(
+            "Duplicate Source",
+            "Ye website source pehle se added hai."
+        );
+
+        return;
+
+    }
+
+
+    sources.push(
+        {
+            id:
+                createSourceId(),
+
+            name:
+                name,
+
+            url:
+                parsedUrl.toString(),
+
+            mode:
+                mode,
+
+            active:
+                false,
+
+            status:
+                "Ready",
+
+            lastCheck:
+                ""
+        }
+    );
+
+
+    saveSources(
+        sources
+    );
+
+
+    if(nameInput){
+
+        nameInput.value =
+            "";
+
+    }
+
+
+    if(urlInput){
+
+        urlInput.value =
+            "";
+
+    }
+
+
+    renderSources();
+
+
+    showPopup(
+        "Source Added",
+        name + " successfully added."
+    );
+
+}
+
+
+/* =========================================================
+   ACTIVATE SOURCE
+
+   Ek time par sirf ek source active.
+========================================================= */
+
+function activateSource(
+    id
+){
+
+    const sources =
+        getSources();
+
+
+    sources.forEach(
+        function(source){
+
+            source.active =
+                source.id === id;
+
+        }
+    );
+
+
+    saveSources(
+        sources
+    );
+
+
+    renderSources();
+
+}
+
+
+/* =========================================================
+   DELETE SOURCE
+========================================================= */
+
+function deleteSource(
+    id
+){
+
+    let sources =
+        getSources();
+
+
+    const selected =
+        sources.find(
+            function(source){
+
+                return (
+                    source.id === id
+                );
+
+            }
+        );
+
+
+    if(!selected){
+
+        return;
+
+    }
+
+
+    sources =
+        sources.filter(
+            function(source){
+
+                return (
+                    source.id !== id
+                );
+
+            }
+        );
+
+
+    /*
+       Agar sab delete ho gaye to
+       default source automatically restore hoga.
+    */
+
+    if(
+        sources.length === 0
+    ){
+
+        sources =
+            defaultSources();
+
+    }
+
+
+    /*
+       Agar active source delete hua aur koi active nahi,
+       first source active kar denge.
+    */
+
+    const hasActive =
+        sources.some(
+            function(source){
+
+                return (
+                    source.active === true
+                );
+
+            }
+        );
+
+
+    if(
+        !hasActive &&
+        sources.length
+    ){
+
+        sources[0].active =
+            true;
+
+    }
+
+
+    saveSources(
+        sources
+    );
+
+
+    renderSources();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return text(
+        value
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   RENDER SOURCES
+========================================================= */
+
+function renderSources(){
+
+    const tbody =
+        document.getElementById(
+            "sourceTableBody"
+        );
+
+
+    const liveSelect =
+        document.getElementById(
+            "liveSource"
+        );
+
+
+    const sources =
+        getSources();
+
+
+    if(tbody){
+
+        tbody.innerHTML =
+            "";
+
+
+        sources.forEach(
+            function(source,index){
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                const activeBadge =
+                    source.active
+                    ?
+                    '<span class="badge badgeGreen">ACTIVE</span>'
+                    :
+                    '<span class="badge badgeGray">INACTIVE</span>';
+
+
+                const statusBadge =
+                    source.status ===
+                    "Working"
+                    ?
+                    '<span class="badge badgeGreen">WORKING</span>'
+                    :
+                    '<span class="badge badgeBlue">'
+                    +
+                    escapeHtml(
+                        source.status ||
+                        "Ready"
+                    )
+                    +
+                    '</span>';
+
+
+                row.innerHTML =
+                    '<td>'
+                    +
+                    (index + 1)
+                    +
+                    '</td>'
+
+                    +
+
+                    '<td>'
+                    +
+                    '<span class="sourceName">'
+                    +
+                    escapeHtml(
+                        source.name
+                    )
+                    +
+                    '</span>'
+                    +
+                    '<span class="sourceUrl">'
+                    +
+                    escapeHtml(
+                        source.url
+                    )
+                    +
+                    '</span>'
+                    +
+                    '</td>'
+
+                    +
+
+                    '<td>'
+                    +
+                    escapeHtml(
+                        source.mode ||
+                        "website"
+                    )
+                    +
+                    '</td>'
+
+                    +
+
+                    '<td>'
+                    +
+                    statusBadge
+                    +
+                    '</td>'
+
+                    +
+
+                    '<td>'
+                    +
+                    escapeHtml(
+                        source.lastCheck ||
+                        "-"
+                    )
+                    +
+                    '</td>'
+
+                    +
+
+                    '<td>'
+                    +
+                    activeBadge
+                    +
+                    '<br>'
+                    +
+                    '<button '
+                    +
+                    'class="btn btnBlue btnSmall" '
+                    +
+                    'type="button" '
+                    +
+                    'style="margin-top:5px;" '
+                    +
+                    'onclick="activateSource(\''
+                    +
+                    escapeHtml(
+                        source.id
+                    )
+                    +
+                    '\')">'
+                    +
+                    'USE'
+                    +
+                    '</button>'
+                    +
+                    '</td>'
+
+                    +
+
+                    '<td>'
+                    +
+                    '<button '
+                    +
+                    'class="btn btnRed btnSmall" '
+                    +
+                    'type="button" '
+                    +
+                    'onclick="deleteSource(\''
+                    +
+                    escapeHtml(
+                        source.id
+                    )
+                    +
+                    '\')">'
+                    +
+                    'DELETE'
+                    +
+                    '</button>'
+                    +
+                    '</td>';
+
+
+                tbody.appendChild(
+                    row
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       LIVE SOURCE SELECT
+    ===================================================== */
+
+    if(liveSelect){
+
+        const previous =
+            liveSelect.value;
+
+
+        liveSelect.innerHTML =
+            '<option value="">Select Source</option>';
+
+
+        sources.forEach(
+            function(source){
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    source.id;
+
+
+                option.textContent =
+                    source.name
+                    +
+                    (
+                        source.active
+                        ?
+                        " - Active"
+                        :
+                        ""
+                    );
+
+
+                liveSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        const previousExists =
+            sources.some(
+                function(source){
+
+                    return (
+                        source.id ===
+                        previous
+                    );
+
+                }
+            );
+
+
+        if(previousExists){
+
+            liveSelect.value =
+                previous;
+
+        }
+        else{
+
+            const active =
+                sources.find(
+                    function(source){
+
+                        return (
+                            source.active ===
+                            true
+                        );
+
+                    }
+                );
+
+
+            if(active){
+
+                liveSelect.value =
+                    active.id;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE SOURCE CHECK STATUS
+========================================================= */
+
+function updateSourceCheck(
+    id,
+    working
+){
+
+    const sources =
+        getSources();
+
+
+    const source =
+        sources.find(
+            function(item){
+
+                return (
+                    item.id === id
+                );
+
+            }
+        );
+
+
+    if(!source){
+
+        return;
+
+    }
+
+
+    source.status =
+        working
+        ?
+        "Working"
+        :
+        "Error";
+
+
+    source.lastCheck =
+        currentTime();
+
+
+    saveSources(
+        sources
+    );
+
+
+    renderSources();
+
+}
+
+
+/* =========================================================
+   PART 2 READY
+========================================================= */
+
+console.log(
+    "✅ RESULT.HTML PART 2 OF 4 LOADED"
+);
+
+
+
+
+
+/* =========================================================
+   RESULT.HTML - COMPLETE REPLACEMENT
+   PART 3 OF 4
+
+   PRIMARY HISTORICAL IMPORT
+   CHART HISTORY MERGE
+   HISTORY DISPLAY
+========================================================= */
+
+
+/* =========================================================
+   DATE HELPERS
+========================================================= */
+
+function parseHistoryDate(value){
+
+    const raw =
+        text(
+            value
+        );
+
+
+    let match =
+        raw.match(
+            /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/
+        );
+
+
+    if(match){
+
+        const date =
+            new Date(
+                Number(match[3]),
+                Number(match[2]) - 1,
+                Number(match[1])
+            );
+
+
+        date.setHours(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+        return date;
+
+    }
+
+
+    match =
+        raw.match(
+            /^(\d{4})-(\d{1,2})-(\d{1,2})/
+        );
+
+
+    if(match){
+
+        const date =
+            new Date(
+                Number(match[1]),
+                Number(match[2]) - 1,
+                Number(match[3])
+            );
+
+
+        date.setHours(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+        return date;
+
+    }
+
+
+    return null;
+
+}
+
+
+function historyDateKey(value){
+
+    const date =
+        parseHistoryDate(
+            value
+        );
+
+
+    if(!date){
+
+        return text(value);
+
+    }
+
+
+    return (
+        date.getFullYear()
+        +
+        "-"
+        +
+        String(
+            date.getMonth() + 1
+        ).padStart(2,"0")
+        +
+        "-"
+        +
+        String(
+            date.getDate()
+        ).padStart(2,"0")
+    );
+
+}
+
+
+/* =========================================================
+   HISTORICAL RECORD KEY
+
+   UNIQUE:
+   MARKET + DATE
+========================================================= */
+
+function historicalKey(record){
+
+    return (
+        normalizeMarket(
+            record?.market
+        )
+        +
+        "|"
+        +
+        historyDateKey(
+            record?.date
+        )
+    );
+
+}
+
+
+/* =========================================================
+   NORMALIZE BACKEND HISTORY RECORD
+========================================================= */
+
+function normalizeHistoricalRecord(record){
+
+    record =
+        record || {};
+
+
+    const openPanel =
+        text(
+            record.openPanel
+        );
+
+
+    const closePanel =
+        text(
+            record.closePanel
+        );
+
+
+    const openSingle =
+        text(
+            record.openSingle
+        )
+        ||
+        calculateSingle(
+            openPanel
+        );
+
+
+    const closeSingle =
+        closePanel
+        ?
+        (
+            text(
+                record.closeSingle
+            )
+            ||
+            calculateSingle(
+                closePanel
+            )
+        )
+        :
+        "";
+
+
+    let jodi =
+        text(
+            record.jodi
+        );
+
+
+    if(
+        !jodi
+        &&
+        openSingle
+        &&
+        closeSingle
+    ){
+
+        jodi =
+            openSingle +
+            closeSingle;
+
+    }
+
+
+    return {
+
+        id:
+            text(
+                record.id
+            )
+            ||
+            (
+                "history-"
+                +
+                normalizeMarket(
+                    record.market
+                )
+                .replace(/\s+/g,"-")
+                .toLowerCase()
+                +
+                "-"
+                +
+                historyDateKey(
+                    record.date
+                )
+            ),
+
+        market:
+            normalizeMarket(
+                record.market
+            ),
+
+        date:
+            text(
+                record.date
+            ),
+
+        openPanel:
+            openPanel,
+
+        openSingle:
+            openSingle,
+
+        jodi:
+            jodi,
+
+        closeSingle:
+            closeSingle,
+
+        closePanel:
+            closePanel,
+
+        result:
+            text(
+                record.result
+            ),
+
+        status:
+            closePanel
+            ?
+            "COMPLETE"
+            :
+            "OPEN",
+
+        source:
+            text(
+                record.source
+            )
+            ||
+            "DPBOSS",
+
+        sourceUrl:
+            text(
+                record.sourceUrl
+            ),
+
+        historical:
+            true,
+
+        settlementAllowed:
+            false,
+
+        importedAt:
+            text(
+                record.importedAt
+            )
+            ||
+            currentIsoTime()
+
+    };
+
+}
+
+
+/* =========================================================
+   RECORD SCORE
+
+   Complete result always stronger than Open-only.
+========================================================= */
+
+function historicalScore(record){
+
+    let score =
+        0;
+
+
+    if(
+        text(
+            record.openPanel
+        )
+    ){
+        score++;
+    }
+
+
+    if(
+        text(
+            record.openSingle
+        )
+    ){
+        score++;
+    }
+
+
+    if(
+        text(
+            record.jodi
+        )
+    ){
+        score++;
+    }
+
+
+    if(
+        text(
+            record.closeSingle
+        )
+    ){
+        score++;
+    }
+
+
+    if(
+        text(
+            record.closePanel
+        )
+    ){
+        score++;
+    }
+
+
+    return score;
+
+}
+
+
+/* =========================================================
+   MERGE INTO chartHistory
+
+   Historical import does not call settlement logic.
+========================================================= */
+
+function mergeHistoricalRecords(records){
+
+    let existing =
+        getStorage(
+            STORAGE_CHART_HISTORY,
+            []
+        );
+
+
+    if(
+        !Array.isArray(
+            existing
+        )
+    ){
+
+        existing = [];
+
+    }
+
+
+    const map =
+        new Map();
+
+
+    existing.forEach(
+        function(record){
+
+            if(
+                !record ||
+                !normalizeMarket(
+                    record.market
+                )
+            ){
+
+                return;
+
+            }
+
+
+            map.set(
+                historicalKey(
+                    record
+                ),
+                record
+            );
+
+        }
+    );
+
+
+    let imported = 0;
+    let updated = 0;
+    let skipped = 0;
+
+
+    (
+        Array.isArray(records)
+        ?
+        records
+        :
+        []
+    )
+    .forEach(
+        function(raw){
+
+            const record =
+                normalizeHistoricalRecord(
+                    raw
+                );
+
+
+            if(
+                !record.market ||
+                !historyDateKey(
+                    record.date
+                ) ||
+                !/^\d{3}$/.test(
+                    record.openPanel
+                )
+            ){
+
+                skipped++;
+
+                return;
+
+            }
+
+
+            const key =
+                historicalKey(
+                    record
+                );
+
+
+            const old =
+                map.get(
+                    key
+                );
+
+
+            if(!old){
+
+                map.set(
+                    key,
+                    record
+                );
+
+
+                imported++;
+
+                return;
+
+            }
+
+
+            const oldScore =
+                historicalScore(
+                    old
+                );
+
+
+            const newScore =
+                historicalScore(
+                    record
+                );
+
+
+            if(
+                newScore <
+                oldScore
+            ){
+
+                skipped++;
+
+                return;
+
+            }
+
+
+            const same =
+                text(old.openPanel) ===
+                text(record.openPanel)
+                &&
+                text(old.jodi) ===
+                text(record.jodi)
+                &&
+                text(old.closePanel) ===
+                text(record.closePanel);
+
+
+            if(same){
+
+                skipped++;
+
+                return;
+
+            }
+
+
+            map.set(
+                key,
+                {
+                    ...old,
+                    ...record,
+                    historical:true,
+                    settlementAllowed:false
+                }
+            );
+
+
+            updated++;
+
+        }
+    );
+
+
+    const finalHistory =
+        Array.from(
+            map.values()
+        );
+
+
+    finalHistory.sort(
+        function(a,b){
+
+            const dateA =
+                parseHistoryDate(
+                    a.date
+                );
+
+
+            const dateB =
+                parseHistoryDate(
+                    b.date
+                );
+
+
+            return (
+                Number(
+                    dateA
+                    ?
+                    dateA.getTime()
+                    :
+                    0
+                )
+                -
+                Number(
+                    dateB
+                    ?
+                    dateB.getTime()
+                    :
+                    0
+                )
+            );
+
+        }
+    );
+
+
+    saveStorage(
+        STORAGE_CHART_HISTORY,
+        finalHistory
+    );
+
+
+    const status = {
+
+        lastImport:
+            currentIsoTime(),
+
+        imported:
+            imported,
+
+        updated:
+            updated,
+
+        skipped:
+            skipped,
+
+        total:
+            finalHistory.length
+
+    };
+
+
+    saveStorage(
+        STORAGE_HISTORY_STATUS,
+        status
+    );
+
+
+    return status;
+
+}
+
+
+/* =========================================================
+   HISTORY COUNTERS
+========================================================= */
+
+function updateHistoryStats(
+    imported,
+    updated,
+    skipped,
+    total
+){
+
+    document.getElementById(
+        "historyImported"
+    ).textContent =
+        Number(
+            imported || 0
+        );
+
+
+    document.getElementById(
+        "historyUpdated"
+    ).textContent =
+        Number(
+            updated || 0
+        );
+
+
+    document.getElementById(
+        "historySkipped"
+    ).textContent =
+        Number(
+            skipped || 0
+        );
+
+
+    document.getElementById(
+        "historyTotal"
+    ).textContent =
+        Number(
+            total || 0
+        );
+
+}
+
+
+/* =========================================================
+   PRIMARY-ONLY HISTORICAL IMPORT
+========================================================= */
+
+async function importHistoricalChart(){
+
+    const market =
+        normalizeMarket(
+            document.getElementById(
+                "historyMarket"
+            )?.value
+        );
+
+
+    const url =
+        text(
+            document.getElementById(
+                "historyPrimaryUrl"
+            )?.value
+        );
+
+
+    const source =
+        text(
+            document.getElementById(
+                "historyPrimarySource"
+            )?.value
+        )
+        ||
+        "DPBOSS";
+
+
+    const from =
+        text(
+            document.getElementById(
+                "historyFrom"
+            )?.value
+        )
+        ||
+        "2026-01-01";
+
+
+    const to =
+        text(
+            document.getElementById(
+                "historyTo"
+            )?.value
+        );
+
+
+    const progress =
+        document.getElementById(
+            "historyProgress"
+        );
+
+
+    if(!market){
+
+        showPopup(
+            "Market Required",
+            "Market Name enter karo."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !url ||
+        !/^https:\/\//i.test(
+            url
+        )
+    ){
+
+        showPopup(
+            "Primary Chart URL Required",
+            "Exact DPBOSS chart URL enter karo."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        from <
+        "2026-01-01"
+    ){
+
+        showPopup(
+            "Invalid Date",
+            "Historical import 01/01/2026 se start hoga."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !to ||
+        from > to
+    ){
+
+        showPopup(
+            "Invalid Date Range",
+            "From Date aur To Date check karo."
+        );
+
+        return;
+
+    }
+
+
+    updateHistoryStats(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    progress.textContent =
+        market +
+        " historical chart import ho raha hai...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:5000/api/history/import",
+                {
+
+                    method:
+                        "POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                market:
+                                    market,
+
+                                url:
+                                    url,
+
+                                source:
+                                    source,
+
+                                from:
+                                    from,
+
+                                to:
+                                    to
+                            }
+                        )
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.ok
+        ){
+
+            throw new Error(
+                data.message ||
+                (
+                    "HTTP " +
+                    response.status
+                )
+            );
+
+        }
+
+
+        const records =
+            Array.isArray(
+                data.records
+            )
+            ?
+            data.records
+            :
+            [];
+
+
+        if(
+            records.length ===
+            0
+        ){
+
+            throw new Error(
+                "Historical records not found."
+            );
+
+        }
+
+
+        const result =
+            mergeHistoricalRecords(
+                records
+            );
+
+
+        updateHistoryStats(
+
+            result.imported,
+
+            result.updated,
+
+            result.skipped,
+
+            records.length
+
+        );
+
+
+        progress.textContent =
+            "Import Complete | "
+            +
+            market
+            +
+            " | Received: "
+            +
+            records.length
+            +
+            " | Imported: "
+            +
+            result.imported
+            +
+            " | Updated: "
+            +
+            result.updated
+            +
+            " | Skipped: "
+            +
+            result.skipped;
+
+
+        localStorage.setItem(
+            "lastResultSync",
+            String(
+                Date.now()
+            )
+        );
+
+
+        window.dispatchEvent(
+            new Event(
+                "resultUpdated"
+            )
+        );
+
+
+        renderChartHistory();
+
+
+        showPopup(
+            "Historical Import Complete",
+            market
+            +
+            "\n\nPrimary Records: "
+            +
+            records.length
+            +
+            "\nImported: "
+            +
+            result.imported
+            +
+            "\nUpdated: "
+            +
+            result.updated
+            +
+            "\nSkipped: "
+            +
+            result.skipped
+        );
+
+    }
+    catch(error){
+
+        progress.textContent =
+            "Import Failed: "
+            +
+            String(
+                error.message ||
+                error
+            );
+
+
+        console.error(
+            "Historical Import Error:",
+            error
+        );
+
+
+        showPopup(
+            "Historical Import Failed",
+            String(
+                error.message ||
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER CHART HISTORY
+========================================================= */
+
+function renderChartHistory(){
+
+    const tbody =
+        document.getElementById(
+            "historyTableBody"
+        );
+
+
+    if(!tbody){
+
+        return;
+
+    }
+
+
+    const search =
+        normalizeMarket(
+            document.getElementById(
+                "historySearch"
+            )?.value
+        );
+
+
+    let history =
+        getStorage(
+            STORAGE_CHART_HISTORY,
+            []
+        );
+
+
+    if(
+        !Array.isArray(
+            history
+        )
+    ){
+
+        history = [];
+
+    }
+
+
+    history =
+        history
+        .slice()
+        .reverse();
+
+
+    if(search){
+
+        history =
+            history.filter(
+                function(record){
+
+                    const searchable =
+                        normalizeMarket(
+                            [
+                                record.market,
+                                record.date,
+                                record.openPanel,
+                                record.jodi,
+                                record.closePanel,
+                                record.source
+                            ]
+                            .join(" ")
+                        );
+
+
+                    return searchable.includes(
+                        search
+                    );
+
+                }
+            );
+
+    }
+
+
+    tbody.innerHTML =
+        "";
+
+
+    if(
+        history.length ===
+        0
+    ){
+
+        tbody.innerHTML =
+            '<tr>'
+            +
+            '<td colspan="8">'
+            +
+            'No chart records found.'
+            +
+            '</td>'
+            +
+            '</tr>';
+
+
+        return;
+
+    }
+
+
+    history.forEach(
+        function(record,index){
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML =
+                '<td>'
+                +
+                (index + 1)
+                +
+                '</td>'
+
+                +
+
+                '<td>'
+                +
+                escapeHtml(
+                    record.market ||
+                    "-"
+                )
+                +
+                '</td>'
+
+                +
+
+                '<td>'
+                +
+                escapeHtml(
+                    record.date ||
+                    "-"
+                )
+                +
+                '</td>'
+
+                +
+
+                '<td>'
+                +
+                escapeHtml(
+                    record.openPanel ||
+                    "-"
+                )
+                +
+                '</td>'
+
+                +
+
+                '<td>'
+                +
+                escapeHtml(
+                    record.jodi ||
+                    "-"
+                )
+                +
+                '</td>'
+
+                +
+
+                '<td>'
+                +
+                escapeHtml(
+                    record.closePanel ||
+                    "-"
+                )
+                +
+                '</td>'
+
+                +
+
+                '<td>'
+                +
+                (
+                    record.closePanel
+                    ?
+                    '<span class="badge badgeGreen">COMPLETE</span>'
+                    :
+                    '<span class="badge badgeBlue">OPEN</span>'
+                )
+                +
+                '</td>'
+
+                +
+
+                '<td>'
+                +
+                escapeHtml(
+                    record.source ||
+                    "-"
+                )
+                +
+                '</td>';
+
+
+            tbody.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RESTORE LAST IMPORT STATS
+========================================================= */
+
+function restoreHistoryStats(){
+
+    const status =
+        getStorage(
+            STORAGE_HISTORY_STATUS,
+            null
+        );
+
+
+    if(!status){
+
+        return;
+
+    }
+
+
+    updateHistoryStats(
+
+        status.imported,
+
+        status.updated,
+
+        status.skipped,
+
+        status.total
+
+    );
+
+
+    const progress =
+        document.getElementById(
+            "historyProgress"
+        );
+
+
+    if(
+        progress &&
+        status.lastImport
+    ){
+
+        const time =
+            new Date(
+                status.lastImport
+            );
+
+
+        if(
+            !Number.isNaN(
+                time.getTime()
+            )
+        ){
+
+            progress.textContent =
+                "Last Import: "
+                +
+                time.toLocaleString(
+                    "en-IN",
+                    {
+                        day:"2-digit",
+                        month:"2-digit",
+                        year:"numeric",
+                        hour:"2-digit",
+                        minute:"2-digit",
+                        hour12:true
+                    }
+                );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   PART 3 READY
+========================================================= */
+
+console.log(
+    "✅ RESULT.HTML PART 3 OF 4 LOADED"
+);
+
+
+
+
+
+/* =========================================================
+   RESULT.HTML - COMPLETE REPLACEMENT
+   FINAL PART 4 OF 4
+
+   LIVE RESULT READER
+   PAGE INITIALIZATION
+   FINAL CLOSING
+========================================================= */
+
+
+/* =========================================================
+   FIND SOURCE BY ID
+========================================================= */
+
+function findSourceById(id){
+
+    return (
+        getSources()
+        .find(
+            function(source){
+
+                return (
+                    source.id === id
+                );
+
+            }
+        )
+        ||
+        null
+    );
+
+}
+
+
+/* =========================================================
+   HTML -> CLEAN TEXT
+========================================================= */
+
+function htmlToPlainText(html){
+
+    const box =
+        document.createElement(
+            "div"
+        );
+
+
+    box.innerHTML =
+        String(
+            html || ""
+        );
+
+
+    return String(
+        box.textContent ||
+        box.innerText ||
+        ""
+    )
+    .replace(
+        /\u00a0/g,
+        " "
+    )
+    .replace(
+        /\s+/g,
+        " "
+    )
+    .trim();
+
+}
+
+
+/* =========================================================
+   FIND MARKET AREA
+========================================================= */
+
+function findMarketArea(
+    html,
+    market
+){
+
+    const page =
+        htmlToPlainText(
+            html
+        );
+
+
+    const wanted =
+        normalizeMarket(
+            market
+        );
+
+
+    if(
+        !page ||
+        !wanted
+    ){
+
+        return "";
+    }
+
+
+    const upperPage =
+        page.toUpperCase();
+
+
+    const position =
+        upperPage.indexOf(
+            wanted
+        );
+
+
+    if(
+        position < 0
+    ){
+
+        return "";
+    }
+
+
+    const start =
+        Math.max(
+            0,
+            position - 120
+        );
+
+
+    const end =
+        Math.min(
+            page.length,
+            position + wanted.length + 450
+        );
+
+
+    return page.slice(
+        start,
+        end
+    );
+
+}
+
+
+/* =========================================================
+   PARSE RESULT TEXT
+
+   Examples:
+   470-11-348
+   470 11 348
+========================================================= */
+
+function parseLiveResultText(value){
+
+    const raw =
+        text(
+            value
+        );
+
+
+    if(!raw){
+
+        return null;
+    }
+
+
+    /* =====================================================
+       COMPLETE RESULT
+    ===================================================== */
+
+    const complete =
+        raw.match(
+            /(?:^|\D)(\d{3})\D+(\d{1,2})\D+(\d{3})(?:\D|$)/
+        );
+
+
+    if(complete){
+
+        const openPanel =
+            complete[1];
+
+
+        const jodi =
+            String(
+                complete[2]
+            )
+            .padStart(
+                2,
+                "0"
+            );
+
+
+        const closePanel =
+            complete[3];
+
+
+        return {
+
+            openPanel:
+                openPanel,
+
+            openSingle:
+                calculateSingle(
+                    openPanel
+                ),
+
+            jodi:
+                jodi,
+
+            closeSingle:
+                calculateSingle(
+                    closePanel
+                ),
+
+            closePanel:
+                closePanel,
+
+            status:
+                "COMPLETE"
+
+        };
+
+    }
+
+
+    /* =====================================================
+       SPACED DIGIT COMPLETE RESULT
+
+       4 7 0 11 3 4 8
+    ===================================================== */
+
+    const tokens =
+        raw.match(
+            /\d+/g
+        )
+        ||
+        [];
+
+
+    for(
+        let i = 0;
+        i <= tokens.length - 7;
+        i++
+    ){
+
+        const open =
+            tokens.slice(
+                i,
+                i + 3
+            );
+
+
+        const pair =
+            tokens[
+                i + 3
+            ];
+
+
+        const close =
+            tokens.slice(
+                i + 4,
+                i + 7
+            );
+
+
+        if(
+            open.every(
+                item =>
+                /^\d$/.test(item)
+            )
+            &&
+            /^\d{1,2}$/.test(
+                pair
+            )
+            &&
+            close.every(
+                item =>
+                /^\d$/.test(item)
+            )
+        ){
+
+            const openPanel =
+                open.join(
+                    ""
+                );
+
+
+            const closePanel =
+                close.join(
+                    ""
+                );
+
+
+            return {
+
+                openPanel:
+                    openPanel,
+
+                openSingle:
+                    calculateSingle(
+                        openPanel
+                    ),
+
+                jodi:
+                    String(
+                        pair
+                    )
+                    .padStart(
+                        2,
+                        "0"
+                    ),
+
+                closeSingle:
+                    calculateSingle(
+                        closePanel
+                    ),
+
+                closePanel:
+                    closePanel,
+
+                status:
+                    "COMPLETE"
+
+            };
+
+        }
+
+    }
+
+
+    /* =====================================================
+       OPEN PANEL ONLY
+    ===================================================== */
+
+    const openOnly =
+        raw.match(
+            /(?:^|\D)(\d{3})(?:\D|$)/
+        );
+
+
+    if(openOnly){
+
+        const openPanel =
+            openOnly[1];
+
+
+        return {
+
+            openPanel:
+                openPanel,
+
+            openSingle:
+                calculateSingle(
+                    openPanel
+                ),
+
+            jodi:
+                "",
+
+            closeSingle:
+                "",
+
+            closePanel:
+                "",
+
+            status:
+                "OPEN"
+
+        };
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =========================================================
+   RESET LIVE DISPLAY
+========================================================= */
+
+function resetLiveDisplay(){
+
+    document.getElementById(
+        "liveOpenPanel"
+    ).textContent = "-";
+
+
+    document.getElementById(
+        "liveOpenSingle"
+    ).textContent = "-";
+
+
+    document.getElementById(
+        "liveJodi"
+    ).textContent = "-";
+
+
+    document.getElementById(
+        "liveCloseSingle"
+    ).textContent = "-";
+
+
+    document.getElementById(
+        "liveClosePanel"
+    ).textContent = "-";
+
+}
+
+
+/* =========================================================
+   SHOW LIVE RESULT
+========================================================= */
+
+function showLiveResult(result){
+
+    document.getElementById(
+        "liveOpenPanel"
+    ).textContent =
+        text(
+            result.openPanel
+        )
+        ||
+        "-";
+
+
+    document.getElementById(
+        "liveOpenSingle"
+    ).textContent =
+        text(
+            result.openSingle
+        )
+        ||
+        "-";
+
+
+    document.getElementById(
+        "liveJodi"
+    ).textContent =
+        text(
+            result.jodi
+        )
+        ||
+        "-";
+
+
+    document.getElementById(
+        "liveCloseSingle"
+    ).textContent =
+        text(
+            result.closeSingle
+        )
+        ||
+        "-";
+
+
+    document.getElementById(
+        "liveClosePanel"
+    ).textContent =
+        text(
+            result.closePanel
+        )
+        ||
+        "-";
+
+}
+
+
+
+/* =========================================================
+   LIVE RESULT -> DAILY CHART HISTORY
+
+   RULE:
+   - Same Market + Same Date = same record
+   - OPEN pe record create/update
+   - COMPLETE pe same record complete
+   - Duplicate result skip
+   - Historical flag FALSE
+   - Live record normal settlement ke liye eligible rahega
+========================================================= */
+
+function todayChartDate(){
+
+    const now =
+        new Date();
+
+
+    const day =
+        String(
+            now.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        day
+        +
+        "/"
+        +
+        month
+        +
+        "/"
+        +
+        now.getFullYear()
+    );
+
+}
+
+
+/* =========================================================
+   LIVE RECORD KEY
+========================================================= */
+
+function liveChartKey(
+    market,
+    date
+){
+
+    return (
+        normalizeMarket(
+            market
+        )
+        +
+        "|"
+        +
+        historyDateKey(
+            date
+        )
+    );
+
+}
+
+
+
+
+/* =========================================================
+   LIVE RESULT TRANSITION VALIDATION
+
+   RULES:
+   1. New OPEN allowed
+   2. Same OPEN duplicate allowed but skipped later
+   3. CLOSE/COMPLETE must match saved OPEN panel
+   4. Completed result cannot go back to OPEN
+========================================================= */
+
+function validateLiveChartTransition(
+    market,
+    result
+){
+
+    const normalizedMarket =
+        normalizeMarket(
+            market
+        );
+
+
+    const today =
+        todayChartDate();
+
+
+    const openPanel =
+        text(
+            result?.openPanel
+        );
+
+
+    const closePanel =
+        text(
+            result?.closePanel
+        );
+
+
+    if(
+        !normalizedMarket ||
+        !/^\d{3}$/.test(
+            openPanel
+        )
+    ){
+
+        return {
+
+            ok:false,
+
+            reason:
+            "INVALID_LIVE_RESULT"
+
+        };
+
+    }
+
+
+    let history =
+        getStorage(
+            STORAGE_CHART_HISTORY,
+            []
+        );
+
+
+    if(
+        !Array.isArray(
+            history
+        )
+    ){
+
+        history = [];
+
+    }
+
+
+    const key =
+        liveChartKey(
+            normalizedMarket,
+            today
+        );
+
+
+    const existing =
+        history.find(
+            function(record){
+
+                return (
+                    liveChartKey(
+                        record.market,
+                        record.date
+                    )
+                    ===
+                    key
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       NO RECORD YET
+    ===================================================== */
+
+    if(!existing){
+
+        return {
+
+            ok:true,
+
+            action:
+            closePanel
+            ?
+            "NEW_COMPLETE"
+            :
+            "NEW_OPEN"
+
+        };
+
+    }
+
+
+    /* =====================================================
+       COMPLETE RESULT ALREADY SAVED
+    ===================================================== */
+
+    if(
+        text(
+            existing.closePanel
+        )
+    ){
+
+        if(
+            !closePanel
+        ){
+
+            return {
+
+                ok:false,
+
+                reason:
+                "COMPLETE_CANNOT_DOWNGRADE_TO_OPEN"
+
+            };
+
+        }
+
+
+        return {
+
+            ok:true,
+
+            action:
+            "EXISTING_COMPLETE"
+
+        };
+
+    }
+
+
+    /* =====================================================
+       OPEN PANEL MUST MATCH BEFORE CLOSE
+    ===================================================== */
+
+    if(
+        text(
+            existing.openPanel
+        )
+        !==
+        openPanel
+    ){
+
+        return {
+
+            ok:false,
+
+            reason:
+            "OPEN_PANEL_MISMATCH",
+
+            expectedOpenPanel:
+            text(
+                existing.openPanel
+            ),
+
+            receivedOpenPanel:
+            openPanel
+
+        };
+
+    }
+
+
+    /* =====================================================
+       SAVED OPEN + NOW CLOSE
+    ===================================================== */
+
+    if(closePanel){
+
+        return {
+
+            ok:true,
+
+            action:
+            "OPEN_TO_COMPLETE"
+
+        };
+
+    }
+
+
+    return {
+
+        ok:true,
+
+        action:
+        "OPEN_ALREADY_SAVED"
+
+    };
+
+}
+
+
+/* =========================================================
+   LIVE TRANSITION PROTECTION READY
+========================================================= */
+
+console.log(
+    "✅ Live OPEN -> CLOSE Protection Ready"
+);
+
+
+
+
+
+
+/* =========================================================
+   SAVE VALID LIVE RESULT INTO CHART
+========================================================= */
+
+function saveLiveResultToChart(
+    market,
+    source,
+    result
+){
+
+    market =
+        normalizeMarket(
+            market
+        );
+
+
+    if(
+        !market ||
+        !result
+    ){
+
+        return {
+
+            ok:false,
+
+            reason:
+            "INVALID_LIVE_RESULT"
+
+        };
+
+    }
+
+
+    const openPanel =
+        text(
+            result.openPanel
+        );
+
+
+    const closePanel =
+        text(
+            result.closePanel
+        );
+
+
+    if(
+        !/^\d{3}$/.test(
+            openPanel
+        )
+    ){
+
+        return {
+
+            ok:false,
+
+            reason:
+            "INVALID_OPEN_PANEL"
+
+        };
+
+    }
+
+
+    const openSingle =
+        calculateSingle(
+            openPanel
+        );
+
+
+    const closeSingle =
+        /^\d{3}$/.test(
+            closePanel
+        )
+        ?
+        calculateSingle(
+            closePanel
+        )
+        :
+        "";
+
+
+
+        let jodi = "";
+
+
+if(
+    closeSingle
+){
+
+    jodi =
+        openSingle
+        +
+        closeSingle;
+
+}
+else{
+
+    jodi =
+        text(
+            result.jodi
+        );
+
+}
+
+
+   
+
+    const date =
+        todayChartDate();
+
+
+    let history =
+        getStorage(
+            STORAGE_CHART_HISTORY,
+            []
+        );
+
+
+    if(
+        !Array.isArray(
+            history
+        )
+    ){
+
+        history = [];
+
+    }
+
+
+    const key =
+        liveChartKey(
+            market,
+            date
+        );
+
+
+    const index =
+        history.findIndex(
+            function(record){
+
+                return (
+                    liveChartKey(
+                        record.market,
+                        record.date
+                    )
+                    ===
+                    key
+                );
+
+            }
+        );
+
+
+    const liveRecord = {
+
+        id:
+            "live-"
+            +
+            normalizeMarket(
+                market
+            )
+            .replace(
+                /\s+/g,
+                "-"
+            )
+            .toLowerCase()
+            +
+            "-"
+            +
+            date.replace(
+                /\D/g,
+                ""
+            ),
+
+        market:
+            market,
+
+        date:
+            date,
+
+        openPanel:
+            openPanel,
+
+        openSingle:
+            openSingle,
+
+        jodi:
+            jodi,
+
+        closeSingle:
+            closeSingle,
+
+        closePanel:
+            closePanel,
+
+        result:
+            closePanel
+            ?
+            (
+                openPanel
+                +
+                "-"
+                +
+                jodi
+                +
+                "-"
+                +
+                closePanel
+            )
+            :
+            (
+                openPanel
+                +
+                "-"
+                +
+                openSingle
+                +
+                "*-***"
+            ),
+
+        status:
+            closePanel
+            ?
+            "COMPLETE"
+            :
+            "OPEN",
+
+        source:
+            text(
+                source?.name
+            )
+            ||
+            "LIVE SOURCE",
+
+        sourceUrl:
+            text(
+                source?.url
+            ),
+
+        historical:
+            false,
+
+        settlementAllowed:
+            true,
+
+        live:
+            true,
+
+        updatedAt:
+            currentIsoTime()
+
+    };
+
+
+    /* =====================================================
+       NEW RECORD
+    ===================================================== */
+
+    if(
+        index < 0
+    ){
+
+        history.push(
+            liveRecord
+        );
+
+
+        saveStorage(
+            STORAGE_CHART_HISTORY,
+            history
+        );
+
+
+        localStorage.setItem(
+            "lastResultSync",
+            String(
+                Date.now()
+            )
+        );
+
+
+        window.dispatchEvent(
+            new Event(
+                "resultUpdated"
+            )
+        );
+
+
+        return {
+
+            ok:true,
+
+            action:
+            "CREATED",
+
+            record:
+            liveRecord
+
+        };
+
+    }
+
+
+    const old =
+        history[
+            index
+        ];
+
+
+    /* =====================================================
+       DUPLICATE COMPLETE/OPEN PROTECTION
+    ===================================================== */
+
+    const same =
+        text(
+            old.openPanel
+        )
+        ===
+        openPanel
+
+        &&
+
+        text(
+            old.jodi
+        )
+        ===
+        jodi
+
+        &&
+
+        text(
+            old.closePanel
+        )
+        ===
+        closePanel;
+
+
+    if(same){
+
+        return {
+
+            ok:true,
+
+            action:
+            "DUPLICATE_SKIPPED",
+
+            record:
+            old
+
+        };
+
+    }
+
+
+    /* =====================================================
+       COMPLETE RESULT KO OPEN-ONLY SE DOWNGRADE NAHI KARNA
+    ===================================================== */
+
+    if(
+        text(
+            old.closePanel
+        )
+        &&
+        !closePanel
+    ){
+
+        return {
+
+            ok:true,
+
+            action:
+            "COMPLETE_PROTECTED",
+
+            record:
+            old
+
+        };
+
+    }
+
+
+    /* =====================================================
+       SAME DAY RECORD UPDATE
+    ===================================================== */
+
+    history[
+        index
+    ]
+    =
+    Object.assign(
+        {},
+        old,
+        liveRecord,
+        {
+
+            id:
+            old.id ||
+            liveRecord.id,
+
+            historical:
+            false,
+
+            settlementAllowed:
+            true,
+
+            live:
+            true
+
+        }
+    );
+
+
+    saveStorage(
+        STORAGE_CHART_HISTORY,
+        history
+    );
+
+
+    localStorage.setItem(
+        "lastResultSync",
+        String(
+            Date.now()
+        )
+    );
+
+
+    window.dispatchEvent(
+        new Event(
+            "resultUpdated"
+        )
+    );
+
+
+    return {
+
+        ok:true,
+
+        action:
+        "UPDATED",
+
+        record:
+        history[
+            index
+        ]
+
+    };
+
+}
+
+
+/* =========================================================
+   LIVE CHART BRIDGE READY
+========================================================= */
+
+console.log(
+    "✅ Live Result -> Chart Bridge Ready"
+);
+
+
+
+
+/* =========================================================
+   HR MATKA - TEST SETTLEMENT ENGINE
+   PART 1 OF 3
+
+   TEST / VIRTUAL ONLY
+
+   FEATURES:
+   - Test Wallet
+   - Test Bets
+   - Test Winning
+   - Test Passbook
+   - Duplicate Settlement Protection
+   - Historical Records Never Settle
+========================================================= */
+
+
+/* =========================================================
+   TEST STORAGE KEYS
+========================================================= */
+
+const TEST_WALLET_KEY =
+    "hrMatkaTestWallet";
+
+const TEST_BETS_KEY =
+    "hrMatkaTestBets";
+
+const TEST_PASSBOOK_KEY =
+    "hrMatkaTestPassbook";
+
+const TEST_SETTLEMENT_KEY =
+    "hrMatkaTestSettlements";
+
+
+/* =========================================================
+   DEFAULT TEST WALLET
+
+   Sirf virtual points.
+========================================================= */
+
+function getTestWallet(){
+
+    let wallet =
+        getStorage(
+            TEST_WALLET_KEY,
+            null
+        );
+
+
+    if(
+        !wallet ||
+        typeof wallet !== "object"
+    ){
+
+        wallet = {
+
+            balance:
+                10000,
+
+            totalWinning:
+                0,
+
+            totalBet:
+                0,
+
+            updatedAt:
+                currentIsoTime()
+
+        };
+
+
+        saveStorage(
+            TEST_WALLET_KEY,
+            wallet
+        );
+
+    }
+
+
+    return wallet;
+
+}
+
+
+/* =========================================================
+   SAVE TEST WALLET
+========================================================= */
+
+function saveTestWallet(wallet){
+
+    wallet.updatedAt =
+        currentIsoTime();
+
+
+    saveStorage(
+        TEST_WALLET_KEY,
+        wallet
+    );
+
+
+    return wallet;
+
+}
+
+
+/* =========================================================
+   GET TEST BETS
+========================================================= */
+
+function getTestBets(){
+
+    let bets =
+        getStorage(
+            TEST_BETS_KEY,
+            []
+        );
+
+
+    if(
+        !Array.isArray(
+            bets
+        )
+    ){
+
+        bets = [];
+
+    }
+
+
+    return bets;
+
+}
+
+
+/* =========================================================
+   SAVE TEST BETS
+========================================================= */
+
+function saveTestBets(bets){
+
+    if(
+        !Array.isArray(
+            bets
+        )
+    ){
+
+        bets = [];
+
+    }
+
+
+    saveStorage(
+        TEST_BETS_KEY,
+        bets
+    );
+
+
+    return bets;
+
+}
+
+
+/* =========================================================
+   GET TEST PASSBOOK
+========================================================= */
+
+function getTestPassbook(){
+
+    let entries =
+        getStorage(
+            TEST_PASSBOOK_KEY,
+            []
+        );
+
+
+    if(
+        !Array.isArray(
+            entries
+        )
+    ){
+
+        entries = [];
+
+    }
+
+
+    return entries;
+
+}
+
+
+/* =========================================================
+   ADD TEST PASSBOOK ENTRY
+========================================================= */
+
+function addTestPassbookEntry(entry){
+
+    const entries =
+        getTestPassbook();
+
+
+    entries.unshift(
+        Object.assign(
+            {
+                id:
+                    "test-passbook-"
+                    +
+                    Date.now()
+                    +
+                    "-"
+                    +
+                    Math.random()
+                    .toString(36)
+                    .slice(2,7),
+
+                createdAt:
+                    currentIsoTime(),
+
+                testMode:
+                    true
+            },
+            entry || {}
+        )
+    );
+
+
+    /*
+       Maximum 1000 entries.
+    */
+
+    if(
+        entries.length > 1000
+    ){
+
+        entries.length =
+            1000;
+
+    }
+
+
+    saveStorage(
+        TEST_PASSBOOK_KEY,
+        entries
+    );
+
+
+    return entries[0];
+
+}
+
+
+/* =========================================================
+   SETTLEMENT LOG
+========================================================= */
+
+function getTestSettlementLog(){
+
+    let log =
+        getStorage(
+            TEST_SETTLEMENT_KEY,
+            []
+        );
+
+
+    if(
+        !Array.isArray(
+            log
+        )
+    ){
+
+        log = [];
+
+    }
+
+
+    return log;
+
+}
+
+
+/* =========================================================
+   UNIQUE RESULT SETTLEMENT KEY
+
+   Market + Date + Phase + Result
+========================================================= */
+
+function createTestSettlementKey(
+    market,
+    date,
+    phase,
+    resultValue
+){
+
+    return (
+        normalizeMarket(
+            market
+        )
+        +
+        "|"
+        +
+        historyDateKey(
+            date
+        )
+        +
+        "|"
+        +
+        text(
+            phase
+        )
+        .toUpperCase()
+        +
+        "|"
+        +
+        text(
+            resultValue
+        )
+    );
+
+}
+
+
+/* =========================================================
+   CHECK DUPLICATE SETTLEMENT
+========================================================= */
+
+function hasTestSettlement(
+    settlementKey
+){
+
+    const log =
+        getTestSettlementLog();
+
+
+    return log.some(
+        function(item){
+
+            return (
+                text(
+                    item.settlementKey
+                )
+                ===
+                text(
+                    settlementKey
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SAVE SETTLEMENT LOG
+========================================================= */
+
+function saveTestSettlementLog(entry){
+
+    const log =
+        getTestSettlementLog();
+
+
+    log.unshift(
+        Object.assign(
+            {
+                id:
+                    "test-settlement-"
+                    +
+                    Date.now()
+                    +
+                    "-"
+                    +
+                    Math.random()
+                    .toString(36)
+                    .slice(2,7),
+
+                createdAt:
+                    currentIsoTime(),
+
+                testMode:
+                    true
+            },
+            entry || {}
+        )
+    );
+
+
+    if(
+        log.length > 1000
+    ){
+
+        log.length =
+            1000;
+
+    }
+
+
+    saveStorage(
+        TEST_SETTLEMENT_KEY,
+        log
+    );
+
+
+    return log[0];
+
+}
+
+
+/* =========================================================
+   TEST BET ID
+========================================================= */
+
+function createTestBetId(){
+
+    return (
+        "test-bet-"
+        +
+        Date.now()
+        +
+        "-"
+        +
+        Math.random()
+        .toString(36)
+        .slice(2,8)
+    );
+
+}
+
+
+/* =========================================================
+   ADD TEST BET
+
+   Example:
+
+   addTestBet({
+       market:"SRIDEVI",
+       type:"JODI",
+       selection:"70",
+       amount:100
+   });
+
+========================================================= */
+
+function addTestBet(data){
+
+    data =
+        data || {};
+
+
+    const market =
+        normalizeMarket(
+            data.market
+        );
+
+
+    const type =
+        text(
+            data.type
+        )
+        .toUpperCase();
+
+
+    const selection =
+        text(
+            data.selection
+        );
+
+
+    const amount =
+        Number(
+            data.amount
+        );
+
+
+    if(!market){
+
+        return {
+
+            ok:false,
+
+            reason:
+                "MARKET_REQUIRED"
+
+        };
+
+    }
+
+
+    if(
+        ![
+            "OPEN_SINGLE",
+            "CLOSE_SINGLE",
+            "JODI",
+            "OPEN_PANEL",
+            "CLOSE_PANEL"
+        ]
+        .includes(
+            type
+        )
+    ){
+
+        return {
+
+            ok:false,
+
+            reason:
+                "INVALID_BET_TYPE"
+
+        };
+
+    }
+
+
+    if(
+        !Number.isFinite(
+            amount
+        )
+        ||
+        amount <= 0
+    ){
+
+        return {
+
+            ok:false,
+
+            reason:
+                "INVALID_AMOUNT"
+
+        };
+
+    }
+
+
+    const wallet =
+        getTestWallet();
+
+
+    if(
+        wallet.balance <
+        amount
+    ){
+
+        return {
+
+            ok:false,
+
+            reason:
+                "INSUFFICIENT_TEST_BALANCE"
+
+        };
+
+    }
+
+
+    const bet = {
+
+        id:
+            createTestBetId(),
+
+        market:
+            market,
+
+        date:
+            todayChartDate(),
+
+        type:
+            type,
+
+        selection:
+            selection,
+
+        amount:
+            amount,
+
+        status:
+            "PENDING",
+
+        winning:
+            0,
+
+        settled:
+            false,
+
+        testMode:
+            true,
+
+        createdAt:
+            currentIsoTime()
+
+    };
+
+
+    const bets =
+        getTestBets();
+
+
+    bets.push(
+        bet
+    );
+
+
+    saveTestBets(
+        bets
+    );
+
+
+    wallet.balance -=
+        amount;
+
+
+    wallet.totalBet +=
+        amount;
+
+
+    saveTestWallet(
+        wallet
+    );
+
+
+    addTestPassbookEntry(
+        {
+
+            type:
+                "TEST_BET",
+
+            market:
+                market,
+
+            betId:
+                bet.id,
+
+            amount:
+                -amount,
+
+            balance:
+                wallet.balance,
+
+            note:
+                type
+                +
+                " "
+                +
+                selection
+
+        }
+    );
+
+
+    return {
+
+        ok:true,
+
+        bet:
+            bet,
+
+        wallet:
+            wallet
+
+    };
+
+}
+
+
+/* =========================================================
+   TEST BET TYPE RESULT VALUE
+========================================================= */
+
+function resultValueForTestBet(
+    betType,
+    result
+){
+
+    switch(
+        text(
+            betType
+        )
+        .toUpperCase()
+    ){
+
+        case "OPEN_SINGLE":
+
+            return text(
+                result.openSingle
+            );
+
+
+        case "CLOSE_SINGLE":
+
+            return text(
+                result.closeSingle
+            );
+
+
+        case "JODI":
+
+            return text(
+                result.jodi
+            );
+
+
+        case "OPEN_PANEL":
+
+            return text(
+                result.openPanel
+            );
+
+
+        case "CLOSE_PANEL":
+
+            return text(
+                result.closePanel
+            );
+
+
+        default:
+
+            return "";
+
+    }
+
+}
+
+
+/* =========================================================
+   WHICH BET TYPE CAN SETTLE IN WHICH PHASE
+========================================================= */
+
+function testBetPhaseAllowed(
+    betType,
+    phase
+){
+
+    betType =
+        text(
+            betType
+        )
+        .toUpperCase();
+
+
+    phase =
+        text(
+            phase
+        )
+        .toUpperCase();
+
+
+    /*
+       OPEN phase:
+       Open Single + Open Panel
+
+       COMPLETE/CLOSE phase:
+       Close Single
+       Close Panel
+       Jodi
+    */
+
+    if(
+        phase ===
+        "OPEN"
+    ){
+
+        return (
+            betType ===
+            "OPEN_SINGLE"
+            ||
+            betType ===
+            "OPEN_PANEL"
+        );
+
+    }
+
+
+    if(
+        phase ===
+        "CLOSE"
+        ||
+        phase ===
+        "COMPLETE"
+    ){
+
+        return (
+            betType ===
+            "CLOSE_SINGLE"
+            ||
+            betType ===
+            "CLOSE_PANEL"
+            ||
+            betType ===
+            "JODI"
+        );
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   TEST PAYOUT MULTIPLIERS
+
+   VIRTUAL POINTS ONLY.
+========================================================= */
+
+const TEST_PAYOUT_MULTIPLIER = {
+
+    OPEN_SINGLE:
+        9,
+
+    CLOSE_SINGLE:
+        9,
+
+    JODI:
+        90,
+
+    OPEN_PANEL:
+        140,
+
+    CLOSE_PANEL:
+        140
+
+};
+
+
+/* =========================================================
+   CALCULATE TEST WINNING
+========================================================= */
+
+function calculateTestWinning(
+    bet
+){
+
+    const multiplier =
+        Number(
+            TEST_PAYOUT_MULTIPLIER[
+                text(
+                    bet.type
+                )
+                .toUpperCase()
+            ]
+            ||
+            0
+        );
+
+
+    return (
+        Number(
+            bet.amount || 0
+        )
+        *
+        multiplier
+    );
+
+}
+
+
+/* =========================================================
+   PART 1 READY
+========================================================= */
+
+console.log(
+    "✅ TEST Wallet Ready"
+);
+
+console.log(
+    "✅ TEST Bet Engine Ready"
+);
+
+console.log(
+    "✅ TEST Passbook Ready"
+);
+
+console.log(
+    "✅ TEST Duplicate Settlement Protection Ready"
+);
+
+
+
+
+/* =========================================================
+   TEST SETTLEMENT ENGINE
+   PART 2 OF 3
+
+   NON-CASH SIMULATION ONLY
+
+   - Live result matching
+   - WIN / LOSS status
+   - Duplicate protection
+   - Test passbook/audit entry
+   - Historical records blocked
+========================================================= */
+
+function settleTestResult(result){
+
+    if(!result){
+
+        return {
+            ok:false,
+            reason:"RESULT_REQUIRED"
+        };
+
+    }
+
+
+    /*
+       Historical import must never trigger settlement.
+    */
+
+    if(
+        result.historical === true
+        ||
+        result.settlementAllowed === false
+    ){
+
+        console.log(
+            "🛡 TEST SETTLEMENT SKIPPED: HISTORICAL"
+        );
+
+        return {
+            ok:false,
+            skipped:true,
+            reason:"HISTORICAL_BLOCKED"
+        };
+
+    }
+
+
+    /*
+       Always correct singles + Jodi from panels first.
+    */
+
+    correctLiveResultMath(
+        result
+    );
+
+
+    const market =
+        normalizeMarket(
+            result.market
+        );
+
+
+    const date =
+        text(result.date)
+        ||
+        todayChartDate();
+
+
+    const phase =
+        text(
+            result.status
+        )
+        .toUpperCase();
+
+
+    let resultValue = "";
+
+
+    if(
+        phase === "OPEN"
+    ){
+
+        resultValue =
+            text(result.openPanel)
+            +
+            "-"
+            +
+            text(result.openSingle);
+
+    }
+    else if(
+        phase === "COMPLETE"
+        ||
+        phase === "CLOSE"
+    ){
+
+        resultValue =
+            text(result.openPanel)
+            +
+            "-"
+            +
+            text(result.jodi)
+            +
+            "-"
+            +
+            text(result.closePanel);
+
+    }
+    else{
+
+        return {
+            ok:false,
+            reason:"INVALID_RESULT_PHASE"
+        };
+
+    }
+
+
+    const settlementKey =
+        createTestSettlementKey(
+            market,
+            date,
+            phase,
+            resultValue
+        );
+
+
+    /*
+       Same result cannot settle twice.
+    */
+
+    if(
+        hasTestSettlement(
+            settlementKey
+        )
+    ){
+
+        console.log(
+            "🛡 DUPLICATE TEST SETTLEMENT SKIPPED:",
+            settlementKey
+        );
+
+
+        return {
+            ok:true,
+            skipped:true,
+            reason:"DUPLICATE_SETTLEMENT",
+            settlementKey:settlementKey
+        };
+
+    }
+
+
+    const bets =
+        getTestBets();
+
+
+    let checked = 0;
+    let won = 0;
+    let lost = 0;
+
+
+    bets.forEach(
+        function(bet){
+
+            if(
+                bet.settled === true
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                normalizeMarket(
+                    bet.market
+                )
+                !== market
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                !testBetPhaseAllowed(
+                    bet.type,
+                    phase
+                )
+            ){
+
+                return;
+
+            }
+
+
+            const actualValue =
+                resultValueForTestBet(
+                    bet.type,
+                    result
+                );
+
+
+            if(!actualValue){
+
+                return;
+
+            }
+
+
+            checked++;
+
+
+            const isWinner =
+                text(
+                    bet.selection
+                )
+                ===
+                text(
+                    actualValue
+                );
+
+
+            bet.settled =
+                true;
+
+
+            bet.settledAt =
+                currentIsoTime();
+
+
+            bet.resultValue =
+                actualValue;
+
+
+            bet.resultPhase =
+                phase;
+
+
+            /*
+               Status simulation only.
+               No payout / wallet credit.
+            */
+
+            if(isWinner){
+
+                bet.status =
+                    "TEST_WIN";
+
+                won++;
+
+            }
+            else{
+
+                bet.status =
+                    "TEST_LOSS";
+
+                lost++;
+
+            }
+
+
+            addTestPassbookEntry(
+                {
+
+                    type:
+                        "TEST_RESULT",
+
+                    market:
+                        market,
+
+                    betId:
+                        bet.id,
+
+                    amount:
+                        0,
+
+                    result:
+                        resultValue,
+
+                    status:
+                        bet.status,
+
+                    note:
+                        bet.type
+                        +
+                        " "
+                        +
+                        bet.selection
+                        +
+                        " → "
+                        +
+                        actualValue
+
+                }
+            );
+
+        }
+    );
+
+
+    saveTestBets(
+        bets
+    );
+
+
+    /*
+       Mark this result processed even if
+       no test bets existed.
+    */
+
+    saveTestSettlementLog(
+        {
+
+            settlementKey:
+                settlementKey,
+
+            market:
+                market,
+
+            date:
+                date,
+
+            phase:
+                phase,
+
+            result:
+                resultValue,
+
+            checked:
+                checked,
+
+            won:
+                won,
+
+            lost:
+                lost
+
+        }
+    );
+
+
+    console.log(
+        "✅ TEST RESULT SETTLED:",
+        {
+            market:market,
+            phase:phase,
+            result:resultValue,
+            checked:checked,
+            won:won,
+            lost:lost
+        }
+    );
+
+
+    return {
+
+        ok:true,
+
+        settlementKey:
+            settlementKey,
+
+        checked:
+            checked,
+
+        won:
+            won,
+
+        lost:
+            lost
+
+    };
+
+}
+
+
+/* =========================================================
+   PART 2 READY
+========================================================= */
+
+console.log(
+    "✅ TEST Result Matcher Ready"
+);
+
+console.log(
+    "✅ TEST WIN/LOSS Simulation Ready"
+);
+
+console.log(
+    "✅ Historical Settlement Block Ready"
+);
+
+
+
+
+/* =========================================================
+   HR MATKA - TEST SETTLEMENT ENGINE
+   FINAL PART 3 OF 3
+
+   LIVE RESULT -> TEST SETTLEMENT BRIDGE
+
+   IMPORTANT:
+   - LIVE result only
+   - Historical import blocked
+   - Corrected Jodi math used
+   - Duplicate settlement protected
+   - TEST / VIRTUAL simulation only
+========================================================= */
+
+
+/* =========================================================
+   LAST TEST SETTLEMENT STORAGE
+========================================================= */
+
+const TEST_LAST_SETTLEMENT_KEY =
+    "hrMatkaLastTestSettlement";
+
+
+/* =========================================================
+   BUILD SAFE LIVE SETTLEMENT RECORD
+========================================================= */
+
+function buildLiveTestSettlementRecord(
+    market,
+    source,
+    result
+){
+
+    if(
+        !result
+    ){
+
+        return null;
+
+    }
+
+
+    /*
+       Clone result so original live object
+       accidentally modify na ho.
+    */
+
+    const safeResult =
+        Object.assign(
+            {},
+            result
+        );
+
+
+    /*
+       Open/Close singles + Jodi
+       panels se dobara calculate.
+    */
+
+    correctLiveResultMath(
+        safeResult
+    );
+
+
+    return {
+
+        market:
+            normalizeMarket(
+                market
+            ),
+
+        date:
+            todayChartDate(),
+
+        openPanel:
+            text(
+                safeResult.openPanel
+            ),
+
+        openSingle:
+            text(
+                safeResult.openSingle
+            ),
+
+        jodi:
+            text(
+                safeResult.jodi
+            ),
+
+        closeSingle:
+            text(
+                safeResult.closeSingle
+            ),
+
+        closePanel:
+            text(
+                safeResult.closePanel
+            ),
+
+        status:
+            text(
+                safeResult.status
+            )
+            .toUpperCase(),
+
+        source:
+            text(
+                source?.name
+            )
+            ||
+            "LIVE SOURCE",
+
+        sourceUrl:
+            text(
+                source?.url
+            ),
+
+        historical:
+            false,
+
+        settlementAllowed:
+            true,
+
+        live:
+            true,
+
+        createdAt:
+            currentIsoTime()
+
+    };
+
+}
+
+
+/* =========================================================
+   LIVE -> TEST SETTLEMENT BRIDGE
+========================================================= */
+
+function runLiveTestSettlementBridge(
+    market,
+    source,
+    result,
+    chartUpdate
+){
+
+    try{
+
+        /*
+           Chart bridge itself must be valid.
+        */
+
+        if(
+            !chartUpdate ||
+            chartUpdate.ok !== true
+        ){
+
+            return {
+
+                ok:false,
+
+                skipped:true,
+
+                reason:
+                    "CHART_UPDATE_NOT_ACCEPTED"
+
+            };
+
+        }
+
+
+        const settlementRecord =
+            buildLiveTestSettlementRecord(
+
+                market,
+
+                source,
+
+                result
+
+            );
+
+
+        if(
+            !settlementRecord
+        ){
+
+            return {
+
+                ok:false,
+
+                skipped:true,
+
+                reason:
+                    "SETTLEMENT_RECORD_NOT_CREATED"
+
+            };
+
+        }
+
+
+        /*
+           Extra historical safety.
+        */
+
+        if(
+            settlementRecord.historical === true
+            ||
+            settlementRecord.settlementAllowed === false
+        ){
+
+            console.warn(
+                "🛡 TEST SETTLEMENT BLOCKED: HISTORICAL",
+                settlementRecord
+            );
+
+
+            return {
+
+                ok:false,
+
+                skipped:true,
+
+                reason:
+                    "HISTORICAL_BLOCKED"
+
+            };
+
+        }
+
+
+        /*
+           Only OPEN or COMPLETE result
+           simulation me jayega.
+        */
+
+        if(
+            settlementRecord.status !== "OPEN"
+            &&
+            settlementRecord.status !== "COMPLETE"
+            &&
+            settlementRecord.status !== "CLOSE"
+        ){
+
+            return {
+
+                ok:false,
+
+                skipped:true,
+
+                reason:
+                    "INVALID_SETTLEMENT_PHASE"
+
+            };
+
+        }
+
+
+        const settlementResult =
+            settleTestResult(
+                settlementRecord
+            );
+
+
+        saveStorage(
+            TEST_LAST_SETTLEMENT_KEY,
+            {
+
+                market:
+                    settlementRecord.market,
+
+                date:
+                    settlementRecord.date,
+
+                status:
+                    settlementRecord.status,
+
+                openPanel:
+                    settlementRecord.openPanel,
+
+                openSingle:
+                    settlementRecord.openSingle,
+
+                jodi:
+                    settlementRecord.jodi,
+
+                closeSingle:
+                    settlementRecord.closeSingle,
+
+                closePanel:
+                    settlementRecord.closePanel,
+
+                source:
+                    settlementRecord.source,
+
+                chartAction:
+                    text(
+                        chartUpdate.action
+                    ),
+
+                settlement:
+                    settlementResult,
+
+                createdAt:
+                    currentIsoTime(),
+
+                testMode:
+                    true
+
+            }
+        );
+
+
+        console.log(
+            "✅ LIVE -> TEST SETTLEMENT:",
+            settlementResult
+        );
+
+
+        return settlementResult;
+
+    }
+    catch(error){
+
+        console.error(
+            "❌ TEST SETTLEMENT BRIDGE ERROR:",
+            error
+        );
+
+
+        return {
+
+            ok:false,
+
+            error:
+                true,
+
+            reason:
+                text(
+                    error?.message
+                )
+                ||
+                "TEST_SETTLEMENT_ERROR"
+
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   TEST SETTLEMENT SUMMARY
+
+   Console me check karne ke liye:
+   showTestSettlementSummary()
+========================================================= */
+
+function showTestSettlementSummary(){
+
+    const wallet =
+        getTestWallet();
+
+
+    const bets =
+        getTestBets();
+
+
+    const passbook =
+        getTestPassbook();
+
+
+    const settlements =
+        getTestSettlementLog();
+
+
+    const last =
+        getStorage(
+            TEST_LAST_SETTLEMENT_KEY,
+            null
+        );
+
+
+    const summary = {
+
+        wallet:
+            wallet,
+
+        totalBets:
+            bets.length,
+
+        pendingBets:
+            bets.filter(
+                function(bet){
+
+                    return (
+                        bet.settled !== true
+                    );
+
+                }
+            )
+            .length,
+
+        settledBets:
+            bets.filter(
+                function(bet){
+
+                    return (
+                        bet.settled === true
+                    );
+
+                }
+            )
+            .length,
+
+        passbookEntries:
+            passbook.length,
+
+        settlementRecords:
+            settlements.length,
+
+        lastSettlement:
+            last
+
+    };
+
+
+    console.log(
+        "======================================"
+    );
+
+    console.log(
+        "📘 TEST SETTLEMENT SUMMARY"
+    );
+
+    console.log(
+        summary
+    );
+
+    console.log(
+        "======================================"
+    );
+
+
+    return summary;
+
+}
+
+
+/* =========================================================
+   FINAL TEST ENGINE READY
+========================================================= */
+
+console.log(
+    "✅ Live -> TEST Settlement Bridge Ready"
+);
+
+console.log(
+    "✅ TEST Settlement Engine COMPLETE"
+);
+
+
+
+
+
+/* =========================================================
+   CHECK LIVE RESULT
+
+   READ-ONLY DISPLAY FLOW
+========================================================= */
+
+async function checkLiveResult(){
+
+    const market =
+        normalizeMarket(
+            document.getElementById(
+                "liveMarket"
+            )?.value
+        );
+
+
+    const sourceId =
+        text(
+            document.getElementById(
+                "liveSource"
+            )?.value
+        );
+
+
+    const status =
+        document.getElementById(
+            "liveStatus"
+        );
+
+
+    resetLiveDisplay();
+
+
+    if(!market){
+
+        showPopup(
+            "Market Required",
+            "Live result check ke liye Market Name enter karo."
+        );
+
+        return;
+    }
+
+
+    if(!sourceId){
+
+        showPopup(
+            "Source Required",
+            "Live Source select karo."
+        );
+
+        return;
+    }
+
+
+    const source =
+        findSourceById(
+            sourceId
+        );
+
+
+    if(!source){
+
+        showPopup(
+            "Source Not Found",
+            "Selected source nahi mila."
+        );
+
+        return;
+    }
+
+
+    status.textContent =
+        market +
+        " live result read ho raha hai...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:5000/api/live/fetch",
+                {
+
+                    method:
+                        "POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+                                url:
+                                    source.url
+                            }
+                        )
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.ok
+        ){
+
+            throw new Error(
+                data.message ||
+                (
+                    "HTTP " +
+                    response.status
+                )
+            );
+
+        }
+
+
+        updateSourceCheck(
+            source.id,
+            true
+        );
+
+
+        const marketArea =
+            findMarketArea(
+                data.html,
+                market
+            );
+
+
+        if(!marketArea){
+
+            status.textContent =
+                "⚠ Source connected, lekin "
+                +
+                market
+                +
+                " text nahi mila.";
+
+
+            return;
+        }
+
+
+        const result =
+            parseLiveResultText(
+                marketArea
+            );
+
+
+        if(!result){
+
+            status.textContent =
+                "⚠ Source connected, lekin result safely parse nahi hua.";
+
+
+            console.warn(
+                "Live Market Text:",
+                marketArea
+            );
+
+
+            return;
+        }
+
+
+        correctLiveResultMath(
+    result
+);
+
+
+console.log(
+    "✅ CORRECTED LIVE MATH:",
+    {
+        openPanel:
+            result.openPanel,
+
+        openSingle:
+            result.openSingle,
+
+        jodi:
+            result.jodi,
+
+        closeSingle:
+            result.closeSingle,
+
+        closePanel:
+            result.closePanel
+    }
+);
+
+
+
+        showLiveResult(
+            result
+        );
+
+
+        const transition =
+    validateLiveChartTransition(
+
+        market,
+
+        result
+
+    );
+
+
+console.log(
+    "✅ LIVE TRANSITION:",
+    transition
+);
+
+
+if(
+    !transition.ok
+){
+
+    status.textContent =
+        "⚠ Live result rejected: "
+        +
+        transition.reason;
+
+
+    console.warn(
+        "❌ LIVE CHART TRANSITION REJECTED:",
+        transition
+    );
+
+
+    return;
+
+}
+
+
+
+        const chartUpdate =
+    saveLiveResultToChart(
+
+        market,
+
+        source,
+
+        result
+
+    );
+
+
+console.log(
+    "✅ LIVE CHART UPDATE:",
+    chartUpdate
+);
+
+
+renderChartHistory();
+
+
+
+const testSettlement =
+    runLiveTestSettlementBridge(
+
+        market,
+
+        source,
+
+        result,
+
+        chartUpdate
+
+    );
+
+
+console.log(
+    "✅ TEST SETTLEMENT RESULT:",
+    testSettlement
+);
+
+
+
+
+        saveStorage(
+            STORAGE_LAST_LIVE,
+            {
+
+                market:
+                    market,
+
+                source:
+                    source.name,
+
+                sourceUrl:
+                    source.url,
+
+                result:
+                    result,
+
+                checkedAt:
+                    currentIsoTime()
+
+            }
+        );
+
+
+        status.textContent =
+            "✅ "
+            +
+            market
+            +
+            " | "
+            +
+            result.status
+            +
+            " | Source: "
+            +
+            source.name
+            +
+            " | "
+            +
+            currentTime();
+
+
+        console.log(
+            "✅ LIVE RESULT READ:",
+            market,
+            result
+        );
+
+    }
+    catch(error){
+
+        updateSourceCheck(
+            source.id,
+            false
+        );
+
+
+        status.textContent =
+            "❌ Live Result Error: "
+            +
+            String(
+                error.message ||
+                error
+            );
+
+
+        console.error(
+            "Live Result Error:",
+            error
+        );
+
+
+        showPopup(
+            "Live Result Error",
+            String(
+                error.message ||
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RESTORE LAST LIVE RESULT
+========================================================= */
+
+function restoreLastLiveResult(){
+
+    const saved =
+        getStorage(
+            STORAGE_LAST_LIVE,
+            null
+        );
+
+
+    if(
+        !saved ||
+        !saved.result
+    ){
+
+        return;
+    }
+
+
+    showLiveResult(
+        saved.result
+    );
+
+
+    const status =
+        document.getElementById(
+            "liveStatus"
+        );
+
+
+    status.textContent =
+        "Last Read: "
+        +
+        normalizeMarket(
+            saved.market
+        )
+        +
+        " | "
+        +
+        text(
+            saved.source
+        );
+
+}
+
+
+/* =========================================================
+   STORAGE UPDATE
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            STORAGE_CHART_HISTORY
+        ){
+
+            renderChartHistory();
+
+        }
+
+
+        if(
+            event.key ===
+            STORAGE_SOURCES
+        ){
+
+            renderSources();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CUSTOM CHART UPDATE
+========================================================= */
+
+window.addEventListener(
+    "resultUpdated",
+    function(){
+
+        renderChartHistory();
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE RESULT PAGE
+========================================================= */
+
+async function initializeResultPage(){
+
+    try{
+
+        setHistoryDates();
+
+
+        getSources();
+
+
+        renderSources();
+
+
+        restoreHistoryStats();
+
+
+        renderChartHistory();
+
+
+        restoreLastLiveResult();
+
+
+        await checkBackend();
+
+
+        console.log(
+            "======================================"
+        );
+
+
+        console.log(
+            "✅ HR MATKA RESULT MANAGEMENT READY"
+        );
+
+
+        console.log(
+            "✅ Primary Historical Import Ready"
+        );
+
+
+        console.log(
+            "✅ January 2026 -> Today Ready"
+        );
+
+
+        console.log(
+            "✅ chartHistory Connected"
+        );
+
+
+        console.log(
+            "✅ Live Result Reader Ready"
+        );
+
+
+        console.log(
+            "✅ Historical Settlement Disabled"
+        );
+
+
+        console.log(
+            "======================================"
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Initialization Error:",
+            error
+        );
+
+
+        showPopup(
+            "Initialization Error",
+            String(
+                error.message ||
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BACKEND HEALTH REFRESH
+========================================================= */
+
+setInterval(
+    function(){
+
+        checkBackend();
+
+    },
+    60000
+);
+
+
+/* =========================================================
+   PAGE FOCUS REFRESH
+========================================================= */
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        renderSources();
+
+        renderChartHistory();
+
+    }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+if(
+    document.readyState ===
+    "loading"
+){
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeResultPage
+    );
+
+}
+else{
+
+    initializeResultPage();
+
+}
+
+
+/* =========================================================
+   FINAL READY
+========================================================= */
+
+console.log(
+    "✅ RESULT.HTML FINAL PART 4 OF 4 LOADED"
+);
+
+</script>
+
+</body>
+
+</html>

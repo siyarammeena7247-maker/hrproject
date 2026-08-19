@@ -1,0 +1,1786 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Single Ank</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#111;
+color:#fff;
+min-height:100vh;
+}
+
+/* ============================= */
+/* TOP HEADER */
+/* ============================= */
+
+.topBar{
+height:70px;
+background:#1c1c1c;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 15px;
+position:sticky;
+top:0;
+z-index:999;
+box-shadow:0 3px 10px rgba(0,0,0,.45);
+}
+
+.backBtn{
+width:44px;
+height:44px;
+border:none;
+border-radius:50%;
+background:#2b2b2b;
+color:#fff;
+font-size:25px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.marketTitle{
+flex:1;
+padding:0 10px;
+font-size:19px;
+font-weight:bold;
+text-align:center;
+color:#ffd54f;
+word-break:break-word;
+}
+
+.walletBox{
+background:#2b2b2b;
+padding:9px 14px;
+border-radius:25px;
+font-size:17px;
+font-weight:bold;
+color:#00e676;
+white-space:nowrap;
+}
+
+/* ============================= */
+/* DATE + SESSION */
+/* ============================= */
+
+.dateSection{
+display:flex;
+gap:12px;
+padding:15px;
+}
+
+.dateBox,
+.sessionBox{
+flex:1;
+min-height:55px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:8px;
+font-size:18px;
+font-weight:bold;
+text-align:center;
+}
+
+.dateBox{
+border:2px solid #d9b13d;
+background:#151515;
+color:#fff;
+}
+
+.sessionBox{
+background:#1f1f1f;
+color:#00e676;
+}
+
+.sessionOpen{
+background:#15803d;
+color:#fff;
+}
+
+.sessionClose{
+background:#d97706;
+color:#fff;
+}
+
+.sessionClosed{
+background:#dc2626;
+color:#fff;
+}
+
+.sessionHoliday{
+background:#616161;
+color:#fff;
+}
+
+
+.sessionSelectorWrap{
+width:100%;
+}
+
+.sessionLabel{
+font-size:13px;
+margin-bottom:6px;
+opacity:.85;
+text-align:center;
+}
+
+.sessionSelect{
+width:100%;
+padding:10px;
+border:none;
+border-radius:8px;
+font-size:17px;
+font-weight:bold;
+text-align:center;
+outline:none;
+cursor:pointer;
+}
+
+
+
+/* ============================= */
+/* MAIN CONTAINER */
+/* ============================= */
+
+.container{
+max-width:700px;
+margin:auto;
+padding:0 15px 20px;
+}
+
+.card{
+background:#fff;
+color:#111;
+padding:20px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,.35);
+}
+
+.appTitle{
+text-align:center;
+color:#e53935;
+margin-bottom:7px;
+}
+
+.gameTitle{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* ============================= */
+/* WALLET CARD */
+/* ============================= */
+
+.wallet{
+background:#4caf50;
+color:#fff;
+padding:15px;
+border-radius:11px;
+text-align:center;
+font-size:21px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+/* ============================= */
+/* NUMBER ROWS */
+/* ============================= */
+
+.ankTable{
+margin-top:10px;
+}
+
+.ankRow{
+display:flex;
+align-items:center;
+gap:13px;
+margin-bottom:12px;
+}
+
+.ankNumber{
+width:45px;
+height:45px;
+flex-shrink:0;
+background:#2196f3;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:21px;
+font-weight:bold;
+}
+
+.pointInput{
+flex:1;
+min-width:0;
+padding:12px;
+font-size:17px;
+border:2px solid #ddd;
+border-radius:9px;
+outline:none;
+}
+
+.pointInput:focus{
+border-color:#2196f3;
+}
+
+.pointInput:disabled{
+background:#eee;
+cursor:not-allowed;
+}
+
+/* ============================= */
+/* TOTAL */
+/* ============================= */
+
+.totalBox{
+margin-top:20px;
+padding:14px;
+background:#f4f4f4;
+border-radius:10px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+}
+
+/* ============================= */
+/* SUBMIT BUTTON */
+/* ============================= */
+
+#submitBtn{
+width:100%;
+padding:15px;
+margin-top:18px;
+border:none;
+border-radius:10px;
+background:#e53935;
+color:#fff;
+font-size:19px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#submitBtn:hover{
+background:#c62828;
+}
+
+#submitBtn:disabled{
+background:#999;
+cursor:not-allowed;
+}
+
+/* ============================= */
+/* BACK LINK */
+/* ============================= */
+
+.backLink{
+display:block;
+margin-top:18px;
+text-align:center;
+text-decoration:none;
+font-weight:bold;
+color:#1976d2;
+}
+
+/* ============================= */
+/* INFORMATION BOX */
+/* ============================= */
+
+.infoBox{
+margin-top:18px;
+padding:12px;
+border-radius:10px;
+background:#fff8e1;
+color:#5d4037;
+font-size:13px;
+line-height:1.6;
+text-align:center;
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media(max-width:600px){
+
+.topBar{
+padding:0 9px;
+}
+
+.marketTitle{
+font-size:16px;
+}
+
+.walletBox{
+font-size:14px;
+padding:8px 10px;
+}
+
+.dateSection{
+padding:12px;
+gap:9px;
+}
+
+.dateBox,
+.sessionBox{
+font-size:15px;
+}
+
+.container{
+padding:0 12px 18px;
+}
+
+.card{
+padding:16px;
+}
+
+.ankNumber{
+width:40px;
+height:40px;
+font-size:18px;
+}
+
+.pointInput{
+padding:11px;
+font-size:16px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ============================= -->
+<!-- TOP HEADER -->
+<!-- ============================= -->
+
+<div class="topBar">
+
+<button
+type="button"
+class="backBtn"
+onclick="history.back()">
+
+←
+
+</button>
+
+<div
+class="marketTitle"
+id="marketTitle">
+
+Loading...
+
+</div>
+
+<div class="walletBox">
+
+₹ <span id="topWallet">0</span>
+
+</div>
+
+</div>
+
+<!-- ============================= -->
+<!-- DATE + SESSION -->
+<!-- ============================= -->
+
+<div class="dateSection">
+
+<div class="dateBox">
+
+<span id="todayDate">
+00-00-0000
+</span>
+
+</div>
+
+
+
+<div class="sessionBox" id="sessionBox">
+
+    <div class="sessionSelectorWrap">
+
+        <div class="sessionLabel">
+            Select Session
+        </div>
+
+        <select id="sessionSelect" class="sessionSelect">
+
+            <option value="OPEN">
+                OPEN
+            </option>
+
+            <option value="CLOSE">
+                CLOSE
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+
+</div>
+
+<!-- ============================= -->
+<!-- MAIN CONTENT -->
+<!-- ============================= -->
+
+<div class="container">
+
+<div class="card">
+
+<h1 class="appTitle">
+HR MATKA
+</h1>
+
+<h2 class="gameTitle">
+Single Ank
+</h2>
+
+<div class="wallet">
+
+Wallet Balance
+
+<br><br>
+
+₹ <span id="wallet">0</span>
+
+</div>
+
+<div
+class="ankTable"
+id="ankContainer">
+
+<!-- 0 से 9 तक के Inputs JavaScript बनाएगी -->
+
+</div>
+
+<div class="totalBox">
+
+Total Points :
+
+<span id="totalPoints">
+0
+</span>
+
+</div>
+
+<button
+type="button"
+id="submitBtn">
+
+Submit Bid
+
+</button>
+
+<a
+href="marketgame.html"
+class="backLink"
+id="backToMarket">
+
+⬅ Back To Market
+
+</a>
+
+<div class="infoBox">
+
+Minimum total bid ₹10 है।<br>
+
+Market Open में Single Ank Open Bid लगेगी।<br>
+
+Open Result आने के बाद Single Ank Close Bid लगेगी।<br>
+
+Close Result आने के बाद Game पूरी तरह बंद हो जाएगी।
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+
+
+// =====================================
+// SINGLE ANK FINAL
+// PART 2A
+// BASE ENGINE
+// =====================================
+
+// Current User
+
+let currentUser =
+JSON.parse(localStorage.getItem("currentUser")) || {};
+
+// Wallet
+
+let balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+// Markets
+
+let markets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+// Current Market
+
+let currentMarket = null;
+
+// Total Points
+
+let totalPoints = 0;
+
+// Current Session
+
+let currentSession = "OPEN";
+
+// =====================================
+// URL PARAM
+// =====================================
+
+const params =
+new URLSearchParams(window.location.search);
+
+const marketName =
+params.get("market");
+
+// =====================================
+// CREATE 0 TO 9 INPUTS
+// =====================================
+
+const ankContainer =
+document.getElementById("ankContainer");
+
+for(let i=0;i<=9;i++){
+
+ankContainer.innerHTML += `
+
+<div class="ankRow">
+
+<div class="ankNumber">
+
+${i}
+
+</div>
+
+<input
+type="number"
+min="0"
+class="pointInput"
+data-number="${i}"
+placeholder="Enter Points">
+
+</div>
+
+`;
+
+}
+
+
+
+
+const pointInputs =
+document.querySelectorAll(".pointInput");
+
+// Mouse Wheel Lock
+pointInputs.forEach(function(input){
+
+    input.addEventListener("wheel",function(event){
+
+        event.preventDefault();
+
+        this.blur();
+
+    },{ passive:false });
+
+});
+
+// Arrow Key Lock
+pointInputs.forEach(function(input){
+
+    input.addEventListener("keydown",function(event){
+
+        if(
+            event.key=="ArrowUp" ||
+            event.key=="ArrowDown"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    });
+
+});
+
+
+
+// =====================================
+// LOAD WALLET
+// =====================================
+
+function loadWallet(){
+
+if(!currentUser.mobile){
+
+alert("Login Required");
+
+location.href="login.html";
+
+return;
+
+}
+
+let wallet =
+Number(
+balances[currentUser.mobile] || 0
+);
+
+document.getElementById("wallet").innerHTML =
+wallet;
+
+document.getElementById("topWallet").innerHTML =
+wallet;
+
+}
+
+// =====================================
+// LOAD MARKET
+// =====================================
+
+function loadMarket(){
+
+if(!marketName){
+
+alert("Market Missing");
+
+history.back();
+
+return;
+
+}
+
+currentMarket =
+markets.find(function(item){
+
+return item.market==marketName;
+
+});
+
+if(!currentMarket){
+
+alert("Market Data Missing");
+
+history.back();
+
+return;
+
+}
+
+document.getElementById("marketTitle").innerHTML=
+
+currentMarket.market +
+
+" [Single Ank]";
+
+}
+
+// =====================================
+// TODAY DATE
+// =====================================
+
+function loadDate(){
+
+let d=new Date();
+
+let dd=
+String(d.getDate()).padStart(2,"0");
+
+let mm=
+String(d.getMonth()+1).padStart(2,"0");
+
+let yy=
+d.getFullYear();
+
+document.getElementById("todayDate").innerHTML=
+
+dd+"-"+mm+"-"+yy;
+
+}
+
+// =====================================
+// TOTAL POINTS
+// =====================================
+
+function calculateTotal(){
+
+totalPoints=0;
+
+pointInputs.forEach(function(input){
+
+let value=
+Number(input.value);
+
+if(value>0){
+
+totalPoints+=value;
+
+}
+
+});
+
+document.getElementById("totalPoints").innerHTML=
+
+totalPoints;
+
+}
+
+// Live Total
+
+pointInputs.forEach(function(input){
+
+input.addEventListener(
+
+"input",
+
+calculateTotal
+
+);
+
+});
+
+
+
+// =====================================
+// SINGLE ANK FINAL
+// PART 2B
+// SESSION ENGINE
+// =====================================
+
+
+
+// =====================================
+// STEP 30 PART 2
+// OPEN / CLOSE SESSION SELECTOR
+// =====================================
+
+function loadSession(){
+
+let sessionSelect =
+document.getElementById("sessionSelect");
+
+let sessionBox =
+document.getElementById("sessionBox");
+
+let openOption =
+sessionSelect.querySelector('option[value="OPEN"]');
+
+let closeOption =
+sessionSelect.querySelector('option[value="CLOSE"]');
+
+let latestMarkets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+let liveMarket =
+latestMarkets.find(function(item){
+
+return String(item.market || "").trim() ===
+String(marketName || "").trim();
+
+});
+
+let results =
+JSON.parse(localStorage.getItem("results")) || [];
+
+let marketResults =
+results.filter(function(item){
+
+return String(item.market || "").trim() ===
+String(marketName || "").trim();
+
+});
+
+let latestResult =
+marketResults.length > 0
+? marketResults[marketResults.length - 1]
+: null;
+
+let hasOpenResult =
+Boolean(
+latestResult &&
+latestResult.openPanel &&
+String(latestResult.openPanel).trim() !== ""
+);
+
+let hasCloseResult =
+Boolean(
+latestResult &&
+latestResult.closePanel &&
+String(latestResult.closePanel).trim() !== ""
+);
+
+// Market Data Missing
+
+if(!liveMarket){
+
+currentSession = "CLOSED";
+
+sessionSelect.disabled = true;
+
+sessionBox.className =
+"sessionBox sessionClosed";
+
+return;
+
+}
+
+let manualStatus =
+String(liveMarket.manualStatus || "OPEN").toUpperCase();
+
+let gameStatus =
+String(liveMarket.gameStatus || "").toUpperCase();
+
+// Holiday
+
+if(manualStatus === "HOLIDAY"){
+
+currentSession = "HOLIDAY";
+
+sessionSelect.disabled = true;
+
+sessionBox.className =
+"sessionBox sessionHoliday";
+
+return;
+
+}
+
+// Close Result के बाद पूरा Game बंद
+
+if(
+hasCloseResult ||
+gameStatus === "CLOSE" ||
+gameStatus === "RESULT_COMPLETE" ||
+manualStatus === "CLOSE"
+){
+
+currentSession = "CLOSED";
+
+sessionSelect.value = "CLOSE";
+
+sessionSelect.disabled = true;
+
+openOption.disabled = true;
+closeOption.disabled = true;
+
+sessionBox.className =
+"sessionBox sessionClosed";
+
+return;
+
+}
+
+// Open Result आने के बाद केवल CLOSE
+
+if(
+hasOpenResult ||
+gameStatus === "OPEN_RESULT"
+){
+
+currentSession = "CLOSE";
+
+sessionSelect.value = "CLOSE";
+
+openOption.disabled = true;
+closeOption.disabled = false;
+
+sessionSelect.disabled = false;
+
+sessionBox.className =
+"sessionBox sessionClose";
+
+return;
+
+}
+
+// Fresh Market में OPEN और CLOSE दोनों चालू
+
+openOption.disabled = false;
+closeOption.disabled = false;
+
+sessionSelect.disabled = false;
+
+currentSession =
+sessionSelect.value || "OPEN";
+
+if(currentSession === "CLOSE"){
+
+sessionBox.className =
+"sessionBox sessionClose";
+
+}else{
+
+sessionBox.className =
+"sessionBox sessionOpen";
+
+}
+
+}
+
+
+
+
+
+
+// User OPEN / CLOSE बदले तो Session Update
+
+document
+.getElementById("sessionSelect")
+.addEventListener("change",function(){
+
+currentSession = this.value;
+
+let sessionBox =
+document.getElementById("sessionBox");
+
+if(currentSession === "OPEN"){
+
+sessionBox.className =
+"sessionBox sessionOpen";
+
+}else{
+
+sessionBox.className =
+"sessionBox sessionClose";
+
+}
+
+});
+
+
+
+
+// =====================================
+// MARKET LOCK
+// =====================================
+
+function isMarketOpen(){
+
+if(currentSession=="HOLIDAY"){
+
+alert("Market Holiday");
+
+return false;
+
+}
+
+if(currentSession=="CLOSED"){
+
+alert("Market Closed");
+
+return false;
+
+}
+
+return true;
+
+}
+
+// =====================================
+// FIRST LOAD
+// =====================================
+
+loadWallet();
+
+loadMarket();
+
+loadDate();
+
+loadSession();
+
+// =====================================
+// AUTO REFRESH
+// =====================================
+
+setInterval(function(){
+
+balances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+markets =
+JSON.parse(localStorage.getItem("markets")) || [];
+
+loadWallet();
+
+loadSession();
+
+},2000);
+
+
+
+
+
+// =====================================
+// SINGLE ANK FINAL
+// PART 2C
+// VALIDATION + SUBMIT BASE
+// =====================================
+
+const MIN_POINTS = 10;
+
+// =====================================
+// FINAL VALIDATION
+// =====================================
+
+function finalValidation(){
+
+calculateTotal();
+
+if(totalPoints <= 0){
+
+alert("Please Enter Points");
+
+return false;
+
+}
+
+if(totalPoints < MIN_POINTS){
+
+alert(
+"Minimum ₹" +
+MIN_POINTS +
+" Points Required"
+);
+
+return false;
+
+}
+
+if(!currentMarket){
+
+alert("Market Data Missing");
+
+return false;
+
+}
+
+if(!isMarketOpen()){
+
+return false;
+
+}
+
+let latestBalances =
+JSON.parse(localStorage.getItem("userBalances")) || {};
+
+let wallet =
+Number(
+latestBalances[currentUser.mobile] || 0
+);
+
+if(totalPoints > wallet){
+
+alert("Insufficient Wallet Balance");
+
+return false;
+
+}
+
+return true;
+
+}
+
+// =====================================
+// SUBMIT BUTTON
+// =====================================
+
+document
+.getElementById("submitBtn")
+.addEventListener("click",function(){
+
+if(!finalValidation()){
+
+return;
+
+}
+
+submitBid();
+
+});
+
+// =====================================
+// INPUT + BUTTON LOCK
+// =====================================
+
+function updateInputStatus(){
+
+let submitBtn =
+document.getElementById("submitBtn");
+
+let shouldDisable =
+currentSession=="CLOSED" ||
+currentSession=="HOLIDAY";
+
+pointInputs.forEach(function(input){
+
+input.disabled = shouldDisable;
+
+});
+
+submitBtn.disabled = shouldDisable;
+
+}
+
+updateInputStatus();
+
+setInterval(function(){
+
+loadSession();
+
+updateInputStatus();
+
+},2000);
+
+// =====================================
+// SUBMIT FUNCTION BASE
+// =====================================
+
+
+
+
+// =====================================
+// SINGLE ANK FINAL
+// PART 3A
+// COMPLETE SUBMIT ENGINE
+// =====================================
+
+function submitBid(){
+
+// Submit से पहले Latest Session Check
+
+loadSession();
+
+let sessionSelect =
+document.getElementById("sessionSelect");
+
+if(!sessionSelect.disabled){
+
+currentSession =
+sessionSelect.value;
+
+}
+
+if(!isMarketOpen()){
+
+return;
+
+}
+
+calculateTotal();
+
+// Latest Wallet Data
+
+balances =
+JSON.parse(
+localStorage.getItem("userBalances")
+) || {};
+
+let wallet =
+Number(
+balances[currentUser.mobile] || 0
+);
+
+if(totalPoints > wallet){
+
+alert("Insufficient Wallet Balance");
+
+return;
+
+}
+
+// =====================================
+// CURRENT GAME SESSION
+// =====================================
+
+let gameName = "";
+
+if(currentSession === "OPEN"){
+
+gameName = "Single Ank Open";
+
+}
+else if(currentSession === "CLOSE"){
+
+gameName = "Single Ank Close";
+
+}
+else{
+
+alert("Market Closed");
+
+return;
+
+}
+
+// =====================================
+// DATE AND TIME
+// =====================================
+
+let now =
+new Date();
+
+let date =
+now.toLocaleDateString("en-GB");
+
+let time =
+now.toLocaleTimeString("en-US",{
+
+hour:"2-digit",
+
+minute:"2-digit",
+
+second:"2-digit",
+
+hour12:true
+
+});
+
+// =====================================
+// LOAD STORAGE DATA
+// =====================================
+
+let bets =
+JSON.parse(
+localStorage.getItem("bets")
+) || [];
+
+let todayPlay =
+JSON.parse(
+localStorage.getItem("todayPlay")
+) || [];
+
+let passbook =
+JSON.parse(
+localStorage.getItem("passbook")
+) || [];
+
+// =====================================
+// COLLECT FILLED NUMBERS
+// =====================================
+
+let filledBids = [];
+
+pointInputs.forEach(function(input){
+
+let points =
+Number(input.value);
+
+if(points > 0){
+
+filledBids.push({
+
+number:
+String(input.dataset.number),
+
+amount:
+points
+
+});
+
+}
+
+});
+
+if(filledBids.length === 0){
+
+alert("Please Enter Points");
+
+return;
+
+}
+
+// =====================================
+// DUPLICATE BID CONFIRMATION
+// =====================================
+
+let previousBidExists =
+bets.some(function(item){
+
+return (
+item.mobile == currentUser.mobile &&
+item.market == currentMarket.market &&
+item.game == gameName &&
+item.date == date &&
+item.status == "Pending"
+);
+
+});
+
+if(previousBidExists){
+
+let allowAgain =
+confirm(
+
+"Is Market aur Session me pehle se Bid lagi hai.\n\nKya aap dobara Bid lagana chahte hain?"
+
+);
+
+if(!allowAgain){
+
+return;
+
+}
+
+}
+
+// =====================================
+// SAVE OR MERGE BETS
+// =====================================
+
+filledBids.forEach(function(newBid){
+
+let oldBet =
+bets.find(function(item){
+
+return (
+item.mobile == currentUser.mobile &&
+item.market == currentMarket.market &&
+item.game == gameName &&
+String(item.number) == newBid.number &&
+item.date == date &&
+item.status == "Pending"
+);
+
+});
+
+if(oldBet){
+
+oldBet.amount =
+Number(oldBet.amount) +
+Number(newBid.amount);
+
+oldBet.updatedTime =
+time;
+
+}else{
+
+bets.push({
+
+id:
+Date.now() +
+Math.random(),
+
+mobile:
+currentUser.mobile,
+
+name:
+currentUser.name || "",
+
+market:
+currentMarket.market,
+
+game:
+gameName,
+
+gameType:
+"Single Ank",
+
+session:
+currentSession,
+
+number:
+newBid.number,
+
+amount:
+Number(newBid.amount),
+
+winRate:
+10,
+
+winAmount:
+0,
+
+date:
+date,
+
+time:
+time,
+
+status:
+"Pending"
+
+});
+
+}
+
+});
+
+// =====================================
+// WALLET DEDUCT
+// =====================================
+
+let previousBalance =
+wallet;
+
+let currentBalance =
+wallet - totalPoints;
+
+balances[currentUser.mobile] =
+currentBalance;
+
+// =====================================
+// TODAY PLAY ENTRY
+// =====================================
+
+todayPlay.push({
+
+id:
+Date.now() +
+Math.random(),
+
+mobile:
+currentUser.mobile,
+
+name:
+currentUser.name || "",
+
+market:
+currentMarket.market,
+
+game:
+gameName,
+
+gameType:
+"Single Ank",
+
+session:
+currentSession,
+
+amount:
+totalPoints,
+
+date:
+date,
+
+time:
+time,
+
+status:
+"Success"
+
+});
+
+// =====================================
+// PASSBOOK ENTRY
+// =====================================
+
+passbook.push({
+
+id:
+Date.now() +
+Math.random(),
+
+mobile:
+currentUser.mobile,
+
+date:
+date,
+
+time:
+time,
+
+type:
+"Game Play",
+
+previousBalance:
+previousBalance,
+
+amount:
+totalPoints,
+
+currentBalance:
+currentBalance,
+
+status:
+"Success",
+
+details:
+currentMarket.market +
+" - " +
+gameName
+
+});
+
+// =====================================
+// SAVE ALL DATA TO LOCAL STORAGE
+// =====================================
+
+localStorage.setItem(
+
+"bets",
+
+JSON.stringify(bets)
+
+);
+
+localStorage.setItem(
+
+"userBalances",
+
+JSON.stringify(balances)
+
+);
+
+localStorage.setItem(
+
+"todayPlay",
+
+JSON.stringify(todayPlay)
+
+);
+
+localStorage.setItem(
+
+"passbook",
+
+JSON.stringify(passbook)
+
+);
+
+// =====================================
+// ADMIN AUTO SYNC
+// =====================================
+
+localStorage.setItem(
+
+"lastBetSync",
+
+JSON.stringify({
+
+mobile:
+currentUser.mobile,
+
+market:
+currentMarket.market,
+
+game:
+gameName,
+
+session:
+currentSession,
+
+amount:
+totalPoints,
+
+date:
+date,
+
+time:
+time,
+
+updatedAt:
+Date.now()
+
+})
+
+);
+
+window.dispatchEvent(
+
+new Event("betUpdated")
+
+);
+
+// =====================================
+// UPDATE SCREEN WALLET
+// =====================================
+
+document.getElementById("wallet").innerText =
+currentBalance;
+
+document.getElementById("topWallet").innerText =
+currentBalance;
+
+// =====================================
+// SUCCESS
+// =====================================
+
+alert(
+
+gameName +
+"\nBid Submitted Successfully"
+
+);
+
+// Clear All Inputs
+
+pointInputs.forEach(function(input){
+
+input.value = "";
+
+});
+
+totalPoints = 0;
+
+document.getElementById("totalPoints").innerText =
+"0";
+
+}
+
+
+
+
+
+
+// =====================================
+// SINGLE ANK FINAL
+// PART 3B
+// FINAL LIVE SYNC
+// =====================================
+
+function refreshSingleAnk(){
+
+// Latest User
+currentUser =
+JSON.parse(
+localStorage.getItem("currentUser")
+) || {};
+
+// Latest Wallet
+balances =
+JSON.parse(
+localStorage.getItem("userBalances")
+) || {};
+
+// Latest Markets
+markets =
+JSON.parse(
+localStorage.getItem("markets")
+) || [];
+
+// Latest Current Market
+currentMarket =
+markets.find(function(item){
+
+return (
+String(item.market || "").trim() ===
+String(marketName || "").trim()
+);
+
+}) || null;
+
+// Market हट जाए तो Page Lock
+if(!currentMarket){
+
+document.getElementById("marketTitle").innerText =
+"MARKET NOT FOUND";
+
+document.getElementById("sessionType").innerText =
+"MARKET CLOSED";
+
+document.getElementById("sessionBox").className =
+"sessionBox sessionClosed";
+
+currentSession = "CLOSED";
+
+updateInputStatus();
+
+return;
+
+}
+
+// Header Update
+document.getElementById("marketTitle").innerText =
+currentMarket.market + " [Single Ank]";
+
+// Wallet, Date और Session Update
+loadWallet();
+
+loadDate();
+
+loadSession();
+
+updateInputStatus();
+
+// Back Link में वही Market भेजना
+document.getElementById("backToMarket").href =
+"marketgame.html?market=" +
+encodeURIComponent(currentMarket.market);
+
+}
+
+// =====================================
+// FIRST FINAL REFRESH
+// =====================================
+
+refreshSingleAnk();
+
+// =====================================
+// OTHER TAB STORAGE UPDATE
+// =====================================
+
+window.addEventListener(
+"storage",
+refreshSingleAnk
+);
+
+// Result Update Event
+window.addEventListener(
+"resultUpdated",
+refreshSingleAnk
+);
+
+// Page वापस Visible होने पर Refresh
+document.addEventListener(
+"visibilitychange",
+function(){
+
+if(!document.hidden){
+
+refreshSingleAnk();
+
+}
+
+}
+);
+
+console.log(
+"✅ Single Ank Final Fully Connected"
+);
+
+
+
+</script>
+
+</body>
+</html>
